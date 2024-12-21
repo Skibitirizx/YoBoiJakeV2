@@ -9,7 +9,7 @@ body {
 
 header {
   display: flex;
-  align-items: center; /* Ensures logo and name are vertically centered */
+  align-items: center;
   padding: 10px 20px;
   border-bottom: 2px solid red;
 }
@@ -22,13 +22,13 @@ header img {
   font-size: 24px;
   color: red;
   font-weight: bold;
-  margin-left: 10px; /* Space between logo and name */
+  margin-left: 10px;
 }
 
 nav {
   display: flex;
   gap: 15px;
-  margin-left: auto; /* Pushes the navigation to the right */
+  margin-left: auto;
 }
 
 nav a {
@@ -52,7 +52,7 @@ nav a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh; /* Ensures the content fills most of the viewport */
+  height: 80vh;
 }
 
 #home-content h1 {
@@ -94,7 +94,6 @@ nav a:hover {
   transition: transform 0.3s, background-color 0.3s;
   color: red;
   text-decoration: none;
-  overflow: hidden;
 }
 
 .game img {
@@ -117,13 +116,36 @@ nav a:hover {
   margin-bottom: 5px;
 }
 
-.game p {
-  font-size: 12px;
-  margin: 0;
+/* Game Display */
+#game-display {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
 }
 
-/* Settings Page */
-#settings-content h1 {
-  font-size: 24px;
-  margin-top: 20px;
+#game-frame-container {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  background-color: black;
+}
+
+#game-buttons {
+  margin-top: 10px;
+}
+
+#game-buttons button {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: black;
+  color: red;
+  border: 2px solid red;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#game-buttons button:hover {
+  background-color: red;
+  color: black;
 }
