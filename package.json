@@ -1,8 +1,8 @@
 {
   "name": "YoBoiJakeV2",
   "version": "1.0.0",
-  "description": "Fun Unblocked Games!!!",
-  "main": "index.js",
+  "description": "BEST Fun Unblocked Games!!!",
+  "main": "index.mjs",
   "scripts": {
     "start": "node index.mjs",
     "setup": "rm -rf node_modules && npm install",
