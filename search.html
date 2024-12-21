@@ -5,6 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Search - YoBoiJake</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Additional styles for the search form */
+    #uv-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .search-bar {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+      border-radius: 5px;
+      border: 2px solid red;
+      background-color: black;
+      color: red;
+      transition: border-color 0.3s;
+    }
+
+    .search-bar:focus {
+      border-color: red;
+      outline: none;
+    }
+
+    .desc {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    #uv-error {
+      color: red;
+      font-size: 14px;
+    }
+
+    /* Centering the content */
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+    }
+
+  </style>
 </head>
 <body>
   <header>
@@ -18,13 +64,22 @@
     </nav>
   </header>
 
-  <main id="search-content">
-    <h1>Search</h1>
-    <p>Enter a search term below:</p>
-    <input type="text" id="search-bar" placeholder="Search...">
-    <p>Search results will appear here based on your query.</p>
+  <main>
+    <form id="uv-form">
+      <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
+      <input id="uv-address" class="search-bar" type="text" placeholder="Search Google or type a URL" class="form__input"/>
+    </form>
+    <div class="desc left-margin">
+      <p id="uv-error"></p>
+      <pre id="uv-error-code"></pre>
+    </div>
   </main>
 
-  <script src="js/scripts.js"></script>
+  <!-- Scripts -->
+  <script src="/uv/uv.bundle.js"></script>
+  <script src="/uv/uv.config.js"></script>
+  <script src="/js/index.js"></script>
+  <script src="/uv/search.js" defer></script>
+
 </body>
 </html>
