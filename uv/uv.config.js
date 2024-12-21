@@ -1,6 +1,5 @@
-// DO NOT Use My Bare
 self.__uv$config = {
-    prefix: '/static/pa/',
+    prefix: '/math/',
     bare: '/bare/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
