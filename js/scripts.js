@@ -34,4 +34,41 @@ function toggleFullScreen() {
     document.exitFullscreen();
   }
 }
+// Function to load the game from the URL and embed the content
+function loadGame(gameUrl) {
+  // Hide the game selection screen
+  document.getElementById('game-container').style.display = 'none';
+  document.getElementById('game-display').style.display = 'block';
+  
+  // Fetch the game content
+  fetch(gameUrl)
+    .then(response => response.text()) // Retrieve the HTML content as text
+    .then(html => {
+      // Inject the HTML content into the game container
+      document.getElementById('game-content').innerHTML = html;
+
+      // You might need to adjust here if the game uses external scripts or stylesheets
+    })
+    .catch(error => console.error('Error loading the game:', error));
+}
+
+// Exit the game and return to the game list
+function exitGame() {
+  // Hide the game display
+  document.getElementById('game-display').style.display = 'none';
+  
+  // Show the game selection screen again
+  document.getElementById('game-container').style.display = 'flex';
+}
+
+// Toggle fullscreen for the game
+function toggleFullScreen() {
+  const gameContent = document.getElementById('game-content');
+  
+  if (!document.fullscreenElement) {
+    gameContent.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
 
