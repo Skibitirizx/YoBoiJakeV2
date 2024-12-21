@@ -9,8 +9,7 @@ body {
 
 header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: center; /* Ensures logo and name are vertically centered */
   padding: 10px 20px;
   border-bottom: 2px solid red;
 }
@@ -23,12 +22,13 @@ header img {
   font-size: 24px;
   color: red;
   font-weight: bold;
-  margin-left: 10px; /* Adds space between the logo and name */
+  margin-left: 10px; /* Space between logo and name */
 }
 
 nav {
   display: flex;
   gap: 15px;
+  margin-left: auto; /* Pushes the navigation to the right */
 }
 
 nav a {
