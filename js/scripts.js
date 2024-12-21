@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameFrame = document.getElementById("game-frame");
   const exitButton = document.getElementById("exit-btn");
   const fullscreenButton = document.getElementById("fullscreen-btn");
+  const gameButtons = document.getElementById("game-buttons");
 
   // Open a game
   games.forEach(game => {
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const gameUrl = game.getAttribute("data-url");
       gameFrame.src = gameUrl;
       gameOverlay.classList.remove("hidden");
+      gameButtons.classList.remove("hidden");
     });
   });
 
@@ -18,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   exitButton.addEventListener("click", () => {
     gameFrame.src = "";
     gameOverlay.classList.add("hidden");
+    gameButtons.classList.add("hidden");
   });
 
   // Fullscreen mode
