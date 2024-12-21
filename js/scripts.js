@@ -5,6 +5,7 @@ function openAboutBlank() {
   newTab.document.write(content);
   newTab.document.close();
 }
+
 function showGame(gameUrl, gameTitle) {
   // Hide game selection screen
   document.getElementById('game-container').style.display = 'none';
