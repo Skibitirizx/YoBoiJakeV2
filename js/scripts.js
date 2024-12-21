@@ -5,28 +5,16 @@ function openAboutBlank() {
   newTab.document.write(content);
   newTab.document.close();
 }
+function showGame(gameUrl, gameTitle) {
+  // Hide game selection screen
+  document.getElementById('game-container').style.display = 'none';
 
-"use strict";
-function showGame(gameUrl) {
-  let destination = gameUrl;
+  // Show the game display
+  const gameFrame = document.getElementById('game-frame');
+  gameFrame.src = gameUrl;
 
-  try {
-    destination = new URL(gameUrl).toString();
-  } catch (err) {
-    alert(`Bad URL. Got error:\n${err}`);
-    throw err;
-  }
-
-  registerSW()
-    .then(() => {
-      window.open(
-        __uv$config.prefix + __uv$config.encodeUrl(destination),
-        "_self"
-      );
-    })
-    .catch((err) => {
-      alert(`Encountered error:\n${err}`);
-    });
+  document.getElementById('game-display').style.display = 'block';
+  document.getElementById('game-frame-container').style.maxWidth = '800px'; // Adjust to prevent the game from being too large
 }
 
 function exitGame() {
