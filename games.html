@@ -9,7 +9,7 @@
 <body>
   <header>
     <img src="https://i.imgflip.com/6ej3bl.png" alt="YoBoiJake Logo">
-    <span id="logo-name">YoBoiJake</span> <!-- Added this line to place the name next to the logo -->
+    <span id="logo-name">YoBoiJake</span>
     <nav>
       <a href="index.html">Home</a>
       <a href="games.html">Game</a>
@@ -20,24 +20,32 @@
   <main id="games-content">
     <h1>Game Tab</h1>
     <div id="game-container">
-      <a href="https://sushi8756.github.io/Cookie-Clicker-2.031/" class="game" target="_blank">
+      <a href="#" class="game" onclick="showGame('https://sushi8756.github.io/Cookie-Clicker-2.031/', 'Cookie Clicker')">
         <img src="https://cdn.discordapp.com/icons/339131488111034389/73f15cd93d96504af9877a53816d110c.png" alt="Cookie Clicker">
         <span>Cookie Clicker</span>
-        <p>Cookie Clicker is an addictive incremental game where players click to produce cookies, unlock upgrades, and aim to amass an ever-growing mountain of delicious digital treats.</p>
       </a>
-      <a href="https://educationgg-23704.web.app/games/FBWG4-main/index.html" class="game" target="_blank">
+      <a href="#" class="game" onclick="showGame('https://educationgg-23704.web.app/games/FBWG4-main/index.html', 'Fireboy and Watergirl')">
         <img src="https://play-lh.googleusercontent.com/5-YcjiTyMrPJEZe078dHMxnCxcg2A_8NWJZQieRvn2Gkf8JOuHZEbTmFyQ9gn5p2lnU" alt="Fireboy and Watergirl">
         <span>Fireboy and Watergirl</span>
-        <p>A 2 player game where you have to work together using logic and teamwork to get to the finish line.</p>
       </a>
-      <a href="https://www.ehabgames.com/games/bloxors/index.html" class="game" target="_blank">
+      <a href="#" class="game" onclick="showGame('https://www.ehabgames.com/games/bloxors/index.html', 'Bloxerz')">
         <img src="https://th.bing.com/th?id=OIP.6jjUQ7Niv2cl4NvkOrkf_QAAAA&w=255&h=244&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" alt="Bloxerz">
         <span>Bloxerz</span>
       </a>
-      <a href="https://driftbossonline.github.io/file/" class="game" target="_blank">
+      <a href="#" class="game" onclick="showGame('https://driftbossonline.github.io/file/', 'Drift Boss')">
         <img src="https://drift-boss.pro/upload/cache/upload/imgs/drift-boss1-m500x500.png" alt="Drift Boss">
         <span>Drift Boss</span>
       </a>
+    </div>
+    <!-- Game container for showing the game -->
+    <div id="game-display" style="display: none;">
+      <div id="game-frame-container">
+        <iframe id="game-frame" src="" width="800" height="600"></iframe>
+        <div id="game-buttons">
+          <button onclick="exitGame()">Exit</button>
+          <button onclick="toggleFullScreen()">Fullscreen</button>
+        </div>
+      </div>
     </div>
   </main>
 
