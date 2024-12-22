@@ -7,6 +7,48 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* Style for Discord link with red border and text */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: red;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1, p {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    #discord-link {
+      display: inline-block;
+      padding: 10px 20px;
+      color: red;
+      border: 2px solid red;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #discord-link:hover {
+      background-color: red;
+      color: black;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -23,8 +65,7 @@
   <main>
     <h1>Thanks to Plexile Network for making this possible!</h1>
     <p>Join their community on Discord:</p>
-    <a href="https://discord.gg/59UMvHBNM6" target="_blank">Join Plexile Network Discord</a>
+    <a id="discord-link" href="https://discord.gg/59UMvHBNM6" target="_blank">Join Plexile Network Discord</a>
   </main>
 </body>
 </html>
-
