@@ -7,6 +7,26 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* Add the bottom-left tab style */
+    #about-tab {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background-color: red;
+      color: black;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #about-tab:hover {
+      background-color: black;
+      color: red;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -28,6 +48,11 @@
       <p id="daily-verse">Loading verse...</p>
     </div>
   </main>
+
+  <!-- Fixed "About" tab in the bottom left -->
+  <div id="about-tab" onclick="window.location.href='/about.html'">
+    About
+  </div>
 
   <script>
     // Function to open a blank page
