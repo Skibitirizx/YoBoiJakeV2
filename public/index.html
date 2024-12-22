@@ -8,23 +8,24 @@
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
   <style>
-    /* Add the bottom-left tab style */
+    /* Add the bottom-left tab style for About button */
     #about-tab {
       position: fixed;
       bottom: 10px;
       left: 10px;
-      background-color: red;
-      color: black;
-      padding: 10px 15px;
-      border-radius: 5px;
+      background-color: transparent;
+      color: red;
+      padding: 10px 20px;
+      border: 2px solid red;
+      border-radius: 10px;
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s, color 0.3s;
     }
 
     #about-tab:hover {
-      background-color: black;
-      color: red;
+      background-color: red;
+      color: black;
     }
   </style>
 </head>
@@ -69,7 +70,7 @@
         win.document.body.appendChild(iframe);
       }
     }
-
+    
     // Array of verses
     const verses = [
       "John 3:16 - For God so loved the world that He gave His one and only Son, that whoever believes in Him shall not perish but have eternal life.",
@@ -105,3 +106,4 @@
   </script>
 </body>
 </html>
+
