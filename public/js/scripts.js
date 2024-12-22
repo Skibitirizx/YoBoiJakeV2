@@ -54,15 +54,8 @@ function showGame(gameUrl) {
 }
 
 function exitGame() {
-  // Remove the iframe entirely from the DOM
-  const gameFrame = document.getElementById("game-frame");
-  if (gameFrame) {
-    gameFrame.remove();
-  }
-
-  // Hide the game display container and show the game list
-  document.getElementById("game-display").style.display = "none";
-  document.getElementById("game-container").style.display = "flex";
+  // Redirect to the games.html page
+  window.location.href = "/games.html";
 }
 
 function toggleFullScreen() {
