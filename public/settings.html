@@ -15,24 +15,29 @@
       color: red;
       border-radius: 5px;
     }
-    #cursor-container input {
+    #cursor-container input,
+    #cursor-container button {
       padding: 10px;
       border: 2px solid red;
       background-color: black;
       color: red;
       margin-right: 10px;
     }
-    #cursor-container button {
-      padding: 10px 20px;
-      background-color: black;
-      color: red;
-      border: 2px solid red;
-      border-radius: 5px;
-      cursor: pointer;
-    }
     #cursor-container button:hover {
       background-color: red;
       color: black;
+    }
+    #cursor-container input[type="file"] {
+      padding: 0;
+      margin-top: 10px;
+    }
+    .cursor-preview {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      background-color: red;
+      border-radius: 5px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -78,15 +83,16 @@
     <!-- Cursor Changer Section -->
     <div id="cursor-container">
       <h2>Change Cursor</h2>
-      <input type="text" id="custom-cursor-url" placeholder="Enter URL for custom cursor">
-      <button onclick="changeCursor()">Set Custom Cursor</button>
 
-      <h3>Predefined Cursors:</h3>
-      <button onclick="changeCursor('https://ssl.gstatic.com/classroom/favicon.png')">Classroom Cursor</button>
-      <button onclick="changeCursor('https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico')">Docs Cursor</button>
-      <button onclick="changeCursor('https://ssl.gstatic.com/slides/images/favicon5.ico')">Slides Cursor</button>
-      <button onclick="changeCursor('https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png')">Drive Cursor</button>
-      <button onclick="changeCursor('/assets/images/logo.png')">Site Logo Cursor</button>
+      <!-- Upload Input for Custom Cursor -->
+      <input type="file" id="cursor-file" accept="image/*">
+      <button onclick="uploadCursor()">Upload Custom Cursor</button>
+
+      <h3>Predefined Cursor:</h3>
+      <button onclick="changeCursor('https://i.imgflip.com/6ej3bl.png')">Use Site Logo Cursor</button>
+
+      <h3>Current Cursor:</h3>
+      <div class="cursor-preview" id="cursor-preview"></div>
       <button onclick="resetCursor()">Reset Cursor</button>
     </div>
   </main>
@@ -106,16 +112,32 @@
       faviconElement.href = '/assets/images/logo.png';
     }
 
-    // Function to change the cursor
+    // Function to change the cursor with a URL
     function changeCursor(url) {
-      if (url) {
-        document.body.style.cursor = `url(${url}), auto`;
+      document.body.style.cursor = `url(${url}), auto`;
+      document.getElementById('cursor-preview').style.backgroundImage = `url(${url})`;
+      document.getElementById('cursor-preview').style.backgroundSize = "cover";
+    }
+
+    // Function to upload and set a custom cursor
+    function uploadCursor() {
+      const fileInput = document.getElementById('cursor-file');
+      const file = fileInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const cursorUrl = event.target.result;
+          changeCursor(cursorUrl);
+        };
+        reader.readAsDataURL(file);
       }
     }
 
     // Function to reset the cursor to default
     function resetCursor() {
       document.body.style.cursor = "default";
+      document.getElementById('cursor-preview').style.backgroundImage = "none";
     }
   </script>
 </body>
