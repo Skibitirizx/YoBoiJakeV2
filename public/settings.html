@@ -15,6 +15,9 @@
       color: red;
       border-radius: 5px;
     }
+    #cursor-container h3 {
+      color: red;
+    }
     #cursor-container input,
     #cursor-container button {
       padding: 10px;
@@ -22,6 +25,7 @@
       background-color: black;
       color: red;
       margin-right: 10px;
+      cursor: pointer;
     }
     #cursor-container button:hover {
       background-color: red;
@@ -30,6 +34,20 @@
     #cursor-container input[type="file"] {
       padding: 0;
       margin-top: 10px;
+    }
+    /* Custom styling for file upload button */
+    #cursor-file-button {
+      background-color: black;
+      color: red;
+      border: 2px solid red;
+      cursor: pointer;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    #cursor-file-button:hover {
+      background-color: red;
+      color: black;
     }
     .cursor-preview {
       display: inline-block;
@@ -85,8 +103,8 @@
       <h2>Change Cursor</h2>
 
       <!-- Upload Input for Custom Cursor -->
-      <input type="file" id="cursor-file" accept="image/*">
-      <button onclick="uploadCursor()">Upload Custom Cursor</button>
+      <input type="file" id="cursor-file" accept="image/*" style="display: none;">
+      <label id="cursor-file-button" for="cursor-file">Upload Custom Cursor</label>
 
       <h3>Predefined Cursor:</h3>
       <button onclick="changeCursor('https://i.imgflip.com/6ej3bl.png')">Use Site Logo Cursor</button>
@@ -120,10 +138,8 @@
     }
 
     // Function to upload and set a custom cursor
-    function uploadCursor() {
-      const fileInput = document.getElementById('cursor-file');
-      const file = fileInput.files[0];
-
+    document.getElementById('cursor-file').addEventListener('change', function () {
+      const file = this.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function(event) {
@@ -132,7 +148,7 @@
         };
         reader.readAsDataURL(file);
       }
-    }
+    });
 
     // Function to reset the cursor to default
     function resetCursor() {
