@@ -39,13 +39,32 @@
       "Psalm 23:1 - The Lord is my shepherd; I shall not want."
     ];
 
-    // Pick a random verse
-    const randomVerse = verses[Math.floor(Math.random() * verses.length)];
+    // Function to get or set the verse of the day
+    function getVerseOfTheDay() {
+      const verseKey = "verseOfTheDay";
+      const timestampKey = "verseTimestamp";
+      const currentTimestamp = Date.now();
+      const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-    // Display the verse
-    document.getElementById("verse").textContent = randomVerse;
+      // Check if a verse is already saved and if it's less than 24 hours old
+      const savedVerse = localStorage.getItem(verseKey);
+      const savedTimestamp = localStorage.getItem(timestampKey);
 
-    // About Blank button functionality (existing script)
+      if (savedVerse && savedTimestamp && currentTimestamp - savedTimestamp < oneDay) {
+        return savedVerse; // Use the saved verse
+      } else {
+        // Select a new random verse
+        const randomVerse = verses[Math.floor(Math.random() * verses.length)];
+        localStorage.setItem(verseKey, randomVerse); // Save the new verse
+        localStorage.setItem(timestampKey, currentTimestamp); // Save the timestamp
+        return randomVerse;
+      }
+    }
+
+    // Display the verse of the day
+    document.getElementById("verse").textContent = getVerseOfTheDay();
+
+    // About Blank button functionality
     function openAboutBlank() {
       window.open("about:blank", "_blank");
     }
