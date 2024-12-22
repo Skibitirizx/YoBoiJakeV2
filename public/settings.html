@@ -7,57 +7,6 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
-  <style>
-    #cursor-container {
-      margin-top: 20px;
-      padding: 20px;
-      background-color: black;
-      color: red;
-      border-radius: 5px;
-    }
-    #cursor-container h3 {
-      color: red;
-    }
-    #cursor-container input,
-    #cursor-container button {
-      padding: 10px;
-      border: 2px solid red;
-      background-color: black;
-      color: red;
-      margin-right: 10px;
-      cursor: pointer;
-    }
-    #cursor-container button:hover {
-      background-color: red;
-      color: black;
-    }
-    #cursor-container input[type="file"] {
-      padding: 0;
-      margin-top: 10px;
-    }
-    /* Custom styling for file upload button */
-    #cursor-file-button {
-      background-color: black;
-      color: red;
-      border: 2px solid red;
-      cursor: pointer;
-      padding: 10px 20px;
-      margin-top: 10px;
-      border-radius: 5px;
-    }
-    #cursor-file-button:hover {
-      background-color: red;
-      color: black;
-    }
-    .cursor-preview {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      background-color: red;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -72,9 +21,7 @@
   </header>
 
   <main id="settings-content">
-    <h1>Tab Cloaking and Cursor Customization</h1>
-
-    <!-- Tab Cloaking Section -->
+    <h1>Tab Cloaking</h1>
     <div id="cloaks">
       <button class="cloak-button" onclick="cloakTab('Google Classroom', 'https://ssl.gstatic.com/classroom/favicon.png')">
         <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Google Classroom Icon">
@@ -97,22 +44,6 @@
         Reset to Default
       </button>
     </div>
-
-    <!-- Cursor Changer Section -->
-    <div id="cursor-container">
-      <h2>Change Cursor</h2>
-
-      <!-- Upload Input for Custom Cursor -->
-      <input type="file" id="cursor-file" accept="image/*" style="display: none;">
-      <label id="cursor-file-button" for="cursor-file">Upload Custom Cursor</label>
-
-      <h3>Predefined Cursor:</h3>
-      <button onclick="changeCursor('https://i.imgflip.com/6ej3bl.png')">Use Site Logo Cursor</button>
-
-      <h3>Current Cursor:</h3>
-      <div class="cursor-preview" id="cursor-preview"></div>
-      <button onclick="resetCursor()">Reset Cursor</button>
-    </div>
   </main>
 
   <script>
@@ -128,35 +59,6 @@
       document.title = 'Settings - YoBoiJake';
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = '/assets/images/logo.png';
-    }
-
-    // Function to change the cursor with a URL
-    function changeCursor(url) {
-      // Apply the new cursor globally
-      document.body.style.cursor = `url(${url}) 16 16, auto`;
-
-      // Update the cursor preview box
-      document.getElementById('cursor-preview').style.backgroundImage = `url(${url})`;
-      document.getElementById('cursor-preview').style.backgroundSize = "cover";
-    }
-
-    // Function to upload and set a custom cursor
-    document.getElementById('cursor-file').addEventListener('change', function () {
-      const file = this.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const cursorUrl = event.target.result;
-          changeCursor(cursorUrl);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Function to reset the cursor to default
-    function resetCursor() {
-      document.body.style.cursor = "default";
-      document.getElementById('cursor-preview').style.backgroundImage = "none";
     }
   </script>
 </body>
