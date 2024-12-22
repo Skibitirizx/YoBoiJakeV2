@@ -132,7 +132,10 @@
 
     // Function to change the cursor with a URL
     function changeCursor(url) {
-      document.body.style.cursor = `url(${url}), auto`;
+      // Apply the new cursor globally
+      document.body.style.cursor = `url(${url}) 16 16, auto`;
+
+      // Update the cursor preview box
       document.getElementById('cursor-preview').style.backgroundImage = `url(${url})`;
       document.getElementById('cursor-preview').style.backgroundSize = "cover";
     }
