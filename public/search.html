@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search - YoBoiJake</title>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="icon" type="image/png" href="/assets/images/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    #uv-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .search-bar {
+      padding: 10px;
+      font-size: 16px;
+      width: 320px;
+      border-radius: 5px;
+      border: 2px solid red;
+      background-color: black;
+      color: red;
+      transition: all 0.4s;
+    }
+
+    .search-bar:hover {
+      width: 370px;
+      background-color: rgb(7, 7, 7);
+    }
+
+    .search-bar:focus {
+      border-color: red;
+      outline: none;
+    }
+
+    .desc {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    #uv-error {
+      color: red;
+      font-size: 14px;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <img src="/assets/images/logo.png" alt="YoBoiJake Logo">
+    <span id="logo-name">YoBoiJake</span>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/games.html">Games</a>
+      <a href="/search.html">Search</a>
+      <a href="/settings.html">Settings</a>
+    </nav>
+  </header>
+
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <center><h1>Search:</h1></center>
+
+  <main>
+    <form id="uv-form">
+      <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
+      <input id="uv-address" class="search-bar" type="text" placeholder="Search Google or type a URL" class="form__input"/>
+    </form>
+    <div class="desc left-margin">
+      <p id="uv-error"></p>
+      <pre id="uv-error-code"></pre>
+    </div>
+  </main>
+
+  <script src="/uv/uv.bundle.js"></script>
+  <script src="/uv/uv.config.js"></script>
+  <script src="/js/index.js"></script>
+  <script src="/uv/search.js" defer></script>
+</body>
+</html>
