@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/css/styles.css">
   <style>
     /* Button style similar to the about:blank button */
-    #auto-blank-btn, #about-blank-btn {
+    #auto-blank-btn {
       background-color: black;
       color: red;
       border: 2px solid red;
@@ -21,7 +21,7 @@
       margin-top: 20px;
     }
 
-    #auto-blank-btn:hover, #about-blank-btn:hover {
+    #auto-blank-btn:hover {
       background-color: red;
       color: black;
     }
@@ -109,7 +109,7 @@
 
     <h2>Auto:Blank Settings</h2>
     <div>
-      <p>Enable auto:blank (Redirect to Google):</p>
+      <p>Enable auto:blank (Open a new blank window):</p>
       <label class="switch">
         <input type="checkbox" id="auto-blank-toggle">
         <span class="slider"></span>
@@ -117,7 +117,7 @@
     </div>
 
     <div>
-      <button id="auto-blank-btn">Toggle auto:blank</button>
+      <button id="auto-blank-btn" onclick="openAboutBlank()">Open About:Blank</button>
     </div>
   </main>
 
@@ -136,18 +136,35 @@
       faviconElement.href = '/assets/images/logo.png';
     }
 
+    // Function to open the about:blank page in a new window
+    var win;
+    function openAboutBlank() {
+      if (win) {
+        win.focus();
+      } else {
+        win = window.open("", "_blank");
+        win.document.body.style.margin = "0";
+        win.document.body.style.height = "100vh";
+        var iframe = win.document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.src = "about:blank";  // Can be set to any URL or remain blank
+        win.document.body.appendChild(iframe);
+      }
+    }
+
     // Check if auto:blank toggle is set to on in localStorage
     if(localStorage.getItem('autoBlankEnabled') === 'true') {
       document.getElementById('auto-blank-toggle').checked = true;
-      // Perform auto:blank action when on
-      window.location.href = "https://www.google.com"; // Redirect to Google
+      openAboutBlank();  // Automatically open the about:blank when enabled
     }
 
     // Listen for toggle switch change
     document.getElementById('auto-blank-toggle').addEventListener('change', function() {
       if(this.checked) {
         localStorage.setItem('autoBlankEnabled', 'true');
-        window.location.href = "https://www.google.com"; // Auto redirect to Google when ON
+        openAboutBlank();  // Open the about:blank when turned on
       } else {
         localStorage.setItem('autoBlankEnabled', 'false');
       }
@@ -155,4 +172,5 @@
   </script>
 </body>
 </html>
+
 
