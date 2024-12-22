@@ -64,7 +64,7 @@
         <span>F1</span>
       </a>
       <a href="#bob1" class="game" onclick="showGame('/assets/games/bob1/', 'bob1')">
-        <img src="/assets/images/bob1/game.png" alt="Bob the Robber">
+        <img src="/assets/images/bob1/game.png" alt="Bob The Robber">
         <span>Bob The Robber</span>
       </a>
       <a href="#bitlife" class="game" onclick="showGame('/assets/games/bitlife/', 'bitlife')">
@@ -85,7 +85,7 @@
   </main>
 
   <script>
-    let currentGameUrl = ''; // Store the current game's URL to check if it's already loaded
+    let currentGameUrl = ''; // Store the current game's URL to track if it's already loaded
     let currentGameName = ''; // Store the name of the current game to track if it's the same game
 
     function showGame(gameUrl, gameName) {
@@ -102,9 +102,8 @@
     }
 
     function exitGame() {
-      // Remove the iframe content and hide the game display
-      document.getElementById('game-frame').src = ''; // Clear the iframe source
-      document.getElementById('game-display').style.display = 'none'; // Hide the iframe container
+      // Redirect back to the games page
+      window.location.href = '/games.html'; // Adjust the path if necessary
     }
 
     function toggleFullScreen() {
@@ -124,3 +123,4 @@
   <script src="/js/scripts.js"></script>
 </body>
 </html>
+
