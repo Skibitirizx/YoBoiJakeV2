@@ -18,7 +18,7 @@ function openAboutBlank() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  var switchInput = document.querySelector("about-blank-btn");
+  var switchInput = document.querySelector("#about-blank-btn");
 
   if (switchInput) {
     switchInput.addEventListener("change", function () {
@@ -45,9 +45,27 @@ function showGame(gameUrl) {
     iframe.height = "600";
     iframe.style.border = "none";
     gameFrameContainer.appendChild(iframe);
+  } else {
+    existingFrame.src = gameUrl;
   }
 
   // Show the game display section
   document.getElementById("game-display").style.display = "block";
 }
 
+function exitGame() {
+  // Redirect to the games.html page
+  window.location.href = "/games.html";
+}
+
+function toggleFullScreen() {
+  const gameFrame = document.getElementById("game-frame");
+
+  if (gameFrame) {
+    if (!document.fullscreenElement) {
+      gameFrame.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+}
