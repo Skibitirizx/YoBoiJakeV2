@@ -1,32 +1,10 @@
-  var url = "/";
-  var win;
-
-  function openAboutBlank() {
-      if (win) {
-          win.focus();
-      } else {
-          win = window.open('', '_blank');
-          win.document.body.style.margin = '0';
-          win.document.body.style.height = '100vh';
-          var iframe = win.document.createElement('iframe');
-          iframe.style.border = 'none';
-          iframe.style.width = '100%';
-          iframe.style.height = '100%';
-          iframe.src = url;
-          win.document.body.appendChild(iframe);
-      }
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-      var switchInput = document.querySelector('about-blank-btn');
-
-      switchInput.addEventListener('change', function() {
-          if (this.checked) {
-              openAboutBlank();
-          }
-      });
-  });
-
+function openAboutBlank() {
+  const content = document.documentElement.outerHTML;
+  const newTab = window.open('about:blank', '_blank');
+  newTab.document.open();
+  newTab.document.write(content);
+  newTab.document.close();
+}
 function showGame(gameUrl, gameTitle) {
   
   document.getElementById('game-container').style.display = 'none';
@@ -39,10 +17,11 @@ function showGame(gameUrl, gameTitle) {
 }
 
 function exitGame() {
-  // Redirect back to the games page
-  window.location.href = '/games.html'; // Adjust the path if necessary
-}
 
+  document.getElementById('game-display').style.display = 'none';
+
+  document.getElementById('game-container').style.display = 'flex';
+}
 
 function toggleFullScreen() {
   const gameFrame = document.getElementById('game-frame');
