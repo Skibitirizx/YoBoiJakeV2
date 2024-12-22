@@ -7,6 +7,34 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    #cursor-container {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: black;
+      color: red;
+      border-radius: 5px;
+    }
+    #cursor-container input {
+      padding: 10px;
+      border: 2px solid red;
+      background-color: black;
+      color: red;
+      margin-right: 10px;
+    }
+    #cursor-container button {
+      padding: 10px 20px;
+      background-color: black;
+      color: red;
+      border: 2px solid red;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #cursor-container button:hover {
+      background-color: red;
+      color: black;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -21,7 +49,9 @@
   </header>
 
   <main id="settings-content">
-    <h1>Tab Cloaking</h1>
+    <h1>Tab Cloaking and Cursor Customization</h1>
+
+    <!-- Tab Cloaking Section -->
     <div id="cloaks">
       <button class="cloak-button" onclick="cloakTab('Google Classroom', 'https://ssl.gstatic.com/classroom/favicon.png')">
         <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Google Classroom Icon">
@@ -44,29 +74,49 @@
         Reset to Default
       </button>
     </div>
+
+    <!-- Cursor Changer Section -->
+    <div id="cursor-container">
+      <h2>Change Cursor</h2>
+      <input type="text" id="custom-cursor-url" placeholder="Enter URL for custom cursor">
+      <button onclick="changeCursor()">Set Custom Cursor</button>
+
+      <h3>Predefined Cursors:</h3>
+      <button onclick="changeCursor('https://ssl.gstatic.com/classroom/favicon.png')">Classroom Cursor</button>
+      <button onclick="changeCursor('https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico')">Docs Cursor</button>
+      <button onclick="changeCursor('https://ssl.gstatic.com/slides/images/favicon5.ico')">Slides Cursor</button>
+      <button onclick="changeCursor('https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png')">Drive Cursor</button>
+      <button onclick="changeCursor('/assets/images/logo.png')">Site Logo Cursor</button>
+      <button onclick="resetCursor()">Reset Cursor</button>
+    </div>
   </main>
 
   <script>
     // Function to cloak the tab
     function cloakTab(title, favicon) {
-      // Change the document title
       document.title = title;
-      
-      // Change the favicon
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = favicon;
     }
 
     // Function to reset the tab to its original state
     function resetTab() {
-      // Restore the original title
       document.title = 'Settings - YoBoiJake';
-
-      // Restore the original favicon
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = '/assets/images/logo.png';
+    }
+
+    // Function to change the cursor
+    function changeCursor(url) {
+      if (url) {
+        document.body.style.cursor = `url(${url}), auto`;
+      }
+    }
+
+    // Function to reset the cursor to default
+    function resetCursor() {
+      document.body.style.cursor = "default";
     }
   </script>
 </body>
 </html>
-
