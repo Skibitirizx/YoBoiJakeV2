@@ -28,7 +28,7 @@
   });
 
 function showGame(gameUrl, gameTitle) {
-  
+
   document.getElementById('game-container').style.display = 'none';
 
   const gameFrame = document.getElementById('game-frame');
@@ -39,15 +39,13 @@ function showGame(gameUrl, gameTitle) {
 }
 
 function exitGame() {
-
   document.getElementById('game-display').style.display = 'none';
-
   document.getElementById('game-container').style.display = 'flex';
 }
 
 function toggleFullScreen() {
   const gameFrame = document.getElementById('game-frame');
-  
+
   if (!document.fullscreenElement) {
     gameFrame.requestFullscreen();
   } else {
