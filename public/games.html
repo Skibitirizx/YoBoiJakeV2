@@ -23,12 +23,54 @@
   <main id="games-content">
     <h1>Games:</h1>
     <div id="game-container">
-      <!-- Your game links here -->
       <a href="#cookieclicker" class="game" onclick="showGame('/assets/games/cookieclicker/')">
         <img src="/assets/images/cookieclicker/game.png" alt="Cookie Clicker">
         <span>Cookie Clicker</span>
       </a>
-      <!-- More games... -->
+      <a href="#fireboyandwatergirl" class="game" onclick="showGame('/assets/games/fireboyandwatergirl/')">
+        <img src="/assets/images/fireboyandwatergirl/game.png" alt="Fireboy and Watergirl">
+        <span>Fireboy and Watergirl</span>
+      </a>
+      <a href="#bloxorz" class="game" onclick="showGame('/assets/games/bloxorz/')">
+        <img src="/assets/images/bloxorz/game.png" alt="Bloxorz">
+        <span>Bloxorz</span>
+      </a>
+      <a href="#driftboss" class="game" onclick="showGame('/assets/games/driftboss/')">
+        <img src="/assets/images/driftboss/game.png" alt="Drift Boss">
+        <span>Drift Boss</span>
+      </a>
+      <a href="#2048" class="game" onclick="showGame('/assets/games/2048/')">
+        <img src="/assets/images/2048/game.png" alt="2048">
+        <span>2048</span>
+      </a>
+      <a href="#1v1.lol" class="game" onclick="showGame('/assets/games/1v1.lol/')">
+        <img src="/assets/images/1v1.lol/game.png" alt="1v1.lol">
+        <span>1v1.lol</span>
+      </a>
+      <a href="#retrobowl" class="game" onclick="showGame('/assets/games/retrobowl/')">
+        <img src="/assets/images/retrobowl/game.png" alt="Retro Bowl">
+        <span>Retro Bowl</span>
+      </a>
+      <a href="#basketballstars" class="game" onclick="showGame('/assets/games/basketballstars/')">
+        <img src="/assets/images/basketballstars/game.png" alt="Basketball Stars">
+        <span>Basketball Stars</span>
+      </a>
+      <a href="#slope" class="game" onclick="showGame('/assets/games/slope/')">
+        <img src="/assets/images/slope/game.png" alt="Slope">
+        <span>Slope</span>
+      </a>
+      <a href="#f1" class="game" onclick="showGame('/assets/games/f1/')">
+        <img src="/assets/images/f1/game.png" alt="F1">
+        <span>F1</span>
+      </a>
+      <a href="#bob1" class="game" onclick="showGame('/assets/games/bob1/')">
+        <img src="/assets/images/bob1/game.png" alt="Bob The Robber">
+        <span>Bob The Robber</span>
+      </a>
+      <a href="#bit" class="game" onclick="showGame('/assets/games/bit/')">
+        <img src="/assets/images/bit/game.png" alt="Bitlife">
+        <span>Bitlife</span>
+      </a>
     </div>
 
     <div id="game-display" style="display: none;">
@@ -46,20 +88,21 @@
     let currentGame = '';
 
     function showGame(gameUrl) {
+      // Load the selected game into the iframe
       currentGame = gameUrl;
       document.getElementById('game-frame').src = gameUrl;
       document.getElementById('game-display').style.display = 'block';
-      document.getElementById('game-container').style.display = 'none'; // Hide the game list
+      document.getElementById('game-container').style.display = 'none'; // Hide the game list when playing
     }
 
     function exitGame() {
-      // Clear the iframe src to "close" the game
+      // Clear the iframe source to "close" the game
       document.getElementById('game-frame').src = '';
       document.getElementById('game-display').style.display = 'none';
       document.getElementById('game-container').style.display = 'block'; // Show the game list again
 
-      // Optionally, you can navigate away from the page
-      // window.location.href = '/'; // Redirect to homepage or any other URL
+      // Optionally, navigate to another page (e.g., the homepage)
+      // window.location.href = '/'; // Uncomment to redirect
     }
 
     function toggleFullScreen() {
@@ -68,7 +111,7 @@
         iframe.requestFullscreen();
       } else if (iframe.mozRequestFullScreen) { // Firefox
         iframe.mozRequestFullScreen();
-      } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
+      } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
         iframe.webkitRequestFullscreen();
       } else if (iframe.msRequestFullscreen) { // IE/Edge
         iframe.msRequestFullscreen();
@@ -79,3 +122,4 @@
   <script src="/js/scripts.js"></script>
 </body>
 </html>
+
