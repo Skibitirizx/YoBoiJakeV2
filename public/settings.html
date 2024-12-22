@@ -23,11 +23,26 @@
   <main id="settings-content">
     <h1>Tab Cloaking</h1>
     <div id="cloaks">
-      <button onclick="cloakTab('Google Classroom', '/assets/icons/classroom.png')">Google Classroom</button>
-      <button onclick="cloakTab('Google Docs', '/assets/icons/docs.png')">Google Docs</button>
-      <button onclick="cloakTab('Google Slides', '/assets/icons/slides.png')">Google Slides</button>
-      <button onclick="cloakTab('Google Drive', '/assets/icons/drive.png')">Google Drive</button>
-      <button onclick="resetTab()">Reset to Default</button>
+      <button class="cloak-button" onclick="cloakTab('Google Classroom', 'https://ssl.gstatic.com/classroom/favicon.png')">
+        <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Google Classroom Icon">
+        Google Classroom
+      </button>
+      <button class="cloak-button" onclick="cloakTab('Google Docs', 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico')">
+        <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="Google Docs Icon">
+        Google Docs
+      </button>
+      <button class="cloak-button" onclick="cloakTab('Google Slides', 'https://ssl.gstatic.com/slides/images/favicon5.ico')">
+        <img src="https://ssl.gstatic.com/slides/images/favicon5.ico" alt="Google Slides Icon">
+        Google Slides
+      </button>
+      <button class="cloak-button" onclick="cloakTab('Google Drive', 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png')">
+        <img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" alt="Google Drive Icon">
+        Google Drive
+      </button>
+      <button class="cloak-button" onclick="resetTab()">
+        <img src="/assets/images/logo.png" alt="Default Icon">
+        Reset to Default
+      </button>
     </div>
   </main>
 
