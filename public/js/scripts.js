@@ -39,11 +39,10 @@ function showGame(gameUrl, gameTitle) {
 }
 
 function exitGame() {
-
-  document.getElementById('game-display').style.display = 'none';
-
-  document.getElementById('game-container').style.display = 'flex';
+  // Redirect back to the games page
+  window.location.href = '/games.html'; // Adjust the path if necessary
 }
+
 
 function toggleFullScreen() {
   const gameFrame = document.getElementById('game-frame');
