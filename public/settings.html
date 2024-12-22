@@ -7,72 +7,6 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
-  <style>
-    /* Button style similar to the about:blank button */
-    #auto-blank-btn {
-      background-color: black;
-      color: red;
-      border: 2px solid red;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
-      margin-top: 20px;
-    }
-
-    #auto-blank-btn:hover {
-      background-color: red;
-      color: black;
-    }
-
-    /* Toggle switch style */
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-
-    .switch input { 
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 34px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      border-radius: 50%;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-    }
-
-    input:checked + .slider {
-      background-color: red;
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(26px);
-    }
-
-  </style>
 </head>
 <body>
   <header>
@@ -97,6 +31,10 @@
         <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="Google Docs Icon">
         Google Docs
       </button>
+      <button class="cloak-button" onclick="cloakTab('Google Slides', 'https://ssl.gstatic.com/slides/images/favicon5.ico')">
+        <img src="https://ssl.gstatic.com/slides/images/favicon5.ico" alt="Google Slides Icon">
+        Google Slides
+      </button>
       <button class="cloak-button" onclick="cloakTab('Google Drive', 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png')">
         <img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" alt="Google Drive Icon">
         Google Drive
@@ -105,19 +43,6 @@
         <img src="/assets/images/logo.png" alt="Default Icon">
         Reset to Default
       </button>
-    </div>
-
-    <h2>Auto:Blank Settings</h2>
-    <div>
-      <p>Enable auto:blank (Open a new blank window):</p>
-      <label class="switch">
-        <input type="checkbox" id="auto-blank-toggle">
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <div>
-      <button id="auto-blank-btn" onclick="openAboutBlank()">Open About:Blank</button>
     </div>
   </main>
 
@@ -135,40 +60,6 @@
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = '/assets/images/logo.png';
     }
-
-    // Function to open the about:blank page in a new window
-    var win;
-    function openAboutBlank() {
-      if (win) {
-        win.focus();
-      } else {
-        win = window.open("", "_blank");
-        win.document.body.style.margin = "0";
-        win.document.body.style.height = "100vh";
-        var iframe = win.document.createElement("iframe");
-        iframe.style.border = "none";
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.src = "about:blank";  // Can be set to any URL or remain blank
-        win.document.body.appendChild(iframe);
-      }
-    }
-
-    // Check if auto:blank toggle is set to on in localStorage
-    if(localStorage.getItem('autoBlankEnabled') === 'true') {
-      document.getElementById('auto-blank-toggle').checked = true;
-      openAboutBlank();  // Automatically open the about:blank when enabled
-    }
-
-    // Listen for toggle switch change
-    document.getElementById('auto-blank-toggle').addEventListener('change', function() {
-      if(this.checked) {
-        localStorage.setItem('autoBlankEnabled', 'true');
-        openAboutBlank();  // Open the about:blank when turned on
-      } else {
-        localStorage.setItem('autoBlankEnabled', 'false');
-      }
-    });
   </script>
 </body>
 </html>
