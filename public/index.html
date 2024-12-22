@@ -23,17 +23,11 @@
   <main id="home-content">
     <h1>Welcome to YoBoiJake</h1>
     <button id="about-blank-btn" onclick="openAboutBlank()">About Blank</button>
+    
+    <!-- Jesus Verse of the Day -->
+    <h2>Jesus Verse of the Day</h2>
+    <p id="verse"></p>
   </main>
-
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jesus Verse of the Day</title>
-</head>
-<body>
-  <h1>Jesus Verse of the Day</h1>
-  <p id="verse"></p>
 
   <script>
     // Array of Bible verses
@@ -50,11 +44,11 @@
 
     // Display the verse
     document.getElementById("verse").textContent = randomVerse;
+
+    // About Blank button functionality (existing script)
+    function openAboutBlank() {
+      window.open("about:blank", "_blank");
+    }
   </script>
-</body>
-</html>
-
-
-  <script src="/js/scripts.js"></script>
 </body>
 </html>
