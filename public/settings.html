@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings - YoBoiJake</title>
   <link rel="manifest" href="/manifest.json"/>
-  <link rel="icon" type="image/png" href="/assets/images/logo.png">
+  <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -21,9 +21,36 @@
   </header>
 
   <main id="settings-content">
-    <h1>Coming Soon</h1>
+    <h1>Tab Cloaking</h1>
+    <div id="cloaks">
+      <button onclick="cloakTab('Google Classroom', '/assets/icons/classroom.png')">Google Classroom</button>
+      <button onclick="cloakTab('Google Docs', '/assets/icons/docs.png')">Google Docs</button>
+      <button onclick="cloakTab('Google Slides', '/assets/icons/slides.png')">Google Slides</button>
+      <button onclick="cloakTab('Google Drive', '/assets/icons/drive.png')">Google Drive</button>
+      <button onclick="resetTab()">Reset to Default</button>
+    </div>
   </main>
 
-  <script src="/js/scripts.js"></script>
+  <script>
+    // Function to cloak the tab
+    function cloakTab(title, favicon) {
+      // Change the document title
+      document.title = title;
+      
+      // Change the favicon
+      const faviconElement = document.getElementById('favicon');
+      faviconElement.href = favicon;
+    }
+
+    // Function to reset the tab to its original state
+    function resetTab() {
+      // Restore the original title
+      document.title = 'Settings - YoBoiJake';
+
+      // Restore the original favicon
+      const faviconElement = document.getElementById('favicon');
+      faviconElement.href = '/assets/images/logo.png';
+    }
+  </script>
 </body>
 </html>
