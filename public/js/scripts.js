@@ -33,18 +33,32 @@ function showGame(gameUrl) {
   // Hide the game list container
   document.getElementById("game-container").style.display = "none";
 
-  // Set the iframe source and display the game
-  const gameFrame = document.getElementById("game-frame");
-  gameFrame.src = gameUrl;
+  // Dynamically create and load the iframe
+  const gameFrameContainer = document.getElementById("game-frame-container");
+  const existingFrame = document.getElementById("game-frame");
 
+  if (!existingFrame) {
+    const iframe = document.createElement("iframe");
+    iframe.id = "game-frame";
+    iframe.src = gameUrl;
+    iframe.width = "800";
+    iframe.height = "600";
+    iframe.style.border = "none";
+    gameFrameContainer.appendChild(iframe);
+  } else {
+    existingFrame.src = gameUrl;
+  }
+
+  // Show the game container
   document.getElementById("game-display").style.display = "block";
-  document.getElementById("game-frame-container").style.maxWidth = "800px";
 }
 
 function exitGame() {
-  // Clear the iframe's source to stop the game
+  // Remove the iframe entirely from the DOM
   const gameFrame = document.getElementById("game-frame");
-  gameFrame.src = "";
+  if (gameFrame) {
+    gameFrame.remove();
+  }
 
   // Hide the game display container and show the game list
   document.getElementById("game-display").style.display = "none";
@@ -54,9 +68,11 @@ function exitGame() {
 function toggleFullScreen() {
   const gameFrame = document.getElementById("game-frame");
 
-  if (!document.fullscreenElement) {
-    gameFrame.requestFullscreen();
-  } else {
-    document.exitFullscreen();
+  if (gameFrame) {
+    if (!document.fullscreenElement) {
+      gameFrame.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
   }
 }
