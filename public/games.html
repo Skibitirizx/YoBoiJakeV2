@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games - YoBoiJake</title>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="icon" type="image/png" href="/assets/images/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <img src="/assets/images/logo.png" alt="YoBoiJake Logo">
+    <span id="logo-name">YoBoiJake</span>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/games.html">Games</a>
+      <a href="/search.html">Search</a>
+      <a href="/settings.html">Settings</a>
+    </nav>
+  </header>
+
+  <main id="games-content">
+    <h1>Games:</h1>
+    <div id="game-container">
+      <a href="#cookieclicker" class="game" onclick="showGame('/assets/games/cookieclicker/')">
+        <img src="/assets/images/cookieclicker/game.png" alt="Cookie Clicker">
+        <span>Cookie Clicker</span>
+      </a>
+      <a href="#fireboyandwatergirl" class="game" onclick="showGame('/assets/games/fireboyandwatergirl/')">
+        <img src="/assets/images/fireboyandwatergirl/game.png" alt="Fireboy and Watergirl">
+        <span>Fireboy and Watergirl</span>
+      </a>
+      <a href="#bloxorz" class="game" onclick="showGame('/assets/games/bloxorz/')">
+        <img src="/assets/images/bloxorz/game.png" alt="Bloxorz">
+        <span>Bloxorz</span>
+      </a>
+      <a href="#driftboss" class="game" onclick="showGame('/assets/games/driftboss/')">
+        <img src="/assets/images/driftboss/game.png" alt="Drift Boss">
+        <span>Drift Boss</span>
+      </a>
+    </div>
+    
+    <div id="game-display" style="display: none;">
+      <div id="game-frame-container">
+        <iframe id="game-frame" src="" width="800" height="600"></iframe>
+        <div id="game-buttons">
+          <button onclick="exitGame()">Exit</button>
+          <button onclick="toggleFullScreen()">Fullscreen</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/scripts.js"></script>
+</body>
+</html>
