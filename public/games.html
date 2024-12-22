@@ -96,13 +96,14 @@
     }
 
     function exitGame() {
-      // Clear the iframe source to "close" the game
-      document.getElementById('game-frame').src = '';
-      document.getElementById('game-display').style.display = 'none';
+      // Clear the iframe source and remove the current game page
+      document.getElementById('game-frame').src = ''; // Removes the current game
+      document.getElementById('game-display').style.display = 'none'; // Hides the game display
       document.getElementById('game-container').style.display = 'block'; // Show the game list again
 
-      // Optionally, navigate to another page (e.g., the homepage)
-      // window.location.href = '/'; // Uncomment to redirect
+      // Optionally, you can navigate to another page or refresh the page
+      // window.location.href = '/'; // Redirect to homepage
+      // location.reload(); // Reloads the page to reset everything (removes any dynamically loaded data)
     }
 
     function toggleFullScreen() {
