@@ -8,31 +8,99 @@
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
   <style>
-    /* Center the main content */
-    main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 80vh; /* 80% of the viewport height */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: red;
       text-align: center;
     }
 
-    /* Style for Discord link with updated button style */
+    header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      border-bottom: 2px solid red;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    #logo-name {
+      font-size: 24px;
+      color: red;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      margin-left: auto;
+    }
+
+    nav a {
+      color: red;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 5px 10px;
+      border: 1px solid red;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: red;
+      color: black;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    h1, h2 {
+      margin: 20px 0;
+      color: red;
+    }
+
     #discord-link {
-      background-color: black;
+      display: inline-block;
+      margin: 20px 0;
+      padding: 10px 15px;
       color: red;
       border: 2px solid red;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
       transition: background-color 0.3s, color 0.3s;
-      text-decoration: none; /* Ensuring no underlines on the link */
-      margin-top: 20px;
     }
 
     #discord-link:hover {
+      background-color: red;
+      color: black;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 20px 0;
+      text-align: left;
+      display: inline-block;
+    }
+
+    li {
+      margin: 5px 0;
+      font-size: 18px;
+      color: red;
+      border: 1px solid red;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: black;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    li:hover {
       background-color: red;
       color: black;
     }
@@ -54,6 +122,22 @@
     <h1>Thanks to Plexile Network for making this possible!</h1>
     <p>Join their community on Discord:</p>
     <a id="discord-link" href="https://discord.gg/59UMvHBNM6" target="_blank">Join Plexile Network Discord</a>
+
+    <h2>Things They Help With</h2>
+    <ul>
+      <li>UV Files</li>
+      <li>Built-In Games</li>
+      <li>Images</li>
+      <li>Some Animations</li>
+      <li>Download Option</li>
+      <li>Fixed About:Blank</li>
+      <li>Fixed Proxy</li>
+      <li>Added Shortcuts</li>
+      <li>Fixed CSS Errors</li>
+      <li>Fixed HTML Errors</li>
+      <li>Added PM2 (index.mjs)</li>
+      <li>LICENSE File</li>
+    </ul>
   </main>
 </body>
 </html>
