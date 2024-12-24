@@ -43,30 +43,21 @@
     </div>
   </main>
 
-  <script>
-    // Function to cloak the tab
-    function cloakTab(title, favicon) {
-      // Set cloaking state in localStorage
-      localStorage.setItem('cloakedTitle', title);
-      localStorage.setItem('cloakedFavicon', favicon);
+    <script>
+    // Check if the cloak settings are stored in localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      const cloakedTitle = localStorage.getItem('cloakedTitle');
+      const cloakedFavicon = localStorage.getItem('cloakedFavicon');
 
-      // Update the title and favicon of the current tab
-      document.title = title;
-      const faviconElement = document.getElementById('favicon');
-      faviconElement.href = favicon;
-    }
-
-    // Function to reset the tab to its original state
-    function resetTab() {
-      // Remove cloaking state from localStorage
-      localStorage.removeItem('cloakedTitle');
-      localStorage.removeItem('cloakedFavicon');
-      
-      // Reset to original title and favicon
-      document.title = 'Settings - YoBoiJake';
-      const faviconElement = document.getElementById('favicon');
-      faviconElement.href = '/assets/images/logo.png';
-    }
+      if (cloakedTitle && cloakedFavicon) {
+        // Apply the cloaked title and favicon to the page
+        document.title = cloakedTitle;
+        const faviconElement = document.getElementById('favicon');
+        if (faviconElement) {
+          faviconElement.href = cloakedFavicon;
+        }
+      }
+    });
   </script>
 </body>
 </html>
