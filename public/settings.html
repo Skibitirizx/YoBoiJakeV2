@@ -7,6 +7,183 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* Theme Definitions */
+    body[theme="rose_gold"] {
+      --text-color: #ffffff;
+      --background: #f3a683;
+      --navbar: #e79a58;
+      --accent: #ff9a8b;
+    }
+
+    body[theme="midnight"] {
+      --text-color: white;
+      --background: #1a2023;
+      --navbar: #0e1213;
+      --accent: #0284d4;
+    }
+
+    body[theme="main"] {
+      --text-color: white;
+      --background: black;
+      --navbar: black;
+      --accent: white;
+    }
+
+    body[theme="lgbtq"] {
+      --text-color: black;
+      --background: url("https://www.rd.com/wp-content/uploads/2021/05/traditional-gay-pride-flag.jpg?resize=2048");
+      --navbar: #bcf3f6;
+      --accent: #DDF9FA;
+    }
+
+    body[theme="forest"] {
+      --text-color: white;
+      --background: #2c3e50;
+      --navbar: #1c221d;
+      --accent: #27ae60;
+    }
+
+    body[theme="ocean"] {
+      --text-color: white;
+      --background: #34495e;
+      --navbar: #2d1a79;
+      --accent: #2980b9;
+    }
+
+    body[theme="amoled"] {
+      --text-color: #ebebeb;
+      --background: #000000;
+      --navbar: #0f0f0f;
+      --accent: #0284d4;
+    }
+
+    body[theme="white"] {
+      --text-color: #000000;
+      --background: #ffffff;
+      --navbar: #dbdbdb;
+      --accent: #0284d4;
+    }
+
+    body[theme="sunset"] {
+      --text-color: #ffffff;
+      --background: linear-gradient(#f08b08, #f15e08);
+      --navbar: #f09f08;
+      --accent: #0284d4;
+    }
+
+    body[theme="flash"] {
+      --text-color: #ffffff;
+      --background: #ffffff;
+      --navbar: #ffffff;
+      --accent: #ffffff;
+    }
+
+    body[theme="matrix"] {
+      --text-color: #e0e0e0;
+      --background: linear-gradient(#000000, #006b09);
+      --navbar: #080808;
+      --accent: #0284d4;
+    }
+
+    body[theme="beach"] {
+      --text-color: #000000;
+      --background: #f6d7b0;
+      --navbar: #87CEEB;
+      --accent: #0284d4;
+    }
+
+    body[theme="murica"] {
+      --text-color: #000000;
+      --background: linear-gradient(#e21f1f, #2233cf);
+      --navbar: #e22e2e;
+      --accent: #0284d4;
+    }
+
+    body[theme="modern"] {
+      --text-color: #000000;
+      --background: url("https://yourcatholicfoundation.org.au/wp-content/uploads/2019/09/Main-Image-bg.jpg");
+      --navbar: #313131;
+      --accent: #0284d4;
+    }
+
+    /* Global Styles */
+    body {
+      color: var(--text-color);
+      background-color: var(--background);
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      border-bottom: 2px solid var(--accent);
+      background-color: var(--navbar);
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    #logo-name {
+      font-size: 24px;
+      color: var(--accent);
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      margin-left: auto;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 16px;
+      padding: 5px 10px;
+      border: 1px solid var(--accent);
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: var(--accent);
+      color: black;
+    }
+
+    #settings-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 80vh;
+    }
+
+    .cloak-button {
+      background-color: var(--background);
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .cloak-button:hover {
+      background-color: var(--accent);
+      color: black;
+    }
+
+  </style>
 </head>
 <body>
   <header>
@@ -56,8 +233,14 @@
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = '/assets/images/logo.png';
     }
+
+    // Function to switch themes
+    function setTheme(theme) {
+      document.body.setAttribute("theme", theme);
+    }
+
+    // Example of changing theme
+    // setTheme('midnight'); // Uncomment to set default theme to "midnight"
   </script>
 </body>
 </html>
-
-
