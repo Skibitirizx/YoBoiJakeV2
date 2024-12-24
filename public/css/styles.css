@@ -1,8 +1,17 @@
+/* Default Styles */
+:root {
+  --text-color: red; /* Default text color */
+  --border-color: red; /* Default border color */
+  --header-color: black; /* Default header color */
+  --background-color: black; /* Default background color */
+  --background-image: none; /* Default background image */
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: black;
-  color: red;
+  background-color: var(--background-color);
+  color: var(--text-color);
   text-align: center;
 }
 
@@ -10,7 +19,8 @@ header {
   display: flex;
   align-items: center;
   padding: 10px 20px;
-  border-bottom: 2px solid red;
+  background-color: var(--header-color); /* Header default to black */
+  border-bottom: 2px solid var(--border-color);
 }
 
 header img {
@@ -19,7 +29,7 @@ header img {
 
 #logo-name {
   font-size: 24px;
-  color: red;
+  color: var(--text-color);
   font-weight: bold;
   margin-left: 10px;
 }
@@ -31,17 +41,17 @@ nav {
 }
 
 nav a {
-  color: red;
+  color: var(--text-color);
   text-decoration: none;
   font-size: 16px;
   padding: 5px 10px;
-  border: 1px solid red;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 nav a:hover {
-  background-color: red;
+  background-color: var(--border-color);
   color: black;
 }
 
@@ -58,6 +68,59 @@ nav a:hover {
   margin-bottom: 20px;
 }
 
+#color-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#color-options label {
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+#color-options input {
+  padding: 5px;
+  font-size: 16px;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+#background-image-upload {
+  margin-top: 20px;
+}
+
+#background-image-upload label {
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+#background-image-upload input {
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 16px;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+button {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: var(--border-color);
+  color: black;
+}
+
+/* Retaining the original styles for all the other elements */
 #cloaks {
   display: flex;
   flex-direction: column;
@@ -84,54 +147,6 @@ nav a:hover {
 }
 
 .cloak-button:hover {
-  background-color: red;
-  color: black;
-}
-
-/* Retaining the rest of the original styles for the home page, games, and settings page */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: black;
-  color: red;
-  text-align: center;
-}
-
-header {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  border-bottom: 2px solid red;
-}
-
-header img {
-  height: 50px;
-}
-
-#logo-name {
-  font-size: 24px;
-  color: red;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-nav {
-  display: flex;
-  gap: 15px;
-  margin-left: auto;
-}
-
-nav a {
-  color: red;
-  text-decoration: none;
-  font-size: 16px;
-  padding: 5px 10px;
-  border: 1px solid red;
-  border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-nav a:hover {
   background-color: red;
   color: black;
 }
