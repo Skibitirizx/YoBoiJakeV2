@@ -89,16 +89,65 @@ function isUrl(val = '') {
     return /^http(s?):\/\//.test(val) || (val.includes('.') && val[0] !== ' ');
 }
 
-// Persistent tab cloaking (added functionality)
-document.addEventListener('DOMContentLoaded', () => {
-  // Check if cloaking state exists in localStorage
-  const cloakedTitle = localStorage.getItem('cloakedTitle');
-  const cloakedFavicon = localStorage.getItem('cloakedFavicon');
-
-  // If cloaking state exists, apply it to the page
-  if (cloakedTitle && cloakedFavicon) {
-    document.title = cloakedTitle;
+// Cloak tab functionality (with localStorage)
+function cloakTab(title, favicon) {
+    document.title = title;
     const faviconElement = document.getElementById('favicon');
-    faviconElement.href = cloakedFavicon;
-  }
+    faviconElement.href = favicon;
+
+    // Save the cloaking settings to localStorage
+    localStorage.setItem('cloakTitle', title);
+    localStorage.setItem('cloakFavicon', favicon);
+}
+
+function resetTab() {
+    document.title = 'Settings - YoBoiJake';
+    const faviconElement = document.getElementById('favicon');
+    faviconElement.href = '/assets/images/logo.png';
+
+    // Reset localStorage
+    localStorage.removeItem('cloakTitle');
+    localStorage.removeItem('cloakFavicon');
+}
+
+// Check if cloaking data exists in localStorage and apply it
+window.addEventListener('DOMContentLoaded', () => {
+    const savedTitle = localStorage.getItem('cloakTitle');
+    const savedFavicon = localStorage.getItem('cloakFavicon');
+    const cloakSwitch = document.getElementById('cloak-switch');
+
+    // Check if cloaking was enabled previously and apply it
+    if (savedTitle && savedFavicon) {
+        document.title = savedTitle;
+        const faviconElement = document.getElementById('favicon');
+        faviconElement.href = savedFavicon;
+        cloakSwitch.checked = true; // Set the checkbox to checked
+    }
+
+    // Event listener for the cloak switch
+    cloakSwitch.addEventListener('change', () => {
+        if (cloakSwitch.checked) {
+            // Enable cloaking when checked
+            const title = localStorage.getItem('cloakTitle');
+            const favicon = localStorage.getItem('cloakFavicon');
+            if (title && favicon) {
+                document.title = title;
+                document.getElementById('favicon').href = favicon;
+            }
+        } else {
+            // Reset cloaking if unchecked
+            resetTab();
+        }
+
+        // Save the cloak switch state in localStorage
+        localStorage.setItem('cloakEnabled', cloakSwitch.checked);
+    });
+
+    // Apply the saved cloak state from localStorage
+    const cloakEnabled = localStorage.getItem('cloakEnabled') === 'true';
+    cloakSwitch.checked = cloakEnabled;
+
+    if (!cloakEnabled) {
+        resetTab(); // Reset if cloak is disabled
+    }
 });
