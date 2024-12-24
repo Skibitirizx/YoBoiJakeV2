@@ -7,7 +7,6 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
-
 </head>
 <body>
   <header>
@@ -18,6 +17,7 @@
       <a href="/games.html">Games</a>
       <a href="/search.html">Search</a>
       <a href="/settings.html">Settings</a>
+      <a href="/chatgpt.html">ChatGPT</a>
     </nav>
   </header>
 
@@ -43,7 +43,20 @@
     </div>
   </main>
 
+  <script>
+    // Function to cloak the tab
+    function cloakTab(title, favicon) {
+      document.title = title;
+      const faviconElement = document.getElementById('favicon');
+      faviconElement.href = favicon;
+    }
+
+    // Function to reset the tab to its original state
+    function resetTab() {
+      document.title = 'Settings - YoBoiJake';
+      const faviconElement = document.getElementById('favicon');
+      faviconElement.href = '/assets/images/logo.png';
+    }
+  </script>
 </body>
 </html>
-
-
