@@ -89,4 +89,16 @@ function isUrl(val = '') {
     return /^http(s?):\/\//.test(val) || (val.includes('.') && val[0] !== ' ');
 }
 
-// Code From: https://github.com/PLEXILENetwork/v6/blob/main/public/js/index.js
+// Persistent tab cloaking (added functionality)
+document.addEventListener('DOMContentLoaded', () => {
+  // Check if cloaking state exists in localStorage
+  const cloakedTitle = localStorage.getItem('cloakedTitle');
+  const cloakedFavicon = localStorage.getItem('cloakedFavicon');
+
+  // If cloaking state exists, apply it to the page
+  if (cloakedTitle && cloakedFavicon) {
+    document.title = cloakedTitle;
+    const faviconElement = document.getElementById('favicon');
+    faviconElement.href = cloakedFavicon;
+  }
+});
