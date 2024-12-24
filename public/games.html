@@ -7,41 +7,6 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
-  <style>
-    /* Style for the volume slider */
-    #volume-slider-container {
-      margin-top: 10px;
-      display: none; /* Initially hidden */
-      text-align: center;
-    }
-    .volume-slider {
-      width: 200px;
-      -webkit-appearance: none;
-      appearance: none;
-      height: 10px;
-      background: #ddd;
-      outline: none;
-      opacity: 0.9;
-      transition: opacity 0.2s;
-      border-radius: 5px;
-    }
-    .volume-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      background: red;
-      cursor: pointer;
-      border-radius: 50%;
-    }
-    .volume-slider::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      background: red;
-      cursor: pointer;
-      border-radius: 50%;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -58,7 +23,7 @@
   <main id="games-content">
     <h1>Games:</h1>
     <div id="game-container">
-      <a href="#cookieclicker" class="game" onclick="showGame('/assets/games/cookieclicker/')">
+ <a href="#cookieclicker" class="game" onclick="showGame('/assets/games/cookieclicker/')">
         <img src="/assets/images/cookieclicker/game.png" alt="Cookie Clicker">
         <span>Cookie Clicker</span>
       </a>
@@ -75,89 +40,42 @@
         <span>Drift Boss</span>
       </a>
       <a href="#2048" class="game" onclick="showGame('/assets/games/2048/')">
-        <img src="/assets/images/2048/game.png" alt="2048">
+        <img src="/assets/images/2048/game.png" alt="Drift Boss">
         <span>2048</span>
       </a>
       <a href="#retrobowl" class="game" onclick="showGame('/assets/games/retrobowl/')">
-        <img src="/assets/images/retrobowl/game.png" alt="Retro Bowl">
+        <img src="/assets/images/retrobowl/game.png" alt="retrobowl">
         <span>Retro Bowl</span>
       </a>
-      <a href="#basketballstars" class="game" onclick="showGame('/assets/games/basketballstars/')">
-        <img src="/assets/images/basketballstars/game.png" alt="Basketball Stars">
+      <a href="#basketball stars" class="game" onclick="showGame('/assets/games/basketball stars/')">
+        <img src="/assets/images/basketball stars/game.png" alt="basketball stars">
         <span>Basketball Stars</span>
       </a>
       <a href="#slope" class="game" onclick="showGame('/assets/games/slope/')">
-        <img src="/assets/images/slope/game.png" alt="Slope">
+        <img src="/assets/images/slope/game.png" alt="slope">
         <span>Slope</span>
       </a>
       <a href="#f1" class="game" onclick="showGame('/assets/games/f1/')">
-        <img src="/assets/images/f1/game.png" alt="Fnaf 1">
+        <img src="/assets/images/f1/game.png" alt="f1">
         <span>Fnaf 1</span>
       </a>
       <a href="#bob1" class="game" onclick="showGame('/assets/games/bob1/')">
-        <img src="/assets/images/bob1/game.png" alt="Bob The Robber">
+        <img src="/assets/images/bob1/game.png" alt="f1">
         <span>Bob The Robber</span>
       </a>
     </div>
     
     <div id="game-display" style="display: none;">
       <div id="game-frame-container">
-        <iframe id="game-frame" src="" width="800" height="600" allow="autoplay"></iframe>
+        <iframe id="game-frame" src="" width="800" height="600"></iframe>
         <div id="game-buttons">
           <button onclick="exitGame()">Exit</button>
           <button onclick="toggleFullScreen()">Fullscreen</button>
         </div>
       </div>
     </div>
-
-    <!-- Volume Slider -->
-    <div id="volume-slider-container">
-      <label for="volume-slider">Volume:</label>
-      <input id="volume-slider" type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setGameVolume(this)">
-    </div>
   </main>
 
-  <script>
-    let currentGameIframe = null;
-
-    function showGame(gameUrl) {
-      document.getElementById("game-display").style.display = "block";
-      currentGameIframe = document.getElementById("game-frame");
-      currentGameIframe.src = gameUrl;
-
-      // Show the volume slider when a game is clicked
-      document.getElementById("volume-slider-container").style.display = "block";
-    }
-
-    function exitGame() {
-      const gameDisplay = document.getElementById("game-display");
-      const gameFrame = document.getElementById("game-frame");
-      gameFrame.src = "";
-      gameDisplay.style.display = "none";
-
-      // Hide the volume slider when exiting the game
-      document.getElementById("volume-slider-container").style.display = "none";
-    }
-
-    function toggleFullScreen() {
-      const gameFrame = document.getElementById("game-frame");
-      if (gameFrame.requestFullscreen) {
-        gameFrame.requestFullscreen();
-      } else if (gameFrame.mozRequestFullScreen) {
-        gameFrame.mozRequestFullScreen();
-      } else if (gameFrame.webkitRequestFullscreen) {
-        gameFrame.webkitRequestFullscreen();
-      } else if (gameFrame.msRequestFullscreen) {
-        gameFrame.msRequestFullscreen();
-      }
-    }
-
-    function setGameVolume(slider) {
-      if (currentGameIframe) {
-        const volume = slider.value;
-        currentGameIframe.contentWindow.postMessage({ type: 'setVolume', volume: volume }, '*');
-      }
-    }
-  </script>
+  <script src="/js/scripts.js"></script>
 </body>
 </html>
