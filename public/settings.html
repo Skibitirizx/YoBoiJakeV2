@@ -7,6 +7,24 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* Custom styles for input fields */
+    input[type="text"] {
+      color: red;
+      border: 2px solid red;
+      border-radius: 10px;
+      padding: 5px;
+      outline: none;
+    }
+
+    input[type="text"]::placeholder {
+      color: red;
+    }
+
+    input[type="text"]:focus {
+      border-color: darkred;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -54,12 +72,9 @@
       <label for="header-color">Header Color:</label>
       <input type="text" id="header-color" placeholder="Enter a color" onchange="updateHeaderColor()">
 
-      <!-- Background Color and Image Settings -->
+      <!-- Background Color Settings -->
       <label for="background-color">Background Color:</label>
       <input type="text" id="background-color" placeholder="Enter a color" onchange="updateBackgroundColor()">
-
-      <label for="background-image">Background Image URL:</label>
-      <input type="file" id="background-image" onchange="uploadBackgroundImage()">
     </div>
   </main>
 
@@ -69,6 +84,8 @@
       document.title = title;
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = favicon;
+      localStorage.setItem('tabTitle', title);
+      localStorage.setItem('tabFavicon', favicon);
     }
 
     // Function to reset the tab to its original state
@@ -76,6 +93,8 @@
       document.title = 'Settings - YoBoiJake';
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = '/assets/images/logo.png';
+      localStorage.setItem('tabTitle', 'Settings - YoBoiJake');
+      localStorage.setItem('tabFavicon', '/assets/images/logo.png');
     }
 
     // Function to update text color
@@ -106,22 +125,15 @@
       localStorage.setItem('backgroundColor', backgroundColor);
     }
 
-    // Function to upload background image
-    function uploadBackgroundImage() {
-      const fileInput = document.getElementById('background-image');
-      const file = fileInput.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          document.documentElement.style.setProperty('--background-image', `url(${e.target.result})`);
-          localStorage.setItem('backgroundImage', e.target.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
     // On page load, apply stored settings from localStorage
     window.onload = function() {
+      // Restore tab settings
+      const tabTitle = localStorage.getItem('tabTitle');
+      const tabFavicon = localStorage.getItem('tabFavicon');
+      if (tabTitle) document.title = tabTitle;
+      if (tabFavicon) document.getElementById('favicon').href = tabFavicon;
+
+      // Restore appearance settings
       const textColor = localStorage.getItem('textColor');
       if (textColor) {
         document.documentElement.style.setProperty('--text-color', textColor);
@@ -144,11 +156,6 @@
       if (backgroundColor) {
         document.documentElement.style.setProperty('--background-color', backgroundColor);
         document.getElementById('background-color').value = backgroundColor;
-      }
-
-      const backgroundImage = localStorage.getItem('backgroundImage');
-      if (backgroundImage) {
-        document.documentElement.style.setProperty('--background-image', `url(${backgroundImage})`);
       }
     };
   </script>
