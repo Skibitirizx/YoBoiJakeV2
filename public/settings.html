@@ -43,11 +43,24 @@
   </main>
 
   <script>
-    // Function to cloak the tab
+    // Check if a cloak is set in localStorage and apply it
+    window.onload = function() {
+      const cloakedTitle = localStorage.getItem('cloakedTitle');
+      const cloakedFavicon = localStorage.getItem('cloakedFavicon');
+      if (cloakedTitle && cloakedFavicon) {
+        document.title = cloakedTitle;
+        const faviconElement = document.getElementById('favicon');
+        faviconElement.href = cloakedFavicon;
+      }
+    };
+
+    // Function to cloak the tab and store the values in localStorage
     function cloakTab(title, favicon) {
       document.title = title;
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = favicon;
+      localStorage.setItem('cloakedTitle', title);
+      localStorage.setItem('cloakedFavicon', favicon);
     }
 
     // Function to reset the tab to its original state
@@ -55,6 +68,8 @@
       document.title = 'Settings - YoBoiJake';
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = '/assets/images/logo.png';
+      localStorage.removeItem('cloakedTitle');
+      localStorage.removeItem('cloakedFavicon');
     }
   </script>
 </body>
