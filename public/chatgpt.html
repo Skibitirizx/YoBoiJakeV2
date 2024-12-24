@@ -3,135 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YoBoiJake</title>
+  <title>ChatGPT - YoBoiJake</title>
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
   <style>
-    /* Add your ChatGPT style */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: black;
-      color: red;
-      text-align: center;
-    }
-
-    /* Chatbox container */
-    #chatbox {
-      margin: 20px auto;
-      padding: 15px;
-      max-width: 500px;
-      height: 400px;
-      background-color: black;
-      border: 2px solid red;
-      border-radius: 10px;
-      overflow-y: auto;
-      text-align: left;
-    }
-
-    /* User input field */
-    #user-input {
-      width: calc(100% - 20px);
-      padding: 10px;
-      margin-top: 10px;
-      border: 2px solid red;
-      border-radius: 5px;
-      background-color: black;
-      color: red;
-      font-size: 16px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    #user-input:focus {
-      background-color: red;
-      color: black;
-    }
-
-    /* Message styles */
-    .message {
-      margin: 10px 0;
-    }
-
-    .user {
-      text-align: right;
-      color: red;
-      font-weight: bold;
-    }
-
-    .bot {
-      text-align: left;
-      color: green;
-      font-weight: bold;
-    }
-
-    /* Styling for the chatbot messages */
-    .message {
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid red;
-      background-color: black;
-      color: red;
-    }
-
-    .user {
-      background-color: #2a2a2a;
-    }
-
-    .bot {
-      background-color: #1a1a1a;
-    }
-
-    /* Hover effects for message bubbles */
-    .message:hover {
-      background-color: red;
-      color: black;
-      border: 1px solid red;
-    }
-
-    /* Chatbot header and title */
-    h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: red;
-    }
-
-    /* Button styles for any interactive features in chat */
-    button {
-      background-color: black;
-      color: red;
-      border: 2px solid red;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    button:hover {
-      background-color: red;
-      color: black;
-    }
-
-    /* Fixed 'About' tab at the bottom-left corner of the screen */
-    #about-tab {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      background-color: transparent;
-      color: red;
-      padding: 10px 20px;
-      border: 2px solid red;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    #about-tab:hover {
-      background-color: red;
-      color: black;
-    }
+    /* Your existing styles */
   </style>
 </head>
 <body>
@@ -149,24 +26,19 @@
 
   <main id="chatgpt-content">
     <h1>ChatGPT - YoBoiJake</h1>
-    <div id="chatbox">
-      <!-- Messages will appear here -->
-    </div>
+    <div id="chatbox"></div>
     <textarea id="user-input" placeholder="Type your message..."></textarea>
     <button onclick="sendMessage()">Send</button>
   </main>
 
-  <!-- Fixed 'About' tab in the bottom left -->
   <div id="about-tab" onclick="window.location.href='/about.html'">
     About
   </div>
 
   <script>
-    // Get the chatbox and user input elements
     const chatbox = document.getElementById("chatbox");
     const userInput = document.getElementById("user-input");
 
-    // Function to display user message
     function displayUserMessage(message) {
       const userMessageDiv = document.createElement("div");
       userMessageDiv.classList.add("message", "user");
@@ -175,7 +47,6 @@
       chatbox.scrollTop = chatbox.scrollHeight;
     }
 
-    // Function to display bot message
     function displayBotMessage(message) {
       const botMessageDiv = document.createElement("div");
       botMessageDiv.classList.add("message", "bot");
@@ -184,33 +55,35 @@
       chatbox.scrollTop = chatbox.scrollHeight;
     }
 
-    // Send message when user presses 'Send'
     function sendMessage() {
       const message = userInput.value.trim();
       if (message) {
         displayUserMessage(message);
         userInput.value = "";
 
-        // Simulate bot response after a delay
-        setTimeout(() => {
-          const botResponse = getBotResponse(message);
-          displayBotMessage(botResponse);
-        }, 1000);
+        // Fetch bot's web search result
+        fetchSearchResults(message);
       }
     }
 
-    // Function to simulate bot response (replace with actual API call if needed)
-    function getBotResponse(userMessage) {
-      const responses = [
-        "Hello! How can I help you today?",
-        "I'm a chatbot. What can I do for you?",
-        "I'm here to assist. Ask me anything!",
-        "Let me help with that!"
-      ];
-      return responses[Math.floor(Math.random() * responses.length)];
+    async function fetchSearchResults(query) {
+      const searchUrl = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json`;
+
+      try {
+        const response = await fetch(searchUrl);
+        const data = await response.json();
+
+        if (data.AbstractText) {
+          displayBotMessage(`Here's what I found: ${data.AbstractText}`);
+        } else {
+          displayBotMessage("Sorry, I couldn't find any relevant information.");
+        }
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+        displayBotMessage("There was an error searching the web.");
+      }
     }
 
-    // Add keyboard event listener for Enter key to send message
     userInput.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         sendMessage();
