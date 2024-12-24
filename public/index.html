@@ -38,6 +38,7 @@
       <a href="/games.html">Games</a>
       <a href="/search.html">Search</a>
       <a href="/settings.html">Settings</a>
+      <a href="/chatgpt.html">ChatGPT</a>
     </nav>
   </header>
 
@@ -49,24 +50,7 @@
       <p id="daily-verse">Loading verse...</p>
     </div>
   </main>
-  
-  <script>
-    // Check if the cloak settings are stored in localStorage
-    document.addEventListener('DOMContentLoaded', function() {
-      const cloakedTitle = localStorage.getItem('cloakedTitle');
-      const cloakedFavicon = localStorage.getItem('cloakedFavicon');
 
-      if (cloakedTitle && cloakedFavicon) {
-        // Apply the cloaked title and favicon to the page
-        document.title = cloakedTitle;
-        const faviconElement = document.getElementById('favicon');
-        if (faviconElement) {
-          faviconElement.href = cloakedFavicon;
-        }
-      }
-    });
-  </script>
-  
   <!-- Fixed "About" tab in the bottom left -->
   <div id="about-tab" onclick="window.location.href='/about.html'">
     About
@@ -88,9 +72,9 @@
       }
     }
     
-  // Extended array of 200 Bible verses
-  const verses = [
-    "John 3:16 - For God so loved the world that He gave His one and only Son, that whoever believes in Him shall not perish but have eternal life.",
+    // Array of verses
+    const verses = [
+      "John 3:16 - For God so loved the world that He gave His one and only Son, that whoever believes in Him shall not perish but have eternal life.",
     "Psalm 23:1 - The Lord is my shepherd; I shall not want.",
     "Philippians 4:13 - I can do all things through Christ who strengthens me.",
     "Matthew 5:16 - Let your light shine before others, that they may see your good deeds and glorify your Father in heaven.",
@@ -162,28 +146,31 @@
     "Psalm 23:4 - Even though I walk through the valley of the shadow of death, I will fear no evil, for You are with me; Your rod and Your staff, they comfort me.",
     "Isaiah 55:8-9 - For my thoughts are not your thoughts, neither are your ways my ways, declares the Lord. For as the heavens are higher than the earth, so are my ways higher than your ways and my thoughts than your thoughts.",
     "Matthew 28:19-20 - Go therefore and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all that I have commanded you. And behold, I am with you always, to the end of the age."
-    // Continue adding more verses here if needed...
-  ];
 
-  // Function to randomize verse every 24 hours
-  function getDailyVerse() {
-    const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
-    const randomIndex = parseInt(localStorage.getItem("verseIndex"));
-    const lastUpdated = localStorage.getItem("lastUpdated");
+    ];
 
-    // Check if the date has changed
-    if (today !== lastUpdated || randomIndex === null) {
-      const newIndex = Math.floor(Math.random() * verses.length);
-      localStorage.setItem("verseIndex", newIndex);
-      localStorage.setItem("lastUpdated", today);
-      return verses[newIndex];
+    // Function to randomize verse every 24 hours
+    function getDailyVerse() {
+      const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
+      const randomIndex = parseInt(localStorage.getItem("verseIndex"));
+      const lastUpdated = localStorage.getItem("lastUpdated");
+
+      // Check if the date has changed
+      if (today !== lastUpdated || randomIndex === null) {
+        const newIndex = Math.floor(Math.random() * verses.length);
+        localStorage.setItem("verseIndex", newIndex);
+        localStorage.setItem("lastUpdated", today);
+        return verses[newIndex];
+      }
+      return verses[randomIndex];
     }
-    return verses[randomIndex];
-  }
 
-  // Display the verse of the day
-  document.addEventListener("DOMContentLoaded", () => {
-    const dailyVerseElement = document.getElementById("daily-verse");
-    dailyVerseElement.textContent = getDailyVerse();
-  });
-</script>
+    // Display the verse of the day
+    document.addEventListener("DOMContentLoaded", () => {
+      const dailyVerseElement = document.getElementById("daily-verse");
+      dailyVerseElement.textContent = getDailyVerse();
+    });
+  </script>
+</body>
+</html>
+   
