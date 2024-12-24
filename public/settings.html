@@ -40,6 +40,7 @@
         Reset to Default
       </button>
     </div>
+    
     <h1>Customize Appearance</h1>
     <div id="appearance-settings">
       <!-- Color and Border Settings -->
@@ -81,24 +82,28 @@
     function updateTextColor() {
       const textColor = document.getElementById('text-color').value;
       document.documentElement.style.setProperty('--text-color', textColor);
+      localStorage.setItem('textColor', textColor);
     }
 
     // Function to update border color
     function updateBorderColor() {
       const borderColor = document.getElementById('border-color').value;
       document.documentElement.style.setProperty('--border-color', borderColor);
+      localStorage.setItem('borderColor', borderColor);
     }
 
     // Function to update header color
     function updateHeaderColor() {
       const headerColor = document.getElementById('header-color').value;
       document.documentElement.style.setProperty('--header-color', headerColor);
+      localStorage.setItem('headerColor', headerColor);
     }
 
     // Function to update background color
     function updateBackgroundColor() {
       const backgroundColor = document.getElementById('background-color').value;
       document.documentElement.style.setProperty('--background-color', backgroundColor);
+      localStorage.setItem('backgroundColor', backgroundColor);
     }
 
     // Function to upload background image
@@ -109,11 +114,43 @@
         const reader = new FileReader();
         reader.onload = function (e) {
           document.documentElement.style.setProperty('--background-image', `url(${e.target.result})`);
+          localStorage.setItem('backgroundImage', e.target.result);
         };
         reader.readAsDataURL(file);
       }
     }
+
+    // On page load, apply stored settings from localStorage
+    window.onload = function() {
+      const textColor = localStorage.getItem('textColor');
+      if (textColor) {
+        document.documentElement.style.setProperty('--text-color', textColor);
+        document.getElementById('text-color').value = textColor;
+      }
+
+      const borderColor = localStorage.getItem('borderColor');
+      if (borderColor) {
+        document.documentElement.style.setProperty('--border-color', borderColor);
+        document.getElementById('border-color').value = borderColor;
+      }
+
+      const headerColor = localStorage.getItem('headerColor');
+      if (headerColor) {
+        document.documentElement.style.setProperty('--header-color', headerColor);
+        document.getElementById('header-color').value = headerColor;
+      }
+
+      const backgroundColor = localStorage.getItem('backgroundColor');
+      if (backgroundColor) {
+        document.documentElement.style.setProperty('--background-color', backgroundColor);
+        document.getElementById('background-color').value = backgroundColor;
+      }
+
+      const backgroundImage = localStorage.getItem('backgroundImage');
+      if (backgroundImage) {
+        document.documentElement.style.setProperty('--background-image', `url(${backgroundImage})`);
+      }
+    };
   </script>
 </body>
 </html>
-
