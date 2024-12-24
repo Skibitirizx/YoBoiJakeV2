@@ -7,6 +7,22 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
+<script>
+  // Check if the cloak settings are stored in localStorage
+  document.addEventListener('DOMContentLoaded', function() {
+    const cloakedTitle = localStorage.getItem('cloakedTitle');
+    const cloakedFavicon = localStorage.getItem('cloakedFavicon');
+
+    if (cloakedTitle && cloakedFavicon) {
+      // Apply the cloaked title and favicon to the page
+      document.title = cloakedTitle;
+      const faviconElement = document.getElementById('favicon');
+      if (faviconElement) {
+        faviconElement.href = cloakedFavicon;
+      }
+    }
+  });
+</script>
 </head>
 <body>
   <header>
