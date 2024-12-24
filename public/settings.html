@@ -183,6 +183,21 @@
       color: black;
     }
 
+    /* Dropdown styles */
+    #theme-selector {
+      padding: 10px;
+      background-color: var(--accent);
+      color: black;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #theme-selector option {
+      background-color: var(--background);
+      color: var(--accent);
+    }
   </style>
 </head>
 <body>
@@ -217,6 +232,24 @@
         Reset to Default
       </button>
     </div>
+
+    <h2>Select Theme</h2>
+    <select id="theme-selector" onchange="setTheme(this.value)">
+      <option value="main">Default</option>
+      <option value="rose_gold">Rose Gold</option>
+      <option value="midnight">Midnight</option>
+      <option value="lgbtq">LGBTQ+</option>
+      <option value="forest">Forest</option>
+      <option value="ocean">Ocean</option>
+      <option value="amoled">Amoled</option>
+      <option value="white">White</option>
+      <option value="sunset">Sunset</option>
+      <option value="flash">Flash</option>
+      <option value="matrix">Matrix</option>
+      <option value="beach">Beach</option>
+      <option value="murica">Murica</option>
+      <option value="modern">Modern</option>
+    </select>
   </main>
 
   <script>
@@ -239,8 +272,8 @@
       document.body.setAttribute("theme", theme);
     }
 
-    // Example of changing theme
-    // setTheme('midnight'); // Uncomment to set default theme to "midnight"
+    // Optionally, set a default theme on page load
+    // setTheme('main'); // Uncomment to set default theme
   </script>
 </body>
 </html>
