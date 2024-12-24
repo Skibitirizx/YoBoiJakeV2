@@ -3,74 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Settings</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Settings - YoBoiJake</title>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Logo">
-    <div id="logo-name">My Website</div>
+    <img src="/assets/images/logo.png" alt="YoBoiJake Logo">
+    <span id="logo-name">YoBoiJake</span>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="games.html">Games</a>
-      <a href="search.html">Search</a>
-      <a href="settings.html">Settings</a>
+      <a href="/">Home</a>
+      <a href="/games.html">Games</a>
+      <a href="/search.html">Search</a>
+      <a href="/settings.html">Settings</a>
     </nav>
   </header>
 
-  <div id="settings-content">
-    <h1>Settings</h1>
-    
-    <h2>Create Shortcuts</h2>
-    <div id="shortcut-creator">
-      <label for="home-key">Set Shortcut for Home (index.html):</label>
-      <input type="text" id="home-key" maxlength="1" placeholder="Enter a key">
-      <br>
-
-      <label for="games-key">Set Shortcut for Games (games.html):</label>
-      <input type="text" id="games-key" maxlength="1" placeholder="Enter a key">
-      <br>
-
-      <label for="search-key">Set Shortcut for Search (search.html):</label>
-      <input type="text" id="search-key" maxlength="1" placeholder="Enter a key">
-      <br>
-
-      <label for="settings-key">Set Shortcut for Settings (settings.html):</label>
-      <input type="text" id="settings-key" maxlength="1" placeholder="Enter a key">
+  <main id="settings-content">
+    <!-- Tab Cloaking Section -->
+    <h1>Tab Cloaking</h1>
+    <div id="cloaks">
+      <button class="cloak-button" onclick="cloakTab('Google Classroom', 'https://ssl.gstatic.com/classroom/favicon.png')">
+        <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Google Classroom Icon">
+        Google Classroom
+      </button>
+      <button class="cloak-button" onclick="cloakTab('Google Docs', 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico')">
+        <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="Google Docs Icon">
+        Google Docs
+      </button>
+      <button class="cloak-button" onclick="cloakTab('Google Drive', 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png')">
+        <img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" alt="Google Drive Icon">
+        Google Drive
+      </button>
+      <button class="cloak-button" onclick="resetTab()">
+        <img src="/assets/images/logo.png" alt="Default Icon">
+        Reset to Default
+      </button>
     </div>
-  </div>
+
+    <!-- Shortcut Section -->
+    <h1>Create Shortcuts</h1>
+    <div id="shortcut-creator">
+      <div class="shortcut-field">
+        <label for="home-key">Shortcut for Home (index.html):</label>
+        <input type="text" id="home-key" maxlength="1" placeholder="Enter a key">
+      </div>
+
+      <div class="shortcut-field">
+        <label for="games-key">Shortcut for Games (games.html):</label>
+        <input type="text" id="games-key" maxlength="1" placeholder="Enter a key">
+      </div>
+
+      <div class="shortcut-field">
+        <label for="search-key">Shortcut for Search (search.html):</label>
+        <input type="text" id="search-key" maxlength="1" placeholder="Enter a key">
+      </div>
+
+      <div class="shortcut-field">
+        <label for="settings-key">Shortcut for Settings (settings.html):</label>
+        <input type="text" id="settings-key" maxlength="1" placeholder="Enter a key">
+      </div>
+    </div>
+  </main>
 
   <script>
-    const shortcuts = {};
+    // Function to cloak the tab
+    function cloakTab(title, favicon) {
+      document.title = title;
+      const faviconElement = document.getElementById('favicon');
+      faviconElement.href = favicon;
+    }
 
+    // Function to reset the tab to its original state
+    function resetTab() {
+      document.title = 'Settings - YoBoiJake';
+      const faviconElement = document.getElementById('favicon');
+      faviconElement.href = '/assets/images/logo.png';
+    }
+
+    // Shortcut Functionality
+    const shortcuts = {
+      home: localStorage.getItem('shortcut-home') || '',
+      games: localStorage.getItem('shortcut-games') || '',
+      search: localStorage.getItem('shortcut-search') || '',
+      settings: localStorage.getItem('shortcut-settings') || ''
+    };
+
+    // Populate input fields with saved shortcuts
+    document.getElementById('home-key').value = shortcuts.home;
+    document.getElementById('games-key').value = shortcuts.games;
+    document.getElementById('search-key').value = shortcuts.search;
+    document.getElementById('settings-key').value = shortcuts.settings;
+
+    // Save shortcuts on input
     document.getElementById('home-key').addEventListener('input', function (e) {
       shortcuts.home = e.target.value.toLowerCase();
+      localStorage.setItem('shortcut-home', shortcuts.home);
     });
 
     document.getElementById('games-key').addEventListener('input', function (e) {
       shortcuts.games = e.target.value.toLowerCase();
+      localStorage.setItem('shortcut-games', shortcuts.games);
     });
 
     document.getElementById('search-key').addEventListener('input', function (e) {
       shortcuts.search = e.target.value.toLowerCase();
+      localStorage.setItem('shortcut-search', shortcuts.search);
     });
 
     document.getElementById('settings-key').addEventListener('input', function (e) {
       shortcuts.settings = e.target.value.toLowerCase();
+      localStorage.setItem('shortcut-settings', shortcuts.settings);
     });
 
-    // Listen for keypress events
+    // Navigate to pages on keypress
     document.addEventListener('keydown', function (e) {
       const key = e.key.toLowerCase();
 
       if (key === shortcuts.home) {
-        window.location.href = 'index.html';
+        window.location.href = '/';
       } else if (key === shortcuts.games) {
-        window.location.href = 'games.html';
+        window.location.href = '/games.html';
       } else if (key === shortcuts.search) {
-        window.location.href = 'search.html';
+        window.location.href = '/search.html';
       } else if (key === shortcuts.settings) {
-        window.location.href = 'settings.html';
+        window.location.href = '/settings.html';
       }
     });
   </script>
