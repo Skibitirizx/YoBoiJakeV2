@@ -7,24 +7,6 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
-  <style>
-    /* Custom styles for input fields */
-    input[type="text"] {
-      color: red;
-      border: 2px solid red;
-      border-radius: 10px;
-      padding: 5px;
-      outline: none;
-    }
-
-    input[type="text"]::placeholder {
-      color: red;
-    }
-
-    input[type="text"]:focus {
-      border-color: darkred;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -58,24 +40,6 @@
         Reset to Default
       </button>
     </div>
-    
-    <h1>Customize Appearance</h1>
-    <div id="appearance-settings">
-      <!-- Color and Border Settings -->
-      <label for="text-color">Text Color:</label>
-      <input type="text" id="text-color" placeholder="Enter a color" onchange="updateTextColor()">
-
-      <label for="border-color">Border Color:</label>
-      <input type="text" id="border-color" placeholder="Enter a color" onchange="updateBorderColor()">
-
-      <!-- Header Color Setting -->
-      <label for="header-color">Header Color:</label>
-      <input type="text" id="header-color" placeholder="Enter a color" onchange="updateHeaderColor()">
-
-      <!-- Background Color Settings -->
-      <label for="background-color">Background Color:</label>
-      <input type="text" id="background-color" placeholder="Enter a color" onchange="updateBackgroundColor()">
-    </div>
   </main>
 
   <script>
@@ -84,8 +48,6 @@
       document.title = title;
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = favicon;
-      localStorage.setItem('tabTitle', title);
-      localStorage.setItem('tabFavicon', favicon);
     }
 
     // Function to reset the tab to its original state
@@ -93,71 +55,7 @@
       document.title = 'Settings - YoBoiJake';
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = '/assets/images/logo.png';
-      localStorage.setItem('tabTitle', 'Settings - YoBoiJake');
-      localStorage.setItem('tabFavicon', '/assets/images/logo.png');
     }
-
-    // Function to update text color
-    function updateTextColor() {
-      const textColor = document.getElementById('text-color').value;
-      document.documentElement.style.setProperty('--text-color', textColor);
-      localStorage.setItem('textColor', textColor);
-    }
-
-    // Function to update border color
-    function updateBorderColor() {
-      const borderColor = document.getElementById('border-color').value;
-      document.documentElement.style.setProperty('--border-color', borderColor);
-      localStorage.setItem('borderColor', borderColor);
-    }
-
-    // Function to update header color
-    function updateHeaderColor() {
-      const headerColor = document.getElementById('header-color').value;
-      document.documentElement.style.setProperty('--header-color', headerColor);
-      localStorage.setItem('headerColor', headerColor);
-    }
-
-    // Function to update background color
-    function updateBackgroundColor() {
-      const backgroundColor = document.getElementById('background-color').value;
-      document.documentElement.style.setProperty('--background-color', backgroundColor);
-      localStorage.setItem('backgroundColor', backgroundColor);
-    }
-
-    // On page load, apply stored settings from localStorage
-    window.onload = function() {
-      // Restore tab settings
-      const tabTitle = localStorage.getItem('tabTitle');
-      const tabFavicon = localStorage.getItem('tabFavicon');
-      if (tabTitle) document.title = tabTitle;
-      if (tabFavicon) document.getElementById('favicon').href = tabFavicon;
-
-      // Restore appearance settings
-      const textColor = localStorage.getItem('textColor');
-      if (textColor) {
-        document.documentElement.style.setProperty('--text-color', textColor);
-        document.getElementById('text-color').value = textColor;
-      }
-
-      const borderColor = localStorage.getItem('borderColor');
-      if (borderColor) {
-        document.documentElement.style.setProperty('--border-color', borderColor);
-        document.getElementById('border-color').value = borderColor;
-      }
-
-      const headerColor = localStorage.getItem('headerColor');
-      if (headerColor) {
-        document.documentElement.style.setProperty('--header-color', headerColor);
-        document.getElementById('header-color').value = headerColor;
-      }
-
-      const backgroundColor = localStorage.getItem('backgroundColor');
-      if (backgroundColor) {
-        document.documentElement.style.setProperty('--background-color', backgroundColor);
-        document.getElementById('background-color').value = backgroundColor;
-      }
-    };
   </script>
 </body>
 </html>
