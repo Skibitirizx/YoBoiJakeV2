@@ -21,72 +21,40 @@
   </header>
 
   <main id="settings-content">
-    <h1>Customization Settings</h1>
-
-    <!-- Text Color -->
-    <label for="text-color">Text Color:</label>
-    <input type="color" id="text-color" name="text-color" onchange="changeTextColor()">
-
-    <!-- Border Color -->
-    <label for="border-color">Border Color:</label>
-    <input type="color" id="border-color" name="border-color" onchange="changeBorderColor()">
-
-    <!-- Header Color -->
-    <label for="header-color">Header Color:</label>
-    <input type="color" id="header-color" name="header-color" onchange="changeHeaderColor()">
-
-    <!-- Background Color or Image -->
-    <label for="background-color">Background Color:</label>
-    <input type="color" id="background-color" name="background-color" onchange="changeBackgroundColor()">
-    <br>
-    <label for="background-image">Upload Background Image:</label>
-    <input type="file" id="background-image" accept="image/*" onchange="uploadBackgroundImage()">
-    
-    <!-- Option to reset to default -->
-    <button class="cloak-button" onclick="resetCustomizations()">Reset to Default</button>
+    <h1>Tab Cloaking</h1>
+    <div id="cloaks">
+      <button class="cloak-button" onclick="cloakTab('Google Classroom', 'https://ssl.gstatic.com/classroom/favicon.png')">
+        <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Google Classroom Icon">
+        Google Classroom
+      </button>
+      <button class="cloak-button" onclick="cloakTab('Google Docs', 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico')">
+        <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="Google Docs Icon">
+        Google Docs
+      </button>
+      <button class="cloak-button" onclick="cloakTab('Google Drive', 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png')">
+        <img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" alt="Google Drive Icon">
+        Google Drive
+      </button>
+      <button class="cloak-button" onclick="resetTab()">
+        <img src="/assets/images/logo.png" alt="Default Icon">
+        Reset to Default
+      </button>
+    </div>
   </main>
 
   <script>
-    // Function to change the text color
-    function changeTextColor() {
-      const color = document.getElementById('text-color').value;
-      document.documentElement.style.setProperty('--text-color', color);
+    // Function to cloak the tab
+    function cloakTab(title, favicon) {
+      document.title = title;
+      const faviconElement = document.getElementById('favicon');
+      faviconElement.href = favicon;
     }
 
-    // Function to change the border color
-    function changeBorderColor() {
-      const color = document.getElementById('border-color').value;
-      document.documentElement.style.setProperty('--border-color', color);
-    }
-
-    // Function to change the header color
-    function changeHeaderColor() {
-      const color = document.getElementById('header-color').value;
-      document.documentElement.style.setProperty('--header-color', color);
-    }
-
-    // Function to change the background color
-    function changeBackgroundColor() {
-      const color = document.getElementById('background-color').value;
-      document.documentElement.style.setProperty('--background', color);
-    }
-
-    // Function to upload a background image
-    function uploadBackgroundImage() {
-      const file = document.getElementById('background-image').files[0];
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        document.documentElement.style.setProperty('--background', `url(${e.target.result})`);
-      };
-      reader.readAsDataURL(file);
-    }
-
-    // Function to reset all customizations
-    function resetCustomizations() {
-      document.documentElement.style.setProperty('--text-color', 'red');
-      document.documentElement.style.setProperty('--border-color', 'red');
-      document.documentElement.style.setProperty('--header-color', 'black');
-      document.documentElement.style.setProperty('--background', 'black');
+    // Function to reset the tab to its original state
+    function resetTab() {
+      document.title = 'Settings - YoBoiJake';
+      const faviconElement = document.getElementById('favicon');
+      faviconElement.href = '/assets/images/logo.png';
     }
   </script>
 </body>
