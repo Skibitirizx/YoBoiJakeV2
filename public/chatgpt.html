@@ -178,10 +178,16 @@
       chatbox.scrollTop = chatbox.scrollHeight;
     }
 
-    function displayBotMessage(message) {
+    function displayBotMessage(message, source) {
       const botMessageDiv = document.createElement("div");
       botMessageDiv.classList.add("message", "bot");
       botMessageDiv.textContent = message;
+      if (source) {
+        const sourceDiv = document.createElement("div");
+        sourceDiv.classList.add("source");
+        sourceDiv.innerHTML = `Source: <a href="${source}" target="_blank">${source}</a>`;
+        botMessageDiv.appendChild(sourceDiv);
+      }
       chatbox.appendChild(botMessageDiv);
       chatbox.scrollTop = chatbox.scrollHeight;
     }
@@ -192,27 +198,32 @@
         displayUserMessage(message);
         userInput.value = "";
 
-        // Fetch bot's web search result
-        fetchSearchResults(message);
+        // Simulate looking up the answer
+        displayBotMessage("Let me look that up for you...");
+
+        fetchAnswerFromDuckDuckGo(message);
       }
     }
 
-    async function fetchSearchResults(query) {
-      const searchUrl = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json`;
+    function fetchAnswerFromDuckDuckGo(query) {
+      const searchURL = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json`;
 
-      try {
-        const response = await fetch(searchUrl);
-        const data = await response.json();
+      fetch(searchURL)
+        .then(response => response.json())
+        .then(data => {
+          const answer = data?.AbstractText;
+          const source = data?.RelatedTopics?.[0]?.FirstURL;
 
-        if (data.AbstractText) {
-          displayBotMessage(`Here's what I found: ${data.AbstractText}`);
-        } else {
-          displayBotMessage("Sorry, I couldn't find any relevant information.");
-        }
-      } catch (error) {
-        console.error("Error fetching search results:", error);
-        displayBotMessage("There was an error searching the web. Please try again.");
-      }
+          if (answer && source) {
+            displayBotMessage(answer, source);
+          } else {
+            displayBotMessage("Sorry, I couldn't find an answer for you. Please try again.");
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          displayBotMessage("Sorry, I encountered an error while searching. Please try again later.");
+        });
     }
 
     userInput.addEventListener("keydown", (event) => {
