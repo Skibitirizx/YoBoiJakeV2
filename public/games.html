@@ -8,21 +8,41 @@
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
 <script>
-  // Check if the cloak settings are stored in localStorage
+  // Check if the cloak settings are stored in localStorage and apply them
   document.addEventListener('DOMContentLoaded', function() {
     const cloakedTitle = localStorage.getItem('cloakedTitle');
     const cloakedFavicon = localStorage.getItem('cloakedFavicon');
 
     if (cloakedTitle && cloakedFavicon) {
-      // Apply the cloaked title and favicon to the page
+      // Apply the cloaked title
       document.title = cloakedTitle;
+
+      // Apply the cloaked favicon (icon)
       const faviconElement = document.getElementById('favicon');
       if (faviconElement) {
         faviconElement.href = cloakedFavicon;
       }
     }
+
+    // Optional: If you want to save the favicon and title when changes are made
+    // To save the title and favicon
+    const saveCloakSettings = (title, faviconUrl) => {
+      localStorage.setItem('cloakedTitle', title);
+      localStorage.setItem('cloakedFavicon', faviconUrl);
+
+      // Apply the new title and favicon immediately
+      document.title = title;
+      const faviconElement = document.getElementById('favicon');
+      if (faviconElement) {
+        faviconElement.href = faviconUrl;
+      }
+    };
+
+    // Example: Calling the saveCloakSettings function when needed
+    // saveCloakSettings('New Title', 'https://example.com/new-favicon.ico');
   });
 </script>
+
 </head>
 <body>
   <header>
