@@ -83,31 +83,6 @@
     </div>
   </main>
 
-  <script>
-    // Auto-save panic key on typing
-    const panicKeyInput = document.getElementById('panic-key-input');
-
-    // Load saved panic key on page load
-    window.onload = function () {
-      const savedPanicKey = localStorage.getItem('panicKey');
-      if (savedPanicKey) {
-        panicKeyInput.value = savedPanicKey;
-      }
-    };
-
-    // Save panic key to localStorage on input
-    panicKeyInput.addEventListener('input', function () {
-      const panicKey = panicKeyInput.value.toUpperCase();
-      localStorage.setItem('panicKey', panicKey);
-    });
-
-    // Panic key functionality (works across all pages)
-    document.addEventListener('keydown', function (e) {
-      const panicKey = localStorage.getItem('panicKey');
-      if (panicKey && e.key.toUpperCase() === panicKey) {
-        window.location.href = 'https://classroom.google.com';
-      }
-    });
-  </script>
+<script src="path/to/settings.js"></script>
 </body>
 </html>
