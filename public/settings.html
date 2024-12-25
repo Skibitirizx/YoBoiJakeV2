@@ -21,12 +21,9 @@
 
     // Function to cloak the tab and store the values in localStorage
     function cloakTab(title, favicon) {
-      // Change the title of the tab
       document.title = title;
-      // Set the favicon based on the cloak selected
       const faviconElement = document.getElementById('favicon');
       faviconElement.href = favicon;
-      // Save the cloak information to localStorage so it persists across pages
       localStorage.setItem('cloakedTitle', title);
       localStorage.setItem('cloakedFavicon', favicon);
     }
@@ -104,13 +101,6 @@
       margin-bottom: 10px;
     }
 
-    .cloak-title {
-      font-size: 24px;
-      color: red;
-      margin-top: 30px;
-      text-align: center;
-    }
-
     #panic-key-section {
       margin-top: 50px;
       text-align: center;
@@ -119,6 +109,7 @@
     #panic-key-section h2 {
       color: red;
       font-size: 28px;
+      margin-bottom: 15px;
     }
 
     #panic-key-section p {
@@ -157,34 +148,38 @@
   </header>
 
   <main id="settings-content">
-    <div class="cloak-title">
-      <h1>Tab Cloaking</h1>
-      <p>Choose a cloak to change the tab's title and favicon.</p>
+    <div id="cloak-container">
+      <div class="cloak-title">
+        <h1>Tab Cloaking</h1>
+        <p>Choose a cloak to change the tab's title and favicon.</p>
+      </div>
+
+      <div class="cloak-container">
+        <button class="cloak-button" onclick="cloakTab('Google Classroom', 'https://ssl.gstatic.com/classroom/favicon.png')">
+          <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Google Classroom Icon">
+          Google Classroom
+        </button>
+        <button class="cloak-button" onclick="cloakTab('Google Docs', 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico')">
+          <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="Google Docs Icon">
+          Google Docs
+        </button>
+        <button class="cloak-button" onclick="cloakTab('Google Drive', 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png')">
+          <img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" alt="Google Drive Icon">
+          Google Drive
+        </button>
+        <button class="cloak-button" onclick="cloakTab('Google', 'https://www.google.com/favicon.ico')">
+          <img src="https://www.google.com/favicon.ico" alt="Google Icon">
+          Google
+        </button>
+        <button class="cloak-button" onclick="resetTab()">
+          <img src="/assets/images/logo.png" alt="Default Icon">
+          Reset to Default
+        </button>
+      </div>
+
     </div>
 
-    <div class="cloak-container">
-      <button class="cloak-button" onclick="cloakTab('Google Classroom', 'https://ssl.gstatic.com/classroom/favicon.png')">
-        <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Google Classroom Icon">
-        Google Classroom
-      </button>
-      <button class="cloak-button" onclick="cloakTab('Google Docs', 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico')">
-        <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="Google Docs Icon">
-        Google Docs
-      </button>
-      <button class="cloak-button" onclick="cloakTab('Google Drive', 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png')">
-        <img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" alt="Google Drive Icon">
-        Google Drive
-      </button>
-      <button class="cloak-button" onclick="cloakTab('Google', 'https://www.google.com/favicon.ico')">
-        <img src="https://www.google.com/favicon.ico" alt="Google Icon">
-        Google
-      </button>
-      <button class="cloak-button" onclick="resetTab()">
-        <img src="/assets/images/logo.png" alt="Default Icon">
-        Reset to Default
-      </button>
-    </div>
-
+    <!-- Panic Key Section -->
     <div id="panic-key-section">
       <h2>Panic Key</h2>
       <p>Enter your Panic Key below to quickly navigate to Google Classroom.</p>
