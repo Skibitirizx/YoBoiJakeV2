@@ -5,135 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings - YoBoiJake</title>
   <link rel="manifest" href="/manifest.json"/>
-  <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
+  <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
-  <script>
-    // Check if cloaked title and favicon are saved in localStorage and apply it
-    window.onload = function () {
-      const cloakedTitle = localStorage.getItem('cloakedTitle');
-      const cloakedFavicon = localStorage.getItem('cloakedFavicon');
-      if (cloakedTitle && cloakedFavicon) {
-        document.title = cloakedTitle;
-        const faviconElement = document.getElementById('favicon');
-        faviconElement.href = cloakedFavicon;
-      }
-    };
-
-    // Function to cloak the tab and store the values in localStorage
-    function cloakTab(title, favicon) {
-      document.title = title;
-      const faviconElement = document.getElementById('favicon');
-      faviconElement.href = favicon;
-      localStorage.setItem('cloakedTitle', title);
-      localStorage.setItem('cloakedFavicon', favicon);
-    }
-
-    // Function to reset the tab to its original state
-    function resetTab() {
-      document.title = 'Settings - YoBoiJake';
-      const faviconElement = document.getElementById('favicon');
-      faviconElement.href = '/assets/images/logo.png';
-      localStorage.removeItem('cloakedTitle');
-      localStorage.removeItem('cloakedFavicon');
-    }
-  </script>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: white;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #1a1a1a;
-      padding: 15px;
-      text-align: center;
-    }
-
-    #logo-name {
-      font-size: 24px;
-      color: red;
-    }
-
-    nav {
-      margin-top: 10px;
-    }
-
-    nav a {
-      color: red;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .cloak-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      margin-top: 20px;
-    }
-
-    .cloak-button {
-      background-color: #333;
-      border: 2px solid #444;
-      padding: 15px;
-      margin: 10px;
-      cursor: pointer;
-      width: 200px;
-      text-align: center;
-      color: white;
-      font-size: 14px;
-      border-radius: 8px;
-      transition: background-color 0.3s, transform 0.3s;
-    }
-
-    .cloak-button:hover {
-      background-color: #555;
-      transform: scale(1.05);
-    }
-
-    .cloak-button img {
-      width: 30px;
-      height: 30px;
-      margin-bottom: 10px;
-    }
-
-    #panic-key-section {
-      margin-top: 50px;
-      text-align: center;
-    }
-
-    #panic-key-section h2 {
-      color: red;
-      font-size: 28px;
-      margin-bottom: 15px;
-    }
-
-    #panic-key-section p {
-      color: #ccc;
-      margin-bottom: 20px;
-      font-size: 16px;
-    }
-
-    .panic-input {
-      padding: 10px;
-      width: 300px;
-      background-color: black;
-      color: red;
-      border: 2px solid red;
-      border-radius: 10px;
-      font-size: 18px;
-      text-align: center;
-    }
-
-    .panic-input:focus {
-      outline: none;
-      border-color: white;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -148,67 +21,48 @@
   </header>
 
   <main id="settings-content">
-    <div id="cloak-container">
-      <div class="cloak-title">
-        <h1>Tab Cloaking</h1>
-        <p>Choose a cloak to change the tab's title and favicon.</p>
-      </div>
-
-      <div class="cloak-container">
-        <button class="cloak-button" onclick="cloakTab('Google Classroom', 'https://ssl.gstatic.com/classroom/favicon.png')">
-          <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Google Classroom Icon">
-          Google Classroom
-        </button>
-        <button class="cloak-button" onclick="cloakTab('Google Docs', 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico')">
-          <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" alt="Google Docs Icon">
-          Google Docs
-        </button>
-        <button class="cloak-button" onclick="cloakTab('Google Drive', 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png')">
-          <img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" alt="Google Drive Icon">
-          Google Drive
-        </button>
-        <button class="cloak-button" onclick="cloakTab('Google', 'https://www.google.com/favicon.ico')">
-          <img src="https://www.google.com/favicon.ico" alt="Google Icon">
-          Google
-        </button>
-        <button class="cloak-button" onclick="resetTab()">
-          <img src="/assets/images/logo.png" alt="Default Icon">
-          Reset to Default
-        </button>
-      </div>
-
-    </div>
-
-    <!-- Panic Key Section -->
-    <div id="panic-key-section">
+    <h1>Settings</h1>
+    <section>
       <h2>Panic Key</h2>
-      <p>Enter your Panic Key below to quickly navigate to Google Classroom.</p>
-      <input type="text" id="panic-key-input" class="panic-input" placeholder="Enter Panic Key" oninput="savePanicKey()" />
-    </div>
+      <form id="panic-key-form">
+        <label for="panic-key">Enter a panic key (single character):</label>
+        <input type="text" id="panic-key" maxlength="1" placeholder="e.g., P" required>
+        <button type="submit">Save Panic Key</button>
+      </form>
+      <p id="panic-key-feedback" style="color: green; display: none;">Panic key saved successfully!</p>
+    </section>
   </main>
 
   <script>
     // Save panic key to localStorage
-    function savePanicKey() {
-      const panicKey = document.getElementById('panic-key-input').value;
-      localStorage.setItem('panicKey', panicKey);
-    }
+    const form = document.getElementById('panic-key-form');
+    const feedback = document.getElementById('panic-key-feedback');
 
-    // Check for the panic key on page load and redirect if correct
-    window.onload = function() {
-      const storedPanicKey = localStorage.getItem('panicKey');
-      if (storedPanicKey) {
-        document.getElementById('panic-key-input').value = storedPanicKey;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const key = document.getElementById('panic-key').value.trim();
+      if (key) {
+        localStorage.setItem('panicKey', key.toUpperCase());
+        feedback.style.display = 'block';
+        setTimeout(() => feedback.style.display = 'none', 3000);
       }
-    };
+    });
 
-    // Check for panic key and navigate to Google Classroom
-    document.getElementById('panic-key-input').addEventListener('input', function() {
-      const panicKey = document.getElementById('panic-key-input').value;
-      if (panicKey === "panic123") {  // Example Panic Key
-        window.location.href = "https://classroom.google.com";
+    // Load the panic key from localStorage
+    document.addEventListener('DOMContentLoaded', function () {
+      const savedKey = localStorage.getItem('panicKey');
+      if (savedKey) {
+        document.getElementById('panic-key').value = savedKey;
       }
     });
   </script>
+  <script>
+  document.addEventListener('keydown', function (e) {
+    const panicKey = localStorage.getItem('panicKey');
+    if (panicKey && e.key.toUpperCase() === panicKey) {
+      window.location.href = 'https://classroom.google.com';
+    }
+  });
+</script>
 </body>
 </html>
