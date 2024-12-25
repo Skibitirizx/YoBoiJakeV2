@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
   <style>
-    /* Input field with red border and rounded square edges */
+    /* Input field with black background, red text, and red border */
     .panic-key-input {
       padding: 10px;
       font-size: 16px;
@@ -16,18 +16,20 @@
       border-radius: 8px;
       outline: none;
       width: 250px;
+      background-color: black;
+      color: red;
       transition: border-color 0.3s ease-in-out;
     }
     .panic-key-input:focus {
       border-color: darkred;
     }
 
-    /* Explanation text styling */
-    .panic-key-explanation {
-      margin-top: 10px;
-      font-size: 14px;
+    /* Title and explanation text styling */
+    .panic-key-title, .panic-key-explanation {
+      font-size: 16px;
       color: red;
       text-align: center;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -44,6 +46,10 @@
   </header>
 
   <main id="settings-content">
+    <p class="panic-key-title">Panic Key</p>
+    <p class="panic-key-explanation">
+      The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
+    </p>
     <input 
       id="panic-key-input" 
       class="panic-key-input" 
@@ -51,10 +57,6 @@
       placeholder="Enter Panic Key" 
       maxlength="1"
     />
-
-    <p class="panic-key-explanation">
-      The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
-    </p>
   </main>
 
   <script>
