@@ -7,24 +7,33 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
-  
-  <!-- Include the shared settings.js script -->
-  <script src="path/to/settings.js"></script>
-
   <style>
-    /* Container for panic key and customization */
-    .settings-container {
-      width: 80%;
-      margin: 0 auto;
-      max-width: 800px;
+    /* Larger Panic Key Title */
+    .panic-key-title {
+      font-size: 32px;
+      font-weight: bold;
+      color: red;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
-    /* Panic key container with border */
-    .panic-key-container, .customization-container {
-      border: 2px solid red;
-      border-radius: 10px;
-      padding: 20px;
+    /* Explanation text styling */
+    .panic-key-explanation {
+      font-size: 16px;
+      color: red;
+      text-align: center;
       margin-bottom: 20px;
+    }
+
+    /* Container box with rounded corners */
+    .panic-key-container {
+      border: 2px solid red;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      margin: 0 auto;
+      text-align: center;
+      background-color: #1a1a1a; /* Dark background for the box */
     }
 
     /* Input field with black background, red text, and red border */
@@ -38,32 +47,11 @@
       background-color: black;
       color: red;
       transition: border-color 0.3s ease-in-out;
+      margin-bottom: 10px;
     }
+
     .panic-key-input:focus {
       border-color: darkred;
-    }
-
-    /* Title and explanation text styling */
-    .panic-key-title, .panic-key-explanation {
-      font-size: 18px;
-      color: red;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .customization-title {
-      font-size: 18px;
-      color: red;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    /* Input for customizing text, border, and background color */
-    .color-input {
-      padding: 10px;
-      font-size: 16px;
-      width: 200px;
-      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -80,59 +68,55 @@
   </header>
 
   <main id="settings-content">
-    <div class="settings-container">
-
-      <!-- Panic Key Section -->
-      <div class="panic-key-container">
-        <p class="panic-key-title">Panic Key</p>
-        <p class="panic-key-explanation">
-          The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
-        </p>
-        <input 
-          id="panic-key-input" 
-          class="panic-key-input" 
-          type="text" 
-          placeholder="Enter Panic Key" 
-          maxlength="1"
-        />
-      </div>
-
-      <!-- Customization Section -->
-      <div class="customization-container">
-        <p class="customization-title">Customization Settings</p>
-        
-        <label for="text-color">Text Color: </label>
-        <input 
-          id="text-color" 
-          class="color-input" 
-          type="color" 
-          value="#ff0000" 
-        />
-        <br>
-
-        <label for="border-color">Border Color: </label>
-        <input 
-          id="border-color" 
-          class="color-input" 
-          type="color" 
-          value="#ff0000" 
-        />
-        <br>
-
-        <label for="background-color">Background Color: </label>
-        <input 
-          id="background-color" 
-          class="color-input" 
-          type="color" 
-          value="#ffffff" 
-        />
-      </div>
-
+    <p class="panic-key-title">Panic Key</p>
+    <div class="panic-key-container">
+      <p class="panic-key-explanation">
+        The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
+      </p>
+      <input 
+        id="panic-key-input" 
+        class="panic-key-input" 
+        type="text" 
+        placeholder="Enter Panic Key" 
+        maxlength="1"
+      />
     </div>
   </main>
 
   <script>
-  <script src="path/to/settings.js"></script>
+    // Auto-save panic key on typing
+    const panicKeyInput = document.getElementById('panic-key-input');
+
+    // Load saved panic key on page load
+    window.onload = function () {
+      const savedPanicKey = localStorage.getItem('panicKey');
+      if (savedPanicKey) {
+        panicKeyInput.value = savedPanicKey;
+      }
+    };
+
+    // Save panic key to localStorage on input
+    panicKeyInput.addEventListener('input', function () {
+      const panicKey = panicKeyInput.value.toUpperCase();
+      localStorage.setItem('panicKey', panicKey);
+    });
+
+    // Panic key functionality (works across all pages)
+    document.addEventListener('keydown', function (e) {
+      const panicKey = localStorage.getItem('panicKey');
+      if (panicKey && e.key.toUpperCase() === panicKey) {
+        window.location.href = 'https://classroom.google.com';
+      }
+    });
   </script>
+  <script>
+  document.addEventListener('keydown', function (e) {
+    const panicKey = localStorage.getItem('panicKey');
+    if (panicKey && e.key.toUpperCase() === panicKey) {
+      window.location.href = 'https://classroom.google.com';
+    }
+  });
+</script>
+
 </body>
 </html>
