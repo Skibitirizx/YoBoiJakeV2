@@ -7,6 +7,31 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* Input field with black background, red text, and red border */
+    .panic-key-input {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid red;
+      border-radius: 8px;
+      outline: none;
+      width: 250px;
+      background-color: black;
+      color: red;
+      transition: border-color 0.3s ease-in-out;
+    }
+    .panic-key-input:focus {
+      border-color: darkred;
+    }
+
+    /* Title and explanation text styling */
+    .panic-key-title, .panic-key-explanation {
+      font-size: 16px;
+      color: red;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -21,50 +46,44 @@
   </header>
 
   <main id="settings-content">
-    <h1>Settings</h1>
-    <section>
-      <h2>Panic Key</h2>
-      <form id="panic-key-form">
-        <label for="panic-key">Enter a panic key (single character):</label>
-        <input type="text" id="panic-key" maxlength="1" placeholder="e.g., P" required>
-        <button type="submit">Save Panic Key</button>
-      </form>
-      <p id="panic-key-feedback" style="color: green; display: none;">Panic key saved successfully!</p>
-    </section>
+    <p class="panic-key-title">Panic Key</p>
+    <p class="panic-key-explanation">
+      The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
+    </p>
+    <input 
+      id="panic-key-input" 
+      class="panic-key-input" 
+      type="text" 
+      placeholder="Enter Panic Key" 
+      maxlength="1"
+    />
   </main>
 
   <script>
-    // Save panic key to localStorage
-    const form = document.getElementById('panic-key-form');
-    const feedback = document.getElementById('panic-key-feedback');
+    // Auto-save panic key on typing
+    const panicKeyInput = document.getElementById('panic-key-input');
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const key = document.getElementById('panic-key').value.trim();
-      if (key) {
-        localStorage.setItem('panicKey', key.toUpperCase());
-        feedback.style.display = 'block';
-        setTimeout(() => feedback.style.display = 'none', 3000);
+    // Load saved panic key on page load
+    window.onload = function () {
+      const savedPanicKey = localStorage.getItem('panicKey');
+      if (savedPanicKey) {
+        panicKeyInput.value = savedPanicKey;
       }
+    };
+
+    // Save panic key to localStorage on input
+    panicKeyInput.addEventListener('input', function () {
+      const panicKey = panicKeyInput.value.toUpperCase();
+      localStorage.setItem('panicKey', panicKey);
     });
 
-    // Load the panic key from localStorage
-    document.addEventListener('DOMContentLoaded', function () {
-      const savedKey = localStorage.getItem('panicKey');
-      if (savedKey) {
-        document.getElementById('panic-key').value = savedKey;
+    // Panic key functionality (works across all pages)
+    document.addEventListener('keydown', function (e) {
+      const panicKey = localStorage.getItem('panicKey');
+      if (panicKey && e.key.toUpperCase() === panicKey) {
+        window.location.href = 'https://classroom.google.com';
       }
     });
   </script>
-  <script>
-  document.addEventListener('keydown', function (e) {
-    const panicKey = localStorage.getItem('panicKey');
-    if (panicKey && e.key.toUpperCase() === panicKey) {
-      window.location.href = 'https://classroom.google.com';
-    }
-  });
-</script>
-  <script async="async" data-cfasync="false" src="//pl25372986.profitablecpmrate.com/fdcb8d4452eae22f50c67e1c442e7a9c/invoke.js"></script>
-<div id="container-fdcb8d4452eae22f50c67e1c442e7a9c"></div>
 </body>
 </html>
