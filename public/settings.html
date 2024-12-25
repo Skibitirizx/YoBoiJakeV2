@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings - YoBoiJake</title>
   <link rel="manifest" href="/manifest.json"/>
-  <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
+  <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -21,9 +21,40 @@
   </header>
 
   <main id="settings-content">
-    <h1>Coming Soon</h1>
-    <p>This section is under construction. Stay tuned for updates!</p>
+    <h1>Settings</h1>
+    <section>
+      <h2>Panic Key</h2>
+      <form id="panic-key-form">
+        <label for="panic-key">Enter a panic key (single character):</label>
+        <input type="text" id="panic-key" maxlength="1" placeholder="e.g., P" required>
+        <button type="submit">Save Panic Key</button>
+      </form>
+      <p id="panic-key-feedback" style="color: green; display: none;">Panic key saved successfully!</p>
+    </section>
   </main>
 
+  <script>
+    // Save panic key to localStorage
+    const form = document.getElementById('panic-key-form');
+    const feedback = document.getElementById('panic-key-feedback');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const key = document.getElementById('panic-key').value.trim();
+      if (key) {
+        localStorage.setItem('panicKey', key.toUpperCase());
+        feedback.style.display = 'block';
+        setTimeout(() => feedback.style.display = 'none', 3000);
+      }
+    });
+
+    // Load the panic key from localStorage
+    document.addEventListener('DOMContentLoaded', function () {
+      const savedKey = localStorage.getItem('panicKey');
+      if (savedKey) {
+        document.getElementById('panic-key').value = savedKey;
+      }
+    });
+  </script>
 </body>
 </html>
