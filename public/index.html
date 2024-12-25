@@ -7,6 +7,33 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
+    <script>
+    window.onload = function() {
+      // Check for blocked email
+      document.getElementById('email-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+
+        const emailInput = document.getElementById('email-input').value;
+        const blockedEmail = "coxjac@wcps.k12.md.us"; // Replace this with the email to block
+
+        if (emailInput === blockedEmail) {
+          // Redirect to Google Classroom if the email matches the blocked one
+          window.location.href = "https://classroom.google.com";
+        } else {
+          // If the email is not blocked, you can display a success message or allow further actions
+          alert("Access granted");
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+  <!-- Hidden email form -->
+  <form id="email-form" style="display:none;">
+    <input type="email" id="email-input" placeholder="Enter your email" />
+    <button type="submit">Submit</button>
+  </form>
+
   <style>
     /* Add the bottom-left tab style for About button */
     #about-tab {
