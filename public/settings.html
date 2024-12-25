@@ -21,6 +21,14 @@
       const faviconElement = document.getElementById('favicon');
       if (faviconElement) {
         faviconElement.href = customFavicon;
+      } else {
+        // If no favicon element exists, create one
+        const link = document.createElement('link');
+        link.id = 'favicon';
+        link.rel = 'icon';
+        link.type = 'image/png';
+        link.href = customFavicon;
+        document.head.appendChild(link);
       }
     }
   };
