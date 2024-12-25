@@ -7,25 +7,6 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
-  <script>
-  // Apply stored title and favicon from localStorage
-  window.onload = function () {
-    const customTitle = localStorage.getItem('customTitle');
-    const customFavicon = localStorage.getItem('customFavicon');
-
-    if (customTitle) {
-      document.title = customTitle;
-    }
-
-    if (customFavicon) {
-      const faviconElement = document.getElementById('favicon');
-      if (faviconElement) {
-        faviconElement.href = customFavicon;
-      }
-    }
-  };
-</script>
-
   <style>
     #uv-form {
       display: flex;
