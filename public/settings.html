@@ -54,6 +54,14 @@
       border-color: darkred;
     }
   </style>
+<style>
+  body {
+    color: var(--text-color, #fff);
+    background-color: var(--background-color, #000);
+    border-color: var(--border-color, #fff);
+  }
+</style>
+
 </head>
 <body>
   <header>
@@ -127,5 +135,26 @@
 	};
 </script>
 <script type="text/javascript" src="//www.highperformanceformat.com/b7ce0045a6c724134a50361a5ae06e0a/invoke.js"></script>  
+<script>
+  // Apply saved customization settings
+  window.onload = function () {
+    const savedTextColor = localStorage.getItem('textColor') || '#ffffff';
+    const savedBorderColor = localStorage.getItem('borderColor') || '#ffffff';
+    const savedBackgroundColor = localStorage.getItem('backgroundColor') || '#000000';
+
+    document.body.style.color = savedTextColor;
+    document.body.style.borderColor = savedBorderColor;
+    document.body.style.backgroundColor = savedBackgroundColor;
+  };
+
+  // Panic key functionality (works across all pages)
+  document.addEventListener('keydown', function (e) {
+    const panicKey = localStorage.getItem('panicKey');
+    if (panicKey && e.key.toUpperCase() === panicKey) {
+      window.location.href = 'https://classroom.google.com';
+    }
+  });
+</script>
+	
 </body>
 </html>
