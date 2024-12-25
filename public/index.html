@@ -7,6 +7,57 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* Modal styles */
+    #email-modal {
+      display: block; /* Show the modal */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999; /* Make sure it's on top of everything else */
+    }
+
+    #modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+
+    #email-input {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 2px solid red;
+      background-color: black;
+      color: white;
+    }
+
+    #email-input:focus {
+      border-color: red;
+      outline: none;
+    }
+
+    #modal-content button {
+      padding: 10px 20px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #modal-content button:hover {
+      background-color: darkred;
+    }
+  </style>
   <script>
     window.onload = function() {
       // List of blocked emails
@@ -26,27 +77,26 @@
           // Redirect to Google Classroom if the email is blocked
           window.location.href = "https://classroom.google.com";
         } else {
-          // If email is not blocked, allow access
-          alert("Access granted!");
+          // Allow access and close the modal
+          document.getElementById('email-modal').style.display = 'none';
         }
       });
     }
   </script>
 </head>
 <body>
-  <!-- Email input form -->
-  <form id="email-form" style="display:block;">
-    <label for="email-input">Enter your email to access:</label>
-    <input type="email" id="email-input" placeholder="Enter your email" required />
-    <button type="submit">Submit</button>
-  </form>
-</head>
-<body>
-  <!-- Hidden email form -->
-  <form id="email-form" style="display:none;">
-    <input type="email" id="email-input" placeholder="Enter your email" />
-    <button type="submit">Submit</button>
-  </form>
+
+  <!-- Modal Popup -->
+  <div id="email-modal">
+    <div id="modal-content">
+      <h2 style="color: red;">Enter your email to access the site</h2>
+      <form id="email-form">
+        <input type="email" id="email-input" placeholder="Enter your email" required />
+        <br>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
 
   <style>
     /* Add the bottom-left tab style for About button */
