@@ -7,7 +7,7 @@
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" id="favicon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
-<script>
+  <script>
   // Apply stored title and favicon from localStorage
   window.onload = function () {
     const customTitle = localStorage.getItem('customTitle');
@@ -26,6 +26,46 @@
   };
 </script>
 
+  <style>
+    #settings-content {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .input-container {
+      margin-top: 20px;
+    }
+
+    .url-input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+      border-radius: 5px;
+      border: 2px solid red;
+      background-color: black;
+      color: red;
+    }
+
+    .submit-button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      font-size: 16px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background-color: darkred;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -40,10 +80,71 @@
   </header>
 
   <main id="settings-content">
-    <h1>Coming Soon</h1>
-    <p>This section is under construction. Stay tuned for updates!</p>
+    <h1>Settings</h1>
+    <div class="input-container">
+      <p>Enter a site's URL to use its icon and title:</p>
+      <input id="site-url" class="url-input" type="text" placeholder="Enter full URL (e.g., https://example.com)">
+      <button class="submit-button" onclick="applySiteSettings()">Apply</button>
+      <p id="error-message" class="error-message"></p>
+    </div>
   </main>
 
+  <script>
+    async function applySiteSettings() {
+      const urlInput = document.getElementById('site-url');
+      const errorMessage = document.getElementById('error-message');
+      const url = urlInput.value;
+
+      // Clear previous error message
+      errorMessage.textContent = '';
+
+      // Validate the URL
+      try {
+        new URL(url);
+      } catch {
+        errorMessage.textContent = 'Invalid URL. Please enter a valid complete URL with https://';
+        return;
+      }
+
+      try {
+        // Fetch the site's HTML
+        const response = await fetch(url);
+        const text = await response.text();
+
+        // Extract the title
+        const titleMatch = text.match(/<title>(.*?)<\/title>/);
+        const title = titleMatch ? titleMatch[1] : 'Untitled';
+
+        // Extract the favicon
+        const faviconMatch = text.match(/<link[^>]*rel=["']icon["'][^>]*href=["'](.*?)["']/i);
+        const baseUrl = new URL(url).origin;
+        const favicon = faviconMatch ? new URL(faviconMatch[1], baseUrl).href : '/assets/images/logo.png';
+
+        // Apply the changes
+        document.title = title;
+        document.getElementById('favicon').href = favicon;
+
+        // Store the values in localStorage
+        localStorage.setItem('customTitle', title);
+        localStorage.setItem('customFavicon', favicon);
+
+        alert('Tab updated successfully!');
+      } catch (error) {
+        console.error(error);
+        errorMessage.textContent = 'Failed to fetch the site details. Please try another URL.';
+      }
+    }
+
+    // Check if custom title and favicon are stored and apply them
+    window.onload = function () {
+      const customTitle = localStorage.getItem('customTitle');
+      const customFavicon = localStorage.getItem('customFavicon');
+
+      if (customTitle && customFavicon) {
+        document.title = customTitle;
+        document.getElementById('favicon').href = customFavicon;
+      }
+    };
+  </script>
 </body>
 </html>
-
