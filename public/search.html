@@ -85,6 +85,14 @@
   <script src="/uv/uv.config.js"></script>
   <script src="/js/index.js"></script>
   <script src="/uv/search.js" defer></script>
-<script src="/js/settings.js"></script>
+<script>
+  document.addEventListener('keydown', function (e) {
+    const panicKey = localStorage.getItem('panicKey');
+    if (panicKey && e.key.toUpperCase() === panicKey) {
+      window.location.href = 'https://classroom.google.com';
+    }
+  });
+</script>
+
 </body>
 </html>
