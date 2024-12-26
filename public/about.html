@@ -186,58 +186,142 @@
 
   // Function to apply a theme
   function applyTheme(theme) {
-    const root = document.documentElement;
-    const elements = document.querySelectorAll(
-      'body, .box-container, .styled-input, .styled-button, header, nav a, footer'
-    );
+    const elements = {
+      body: document.querySelector('body'),
+      header: document.querySelector('header'),
+      navLinks: document.querySelectorAll('nav a'),
+      logoName: document.getElementById('logo-name'),
+      discordLink: document.getElementById('discord-link'),
+      listItems: document.querySelectorAll('ul li'),
+    };
 
     switch (theme) {
       case 'dark':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#121212';
-          el.style.color = 'white';
-          el.style.borderColor = 'gray';
+        updateStyles(elements, {
+          backgroundColor: '#121212',
+          textColor: 'white',
+          borderColor: 'gray',
+          buttonHoverBackground: '#333333',
+          buttonHoverColor: 'white',
         });
         break;
 
       case 'light':
-        elements.forEach(el => {
-          el.style.backgroundColor = 'white';
-          el.style.color = 'black';
-          el.style.borderColor = 'black';
+        updateStyles(elements, {
+          backgroundColor: 'white',
+          textColor: 'black',
+          borderColor: 'black',
+          buttonHoverBackground: '#f0f0f0',
+          buttonHoverColor: 'black',
         });
         break;
 
       case 'blue':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#1e3a5f';
-          el.style.color = '#a9d6e5';
-          el.style.borderColor = '#4682b4';
+        updateStyles(elements, {
+          backgroundColor: '#1e3a5f',
+          textColor: '#a9d6e5',
+          borderColor: '#4682b4',
+          buttonHoverBackground: '#285678',
+          buttonHoverColor: 'white',
         });
         break;
 
       case 'forest':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#2b4227';
-          el.style.color = '#d0e6b5';
-          el.style.borderColor = '#3c6e47';
+        updateStyles(elements, {
+          backgroundColor: '#2b4227',
+          textColor: '#d0e6b5',
+          borderColor: '#3c6e47',
+          buttonHoverBackground: '#385537',
+          buttonHoverColor: 'white',
         });
         break;
 
       case 'sunset':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#ffad60';
-          el.style.color = '#4a1a1a';
-          el.style.borderColor = '#ff4500';
+        updateStyles(elements, {
+          backgroundColor: '#ffad60',
+          textColor: '#4a1a1a',
+          borderColor: '#ff4500',
+          buttonHoverBackground: '#ffa372',
+          buttonHoverColor: 'black',
         });
         break;
 
       default: // Default theme
-        elements.forEach(el => {
-          el.style.backgroundColor = '#1a1a1a';
-          el.style.color = 'red';
-          el.style.borderColor = 'red';
+        updateStyles(elements, {
+          backgroundColor: '#1a1a1a',
+          textColor: 'red',
+          borderColor: 'red',
+          buttonHoverBackground: '#333333',
+          buttonHoverColor: 'red',
         });
+    }
+  }
+
+  // Helper function to update styles for the page elements
+  function updateStyles(elements, styles) {
+    if (elements.body) {
+      elements.body.style.backgroundColor = styles.backgroundColor;
+      elements.body.style.color = styles.textColor;
+    }
+
+    if (elements.header) {
+      elements.header.style.backgroundColor = styles.backgroundColor;
+      elements.header.style.borderColor = styles.borderColor;
+    }
+
+    if (elements.navLinks) {
+      elements.navLinks.forEach(link => {
+        link.style.color = styles.textColor;
+        link.style.borderColor = styles.borderColor;
+
+        // Add hover styles for nav links
+        link.addEventListener('mouseover', () => {
+          link.style.backgroundColor = styles.buttonHoverBackground;
+          link.style.color = styles.buttonHoverColor;
+        });
+        link.addEventListener('mouseout', () => {
+          link.style.backgroundColor = 'transparent';
+          link.style.color = styles.textColor;
+        });
+      });
+    }
+
+    if (elements.logoName) {
+      elements.logoName.style.color = styles.textColor;
+    }
+
+    if (elements.discordLink) {
+      elements.discordLink.style.color = styles.textColor;
+      elements.discordLink.style.backgroundColor = styles.backgroundColor;
+      elements.discordLink.style.borderColor = styles.borderColor;
+
+      // Add hover styles for the Discord link
+      elements.discordLink.addEventListener('mouseover', () => {
+        elements.discordLink.style.backgroundColor = styles.buttonHoverBackground;
+        elements.discordLink.style.color = styles.buttonHoverColor;
+      });
+      elements.discordLink.addEventListener('mouseout', () => {
+        elements.discordLink.style.backgroundColor = styles.backgroundColor;
+        elements.discordLink.style.color = styles.textColor;
+      });
+    }
+
+    if (elements.listItems) {
+      elements.listItems.forEach(item => {
+        item.style.color = styles.textColor;
+        item.style.backgroundColor = styles.backgroundColor;
+        item.style.borderColor = styles.borderColor;
+
+        // Add hover styles for list items
+        item.addEventListener('mouseover', () => {
+          item.style.backgroundColor = styles.buttonHoverBackground;
+          item.style.color = styles.buttonHoverColor;
+        });
+        item.addEventListener('mouseout', () => {
+          item.style.backgroundColor = styles.backgroundColor;
+          item.style.color = styles.textColor;
+        });
+      });
     }
   }
 </script>
