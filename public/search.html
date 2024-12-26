@@ -54,7 +54,7 @@
     }
 
     /* Ensure smooth transitions for all elements */
-    body, header, main, footer, .search-bar, a, h1, p {
+    body, header, main, footer, .search-bar, a, h1, p, #logo-name, .desc, #uv-error {
       transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     }
   </style>
@@ -134,9 +134,8 @@
 
     // Function to apply a theme
     function applyTheme(theme) {
-      const root = document.documentElement;
       const elements = document.querySelectorAll(
-        'body, header, nav, footer, main, .search-bar, h1, p, a, .desc, #uv-error'
+        'body, header, nav, footer, main, .search-bar, h1, p, #logo-name, .desc, #uv-error'
       );
 
       switch (theme) {
