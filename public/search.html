@@ -176,11 +176,11 @@
         });
         break;
 
-      default: // Default theme
+      default: // Default theme (reset to original styles)
         allElements.forEach(el => {
-          el.style.backgroundColor = '#000000';
-          el.style.color = 'red';
-          el.style.borderColor = 'red';
+          el.style.backgroundColor = ''; // Clear inline background color
+          el.style.color = '';           // Clear inline text color
+          el.style.borderColor = '';     // Clear inline border color
         });
     }
   }
