@@ -230,150 +230,55 @@
         'body, header, nav, footer, main, h1, p, a, div, button, img, span, #about-tab'
       );
 
- // Define theme styles
-    let themeStyles;
-    switch (theme) {
-      case 'dark':
-        themeStyles = {
-          backgroundColor: '#121212',
-          textColor: 'white',
-          borderColor: 'gray',
-          buttonHoverBackground: '#333333',
-          buttonHoverColor: 'white',
-        };
-        break;
+      switch (theme) {
+        case 'dark':
+          elements.forEach(el => {
+            el.style.backgroundColor = '#121212';
+            el.style.color = 'white';
+            el.style.borderColor = 'gray';
+          });
+          break;
 
-      case 'light':
-        themeStyles = {
-          backgroundColor: 'white',
-          textColor: 'black',
-          borderColor: 'black',
-          buttonHoverBackground: '#f0f0f0',
-          buttonHoverColor: 'black',
-        };
-        break;
+        case 'light':
+          elements.forEach(el => {
+            el.style.backgroundColor = 'white';
+            el.style.color = 'black';
+            el.style.borderColor = 'black';
+          });
+          break;
 
-      case 'blue':
-        themeStyles = {
-          backgroundColor: '#1e3a5f',
-          textColor: '#a9d6e5',
-          borderColor: '#4682b4',
-          buttonHoverBackground: '#285678',
-          buttonHoverColor: 'white',
-        };
-        break;
+        case 'blue':
+          elements.forEach(el => {
+            el.style.backgroundColor = '#1e3a5f';
+            el.style.color = '#a9d6e5';
+            el.style.borderColor = '#4682b4';
+          });
+          break;
 
-      case 'forest':
-        themeStyles = {
-          backgroundColor: '#2b4227',
-          textColor: '#d0e6b5',
-          borderColor: '#3c6e47',
-          buttonHoverBackground: '#385537',
-          buttonHoverColor: 'white',
-        };
-        break;
+        case 'forest':
+          elements.forEach(el => {
+            el.style.backgroundColor = '#2b4227';
+            el.style.color = '#d0e6b5';
+            el.style.borderColor = '#3c6e47';
+          });
+          break;
 
-      case 'sunset':
-        themeStyles = {
-          backgroundColor: '#ffad60',
-          textColor: '#4a1a1a',
-          borderColor: '#ff4500',
-          buttonHoverBackground: '#ffa372',
-          buttonHoverColor: 'black',
-        };
-        break;
+        case 'sunset':
+          elements.forEach(el => {
+            el.style.backgroundColor = '#ffad60';
+            el.style.color = '#4a1a1a';
+            el.style.borderColor = '#ff4500';
+          });
+          break;
 
-      case 'neon':
-        themeStyles = {
-          backgroundColor: '#000000',
-          textColor: '#39ff14',
-          borderColor: '#39ff14',
-          buttonHoverBackground: '#333333',
-          buttonHoverColor: '#39ff14',
-        };
-        break;
-
-      case 'retro':
-        themeStyles = {
-          backgroundColor: '#4e4e4e',
-          textColor: '#f1f1f1',
-          borderColor: '#ff6347',
-          buttonHoverBackground: '#ff6347',
-          buttonHoverColor: '#f1f1f1',
-        };
-        break;
-
-      case 'cyberpunk':
-        themeStyles = {
-          backgroundColor: '#2b2b2b',
-          textColor: '#ff00ff',
-          borderColor: '#ff00ff',
-          buttonHoverBackground: '#4c4c4c',
-          buttonHoverColor: '#ff00ff',
-        };
-        break;
-
-      case 'ocean':
-        themeStyles = {
-          backgroundColor: '#006994',
-          textColor: '#b3e0e8',
-          borderColor: '#4cb7c5',
-          buttonHoverBackground: '#004f6c',
-          buttonHoverColor: '#b3e0e8',
-        };
-        break;
-
-      case 'matrix':
-        themeStyles = {
-          backgroundColor: '#000000',
-          textColor: '#00ff00',
-          borderColor: '#00ff00',
-          buttonHoverBackground: '#004d00',
-          buttonHoverColor: '#00ff00',
-        };
-        break;
-
-      case 'pastel':
-        themeStyles = {
-          backgroundColor: '#fceef4',
-          textColor: '#9b9b9b',
-          borderColor: '#f2a0a1',
-          buttonHoverBackground: '#f3c1c6',
-          buttonHoverColor: '#9b9b9b',
-        };
-        break;
-
-      case 'space':
-        themeStyles = {
-          backgroundColor: '#1a1a2e',
-          textColor: '#7f8fa6',
-          borderColor: '#b5c1b2',
-          buttonHoverBackground: '#4a4e75',
-          buttonHoverColor: '#7f8fa6',
-        };
-        break;
-
-      case 'cherry-blossom':
-        themeStyles = {
-          backgroundColor: '#ffe6f1',
-          textColor: '#f2c6c9',
-          borderColor: '#ffb3c1',
-          buttonHoverBackground: '#ffcccc',
-          buttonHoverColor: '#f2c6c9',
-        };
-        break;
-
-      default: // Default theme
-        themeStyles = {
-          backgroundColor: '#000000',
-          textColor: 'red',
-          borderColor: 'red',
-          buttonHoverBackground: '#333333',
-          buttonHoverColor: 'red',
-        };
+        default: // Default theme
+          elements.forEach(el => {
+            el.style.backgroundColor = '#000000';
+            el.style.color = 'red';
+            el.style.borderColor = 'red';
+          });
+      }
     }
-
-
   </script>
 
 </body>
