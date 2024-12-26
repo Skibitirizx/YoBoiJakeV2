@@ -8,14 +8,6 @@
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
   <style>
-    /* General reset for all elements */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    }
-
     /* General styling for container box */
     .box-container {
       border: 2px solid red;
@@ -24,6 +16,8 @@
       width: 300px;
       margin: 20px;
       text-align: center;
+      background-color: #1a1a1a;
+      color: red;
     }
 
     /* Input and button styles */
@@ -35,6 +29,8 @@
       outline: none;
       width: 90%;
       margin-bottom: 10px;
+      background-color: black;
+      color: red;
       transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
     }
 
@@ -48,6 +44,7 @@
       font-size: 24px;
       font-weight: bold;
       text-align: center;
+      color: red;
     }
 
     /* Grid for aligning boxes in the center */
@@ -59,37 +56,10 @@
       margin-top: 40px;
     }
 
-    /* Center the page content */
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      transition: background-color 0.3s, color 0.3s;
+    /* Ensure smooth transitions for all elements */
+    body, header, main, footer, .box-container, .styled-input, .styled-button, #logo-name {
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     }
-
-    header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    nav a {
-      text-decoration: none;
-      font-size: 18px;
-      transition: color 0.3s ease-in-out;
-    }
-
-    nav a:hover {
-      color: darkred;
-    }
-
   </style>
 </head>
 <body>
@@ -182,63 +152,65 @@
       });
     });
 
-    // Function to apply a theme to everything
+    // Function to apply a theme
     function applyTheme(theme) {
-      const allElements = document.querySelectorAll('*'); // Select all elements
-
+      const elements = document.querySelectorAll(
+        'body, header, nav, .box-container, .styled-input, .styled-button, #logo-name, footer, a'
+      );
+      
       switch (theme) {
         case 'dark':
           document.body.style.backgroundColor = '#121212';
           document.body.style.color = 'white';
-          allElements.forEach(el => {
+          elements.forEach(el => {
+            el.style.borderColor = 'gray';
             el.style.backgroundColor = '#1a1a1a';
             el.style.color = 'white';
-            el.style.borderColor = 'gray'; // For elements with borders
           });
           break;
         case 'light':
           document.body.style.backgroundColor = 'white';
           document.body.style.color = 'black';
-          allElements.forEach(el => {
+          elements.forEach(el => {
+            el.style.borderColor = 'black';
             el.style.backgroundColor = '#f0f0f0';
             el.style.color = 'black';
-            el.style.borderColor = 'black';
           });
           break;
         case 'blue':
           document.body.style.backgroundColor = '#1e3a5f';
           document.body.style.color = '#a9d6e5';
-          allElements.forEach(el => {
+          elements.forEach(el => {
+            el.style.borderColor = '#4682b4';
             el.style.backgroundColor = '#243447';
             el.style.color = '#a9d6e5';
-            el.style.borderColor = '#4682b4';
           });
           break;
         case 'forest':
           document.body.style.backgroundColor = '#2b4227';
           document.body.style.color = '#d0e6b5';
-          allElements.forEach(el => {
+          elements.forEach(el => {
+            el.style.borderColor = '#3c6e47';
             el.style.backgroundColor = '#334d34';
             el.style.color = '#d0e6b5';
-            el.style.borderColor = '#3c6e47';
           });
           break;
         case 'sunset':
           document.body.style.backgroundColor = '#ffad60';
           document.body.style.color = '#4a1a1a';
-          allElements.forEach(el => {
+          elements.forEach(el => {
+            el.style.borderColor = '#ff4500';
             el.style.backgroundColor = '#ff6347';
             el.style.color = '#4a1a1a';
-            el.style.borderColor = '#ff4500';
           });
           break;
         default:
           document.body.style.backgroundColor = '#121212';
           document.body.style.color = 'red';
-          allElements.forEach(el => {
+          elements.forEach(el => {
+            el.style.borderColor = 'red';
             el.style.backgroundColor = '#1a1a1a';
             el.style.color = 'red';
-            el.style.borderColor = 'red';
           });
       }
     }
