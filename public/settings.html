@@ -8,16 +8,7 @@
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
   <style>
-    /* Larger Panic Key Title */
-    .panic-key-title, .theme-title {
-      font-size: 32px;
-      font-weight: bold;
-      color: red;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    /* Container box with rounded corners */
+    /* General styling for container box */
     .box-container {
       border: 2px solid red;
       border-radius: 12px;
@@ -25,34 +16,27 @@
       width: 300px;
       margin: 20px auto;
       text-align: center;
-      background-color: #1a1a1a; /* Dark background for the box */
+      background-color: #1a1a1a;
+      color: red;
     }
 
-    /* Dropdown styling */
-    .theme-select {
+    /* Input and button styles */
+    .styled-input, .styled-button {
       padding: 10px;
       font-size: 16px;
       border: 2px solid red;
       border-radius: 8px;
       outline: none;
+      width: 90%;
+      margin-bottom: 10px;
       background-color: black;
       color: red;
-      transition: border-color 0.3s ease-in-out;
-      width: 100%;
+      transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
     }
 
-    .theme-select:focus {
+    .styled-input:focus, .styled-button:hover {
       border-color: darkred;
-    }
-
-    /* Default theme styles */
-    body {
-      background-color: #121212;
-      color: white;
-    }
-
-    header {
-      color: white;
+      background-color: #333;
     }
   </style>
 </head>
@@ -69,172 +53,138 @@
   </header>
 
   <main id="settings-content">
-    <p class="panic-key-title">Panic Key</p>
+    <!-- Panic Key Section -->
     <div class="box-container">
-      <p>
+      <p class="panic-key-title">Panic Key</p>
+      <p class="panic-key-explanation">
         The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
       </p>
       <input 
         id="panic-key-input" 
-        class="panic-key-input" 
+        class="styled-input" 
         type="text" 
         placeholder="Enter Panic Key" 
         maxlength="1"
       />
     </div>
 
-    <p class="theme-title">Themes</p>
+    <!-- Themes Section -->
     <div class="box-container">
-      <p>Choose a theme to customize the appearance:</p>
-      <select id="theme-select" class="theme-select">
+      <p class="theme-title">Themes</p>
+      <p class="theme-explanation">
+        Choose a theme to customize the appearance of the website. Your selection will be saved.
+      </p>
+      <select id="theme-selector" class="styled-input">
         <option value="default">Default</option>
-        <option value="dark">Dark Mode</option>
-        <option value="light">Light Mode</option>
-        <option value="blue">Blue Ocean</option>
-        <option value="forest">Forest Green</option>
-        <option value="sunset">Sunset Glow</option>
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+        <option value="blue">Blue</option>
+        <option value="forest">Forest</option>
+        <option value="sunset">Sunset</option>
       </select>
     </div>
   </main>
 
   <script>
-    // Load saved theme on page load
-    window.onload = function () {
+    // Load saved settings on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      // Panic Key
+      const panicKeyInput = document.getElementById('panic-key-input');
+      const savedPanicKey = localStorage.getItem('panicKey');
+      if (savedPanicKey) {
+        panicKeyInput.value = savedPanicKey;
+      }
+
+      panicKeyInput.addEventListener('input', function () {
+        const panicKey = panicKeyInput.value.toUpperCase();
+        localStorage.setItem('panicKey', panicKey);
+      });
+
+      // Panic Key Functionality
+      document.addEventListener('keydown', function (e) {
+        const panicKey = localStorage.getItem('panicKey');
+        if (panicKey && e.key.toUpperCase() === panicKey) {
+          window.location.href = 'https://classroom.google.com';
+        }
+      });
+
+      // Themes
+      const themeSelector = document.getElementById('theme-selector');
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
-        document.getElementById('theme-select').value = savedTheme;
+        themeSelector.value = savedTheme;
         applyTheme(savedTheme);
       }
-    };
+
+      themeSelector.addEventListener('change', function () {
+        const selectedTheme = themeSelector.value;
+        localStorage.setItem('theme', selectedTheme);
+        applyTheme(selectedTheme);
+      });
+    });
 
     // Function to apply a theme
     function applyTheme(theme) {
       const root = document.documentElement;
+      const elements = document.querySelectorAll('.box-container, .styled-input, .styled-button');
+      
       switch (theme) {
         case 'dark':
           document.body.style.backgroundColor = '#121212';
           document.body.style.color = 'white';
-          document.querySelectorAll('.box-container').forEach(el => {
+          elements.forEach(el => {
             el.style.borderColor = 'gray';
             el.style.backgroundColor = '#1a1a1a';
+            el.style.color = 'white';
           });
           break;
         case 'light':
           document.body.style.backgroundColor = 'white';
           document.body.style.color = 'black';
-          document.querySelectorAll('.box-container').forEach(el => {
+          elements.forEach(el => {
             el.style.borderColor = 'black';
             el.style.backgroundColor = '#f0f0f0';
+            el.style.color = 'black';
           });
           break;
         case 'blue':
           document.body.style.backgroundColor = '#1e3a5f';
           document.body.style.color = '#a9d6e5';
-          document.querySelectorAll('.box-container').forEach(el => {
+          elements.forEach(el => {
             el.style.borderColor = '#4682b4';
             el.style.backgroundColor = '#243447';
+            el.style.color = '#a9d6e5';
           });
           break;
         case 'forest':
           document.body.style.backgroundColor = '#2b4227';
           document.body.style.color = '#d0e6b5';
-          document.querySelectorAll('.box-container').forEach(el => {
+          elements.forEach(el => {
             el.style.borderColor = '#3c6e47';
             el.style.backgroundColor = '#334d34';
+            el.style.color = '#d0e6b5';
           });
           break;
         case 'sunset':
           document.body.style.backgroundColor = '#ffad60';
           document.body.style.color = '#4a1a1a';
-          document.querySelectorAll('.box-container').forEach(el => {
+          elements.forEach(el => {
             el.style.borderColor = '#ff4500';
             el.style.backgroundColor = '#ff6347';
+            el.style.color = '#4a1a1a';
           });
           break;
         default:
           document.body.style.backgroundColor = '#121212';
-          document.body.style.color = 'white';
-          document.querySelectorAll('.box-container').forEach(el => {
+          document.body.style.color = 'red';
+          elements.forEach(el => {
             el.style.borderColor = 'red';
             el.style.backgroundColor = '#1a1a1a';
+            el.style.color = 'red';
           });
       }
     }
-
-    // Theme change event listener
-    document.getElementById('theme-select').addEventListener('change', function () {
-      const selectedTheme = this.value;
-      localStorage.setItem('theme', selectedTheme);
-      applyTheme(selectedTheme);
-    });
   </script>
-<script>
-  // Apply saved theme on page load
-  function loadTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      applyTheme(savedTheme);
-    }
-  }
-
-  // Function to apply a theme
-  function applyTheme(theme) {
-    switch (theme) {
-      case 'dark':
-        document.body.style.backgroundColor = '#121212';
-        document.body.style.color = 'white';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = 'gray';
-          el.style.backgroundColor = '#1a1a1a';
-        });
-        break;
-      case 'light':
-        document.body.style.backgroundColor = 'white';
-        document.body.style.color = 'black';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = 'black';
-          el.style.backgroundColor = '#f0f0f0';
-        });
-        break;
-      case 'blue':
-        document.body.style.backgroundColor = '#1e3a5f';
-        document.body.style.color = '#a9d6e5';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = '#4682b4';
-          el.style.backgroundColor = '#243447';
-        });
-        break;
-      case 'forest':
-        document.body.style.backgroundColor = '#2b4227';
-        document.body.style.color = '#d0e6b5';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = '#3c6e47';
-          el.style.backgroundColor = '#334d34';
-        });
-        break;
-      case 'sunset':
-        document.body.style.backgroundColor = '#ffad60';
-        document.body.style.color = '#4a1a1a';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = '#ff4500';
-          el.style.backgroundColor = '#ff6347';
-        });
-        break;
-      default:
-        document.body.style.backgroundColor = '#121212';
-        document.body.style.color = 'white';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = 'red';
-          el.style.backgroundColor = '#1a1a1a';
-        });
-    }
-  }
-
-  // Initialize theme on page load
-  document.addEventListener('DOMContentLoaded', function () {
-    loadTheme();
-  });
-</script>
-	
 </body>
 </html>
+
