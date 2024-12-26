@@ -14,7 +14,7 @@
       border-radius: 12px;
       padding: 20px;
       width: 300px;
-      margin: 20px auto;
+      margin: 20px;
       text-align: center;
       background-color: #1a1a1a;
       color: red;
@@ -38,6 +38,26 @@
       border-color: darkred;
       background-color: #333;
     }
+
+    /* Larger text for the titles */
+    .setting-title {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      color: red;
+    }
+
+    /* Flexbox for aligning boxes side by side */
+    .settings-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 40px;
+    }
+
+    /* Ensure smooth transitions for all elements */
+    body, header, main, footer, .box-container, .styled-input, .styled-button, #logo-name {
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
   </style>
 </head>
 <body>
@@ -53,9 +73,8 @@
   </header>
 
   <main id="settings-content">
-    <!-- Panic Key Section -->
+    <div class="setting-title">Panic Key</div>
     <div class="box-container">
-      <p class="panic-key-title">Panic Key</p>
       <p class="panic-key-explanation">
         The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
       </p>
@@ -68,9 +87,8 @@
       />
     </div>
 
-    <!-- Themes Section -->
+    <div class="setting-title">Themes</div>
     <div class="box-container">
-      <p class="theme-title">Themes</p>
       <p class="theme-explanation">
         Choose a theme to customize the appearance of the website. Your selection will be saved.
       </p>
@@ -125,8 +143,7 @@
 
     // Function to apply a theme
     function applyTheme(theme) {
-      const root = document.documentElement;
-      const elements = document.querySelectorAll('.box-container, .styled-input, .styled-button');
+      const elements = document.querySelectorAll('.box-container, .styled-input, .styled-button, #logo-name');
       
       switch (theme) {
         case 'dark':
@@ -187,4 +204,3 @@
   </script>
 </body>
 </html>
-
