@@ -16,7 +16,7 @@
       width: 300px;
       margin: 20px;
       text-align: center;
-      background-color: #1a1a1a;
+      background-color: black; /* Updated to black */
       color: red;
     }
 
@@ -256,21 +256,6 @@
     return styleSheet;
   }
 </script>
- <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Load the saved panic key from localStorage
-    const savedPanicKey = localStorage.getItem('panicKey');
 
-    if (savedPanicKey) {
-      // Listen for key presses globally to activate the panic key
-      document.addEventListener('keydown', function (event) {
-        if (event.key === savedPanicKey) {
-          // Redirect to Google Classroom when the panic key is pressed
-          window.location.href = 'https://classroom.google.com';
-        }
-      });
-    }
-  });
-</script>
 </body>
 </html>
