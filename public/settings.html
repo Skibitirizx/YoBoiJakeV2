@@ -90,6 +90,7 @@
             type="text" 
             placeholder="Enter Panic Key" 
             maxlength="1"
+            oninput="savePanicKey()"
           />
         </div>
       </div>
@@ -116,6 +117,22 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    // Load the saved panic key
+    const panicKeyInput = document.getElementById('panic-key-input');
+    const savedPanicKey = localStorage.getItem('panicKey');
+
+    if (savedPanicKey) {
+      panicKeyInput.value = savedPanicKey;
+    }
+
+    // Listen for key presses globally to activate the panic key
+    document.addEventListener('keydown', function (event) {
+      if (event.key === localStorage.getItem('panicKey')) {
+        // Redirect to Google Classroom when the panic key is pressed
+        window.location.href = 'https://classroom.google.com';
+      }
+    });
+
     // Load and apply the saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -137,6 +154,16 @@
       });
     }
   });
+
+  // Save the panic key to localStorage
+  function savePanicKey() {
+    const panicKeyInput = document.getElementById('panic-key-input');
+    const panicKey = panicKeyInput.value;
+
+    if (panicKey.length === 1) { // Ensure only a single character is saved
+      localStorage.setItem('panicKey', panicKey);
+    }
+  }
 
   // Function to apply a theme dynamically to all elements
   function applyTheme(theme) {
