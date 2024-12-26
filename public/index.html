@@ -309,6 +309,35 @@
     return styleSheet;
   }
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Load the saved panic key
+    const panicKeyInput = document.getElementById('panic-key-input');
+    const savedPanicKey = localStorage.getItem('panicKey');
+
+    if (savedPanicKey) {
+      panicKeyInput.value = savedPanicKey;
+    }
+
+    // Listen for key presses globally to activate the panic key
+    document.addEventListener('keydown', function (event) {
+      if (event.key === localStorage.getItem('panicKey')) {
+        // Redirect to Google Classroom when the panic key is pressed
+        window.location.href = 'https://classroom.google.com';
+      }
+    });
+  });
+
+  // Save the panic key to localStorage
+  function savePanicKey() {
+    const panicKeyInput = document.getElementById('panic-key-input');
+    const panicKey = panicKeyInput.value;
+
+    if (panicKey.length === 1) { // Ensure only a single character is saved
+      localStorage.setItem('panicKey', panicKey);
+    }
+  }
+</script>
 
 </body>
 </html>
