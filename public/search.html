@@ -133,56 +133,93 @@
 
   // Function to apply a theme dynamically to all elements
   function applyTheme(theme) {
-    const allElements = document.querySelectorAll("*"); // Select all elements in the document
+    const allElements = document.querySelectorAll("*"); // Select all elements
+    const styleSheet = document.getElementById('dynamic-theme-styles') || createDynamicStyleSheet();
+
+    // Clear previously applied styles for the default theme
+    if (theme === 'default') {
+      allElements.forEach(el => {
+        el.style.backgroundColor = ''; // Clear inline background color
+        el.style.color = '';           // Clear inline text color
+        el.style.borderColor = '';     // Clear inline border color
+      });
+      styleSheet.innerHTML = ''; // Remove hover styles
+      return;
+    }
+
+    // Apply theme colors dynamically
+    let backgroundColor, textColor, borderColor, hoverBackgroundColor, hoverTextColor;
 
     switch (theme) {
       case 'dark':
-        allElements.forEach(el => {
-          el.style.backgroundColor = '#121212';
-          el.style.color = 'white';
-          el.style.borderColor = 'gray';
-        });
+        backgroundColor = '#121212';
+        textColor = 'white';
+        borderColor = 'gray';
+        hoverBackgroundColor = '#1c1c1c';
+        hoverTextColor = '#f0f0f0';
         break;
 
       case 'light':
-        allElements.forEach(el => {
-          el.style.backgroundColor = 'white';
-          el.style.color = 'black';
-          el.style.borderColor = 'black';
-        });
+        backgroundColor = 'white';
+        textColor = 'black';
+        borderColor = 'black';
+        hoverBackgroundColor = '#f7f7f7';
+        hoverTextColor = '#333';
         break;
 
       case 'blue':
-        allElements.forEach(el => {
-          el.style.backgroundColor = '#1e3a5f';
-          el.style.color = '#a9d6e5';
-          el.style.borderColor = '#4682b4';
-        });
+        backgroundColor = '#1e3a5f';
+        textColor = '#a9d6e5';
+        borderColor = '#4682b4';
+        hoverBackgroundColor = '#24476d';
+        hoverTextColor = '#c0e9f5';
         break;
 
       case 'forest':
-        allElements.forEach(el => {
-          el.style.backgroundColor = '#2b4227';
-          el.style.color = '#d0e6b5';
-          el.style.borderColor = '#3c6e47';
-        });
+        backgroundColor = '#2b4227';
+        textColor = '#d0e6b5';
+        borderColor = '#3c6e47';
+        hoverBackgroundColor = '#365735';
+        hoverTextColor = '#e0f0c5';
         break;
 
       case 'sunset':
-        allElements.forEach(el => {
-          el.style.backgroundColor = '#ffad60';
-          el.style.color = '#4a1a1a';
-          el.style.borderColor = '#ff4500';
-        });
+        backgroundColor = '#ffad60';
+        textColor = '#4a1a1a';
+        borderColor = '#ff4500';
+        hoverBackgroundColor = '#ff9240';
+        hoverTextColor = '#5c1e1e';
         break;
 
-      default: // Default theme (reset to original styles)
-        allElements.forEach(el => {
-          el.style.backgroundColor = ''; // Clear inline background color
-          el.style.color = '';           // Clear inline text color
-          el.style.borderColor = '';     // Clear inline border color
-        });
+      default:
+        return;
     }
+
+    // Apply the base styles to all elements
+    allElements.forEach(el => {
+      el.style.backgroundColor = backgroundColor;
+      el.style.color = textColor;
+      el.style.borderColor = borderColor;
+    });
+
+    // Add hover effects dynamically using the stylesheet
+    styleSheet.innerHTML = `
+      button, a {
+        transition: background-color 0.3s, color 0.3s;
+      }
+      button:hover, a:hover {
+        background-color: ${hoverBackgroundColor};
+        color: ${hoverTextColor};
+      }
+    `;
+  }
+
+  // Helper function to create or find the dynamic stylesheet
+  function createDynamicStyleSheet() {
+    const styleSheet = document.createElement('style');
+    styleSheet.id = 'dynamic-theme-styles';
+    document.head.appendChild(styleSheet);
+    return styleSheet;
   }
 </script>
 
