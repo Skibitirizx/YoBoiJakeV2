@@ -96,7 +96,6 @@
 </script>
 <script type="text/javascript" src="//www.highperformanceformat.com/b7ce0045a6c724134a50361a5ae06e0a/invoke.js"></script>
 <script>
-  // Apply the saved theme across all elements on page load
   document.addEventListener('DOMContentLoaded', function () {
     // Load and apply the saved theme
     const savedTheme = localStorage.getItem('theme');
@@ -122,61 +121,96 @@
 
   // Function to apply a theme
   function applyTheme(theme) {
-    const root = document.documentElement;
-    const elements = document.querySelectorAll(
-      'body, .box-container, .styled-input, .styled-button, header, nav a, footer'
-    );
+    // Select all elements on the page
+    const allElements = document.querySelectorAll('*');
 
+    // Define theme styles
+    let themeStyles;
     switch (theme) {
       case 'dark':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#121212';
-          el.style.color = 'white';
-          el.style.borderColor = 'gray';
-        });
+        themeStyles = {
+          backgroundColor: '#121212',
+          textColor: 'white',
+          borderColor: 'gray',
+          buttonHoverBackground: '#333333',
+          buttonHoverColor: 'white',
+        };
         break;
 
       case 'light':
-        elements.forEach(el => {
-          el.style.backgroundColor = 'white';
-          el.style.color = 'black';
-          el.style.borderColor = 'black';
-        });
+        themeStyles = {
+          backgroundColor: 'white',
+          textColor: 'black',
+          borderColor: 'black',
+          buttonHoverBackground: '#f0f0f0',
+          buttonHoverColor: 'black',
+        };
         break;
 
       case 'blue':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#1e3a5f';
-          el.style.color = '#a9d6e5';
-          el.style.borderColor = '#4682b4';
-        });
+        themeStyles = {
+          backgroundColor: '#1e3a5f',
+          textColor: '#a9d6e5',
+          borderColor: '#4682b4',
+          buttonHoverBackground: '#285678',
+          buttonHoverColor: 'white',
+        };
         break;
 
       case 'forest':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#2b4227';
-          el.style.color = '#d0e6b5';
-          el.style.borderColor = '#3c6e47';
-        });
+        themeStyles = {
+          backgroundColor: '#2b4227',
+          textColor: '#d0e6b5',
+          borderColor: '#3c6e47',
+          buttonHoverBackground: '#385537',
+          buttonHoverColor: 'white',
+        };
         break;
 
       case 'sunset':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#ffad60';
-          el.style.color = '#4a1a1a';
-          el.style.borderColor = '#ff4500';
-        });
+        themeStyles = {
+          backgroundColor: '#ffad60',
+          textColor: '#4a1a1a',
+          borderColor: '#ff4500',
+          buttonHoverBackground: '#ffa372',
+          buttonHoverColor: 'black',
+        };
         break;
 
       default: // Default theme
-        elements.forEach(el => {
-          el.style.backgroundColor = '#1a1a1a';
-          el.style.color = 'red';
-          el.style.borderColor = 'red';
-        });
+        themeStyles = {
+          backgroundColor: '#1a1a1a',
+          textColor: 'red',
+          borderColor: 'red',
+          buttonHoverBackground: '#333333',
+          buttonHoverColor: 'red',
+        };
     }
+
+    // Apply styles to all elements
+    allElements.forEach(el => {
+      el.style.backgroundColor = themeStyles.backgroundColor;
+      el.style.color = themeStyles.textColor;
+
+      // Apply borders if the element has a visible border
+      if (window.getComputedStyle(el).borderStyle !== 'none') {
+        el.style.borderColor = themeStyles.borderColor;
+      }
+    });
+
+    // Apply hover effects for specific elements (buttons, links, etc.)
+    const buttonsAndLinks = document.querySelectorAll('button, a, .game');
+    buttonsAndLinks.forEach(el => {
+      el.addEventListener('mouseover', () => {
+        el.style.backgroundColor = themeStyles.buttonHoverBackground;
+        el.style.color = themeStyles.buttonHoverColor;
+      });
+      el.addEventListener('mouseout', () => {
+        el.style.backgroundColor = themeStyles.backgroundColor;
+        el.style.color = themeStyles.textColor;
+      });
+    });
   }
 </script>
 
-	
 </html>
