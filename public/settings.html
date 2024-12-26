@@ -8,6 +8,14 @@
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="stylesheet" href="/css/styles.css">
   <style>
+    /* General reset for all elements */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
     /* General styling for container box */
     .box-container {
       border: 2px solid red;
@@ -56,8 +64,41 @@
       margin-top: 40px;
     }
 
+    /* Center the page content */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      background-color: #121212; /* Default background color */
+      color: red;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    nav a {
+      color: red;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    nav a:hover {
+      color: darkred;
+    }
+
     /* Ensure smooth transitions for all elements */
-    body, header, main, footer, .box-container, .styled-input, .styled-button, #logo-name {
+    body, header, main, footer, .box-container, .styled-input, .styled-button, #logo-name, nav a {
       transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     }
   </style>
@@ -154,9 +195,7 @@
 
     // Function to apply a theme
     function applyTheme(theme) {
-      const elements = document.querySelectorAll(
-        'body, header, nav, .box-container, .styled-input, .styled-button, #logo-name, footer, a'
-      );
+      const elements = document.querySelectorAll('*'); // Select all elements globally
       
       switch (theme) {
         case 'dark':
