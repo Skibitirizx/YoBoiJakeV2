@@ -57,7 +57,7 @@
     }
 
     /* Ensure smooth transitions for all elements */
-    body, header, main, footer, .box-container, .styled-input, .styled-button, #logo-name {
+    body, header, main, footer, .box-container, .styled-input, .styled-button, #logo-name, .setting-title {
       transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     }
   </style>
@@ -79,9 +79,9 @@
     <div class="settings-container">
       <!-- Panic Key Section -->
       <div>
-        <div class="setting-title">Panic Key</div>
+        <div class="setting-title" id="panic-key-title">Panic Key</div>
         <div class="box-container">
-          <p class="panic-key-explanation">
+          <p class="panic-key-explanation" id="panic-key-explanation">
             The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
           </p>
           <input 
@@ -96,9 +96,9 @@
 
       <!-- Themes Section -->
       <div>
-        <div class="setting-title">Themes</div>
+        <div class="setting-title" id="themes-title">Themes</div>
         <div class="box-container">
-          <p class="theme-explanation">
+          <p class="theme-explanation" id="theme-explanation">
             Choose a theme to customize the appearance of the website. Your selection will be saved.
           </p>
           <select id="theme-selector" class="styled-input">
@@ -155,7 +155,7 @@
     // Function to apply a theme
     function applyTheme(theme) {
       const elements = document.querySelectorAll(
-        'body, header, nav, .box-container, .styled-input, .styled-button, #logo-name, footer, a'
+        'body, header, nav, .box-container, .styled-input, .styled-button, #logo-name, footer, a, .setting-title, #panic-key-title, #themes-title, #panic-key-explanation, #theme-explanation'
       );
       
       switch (theme) {
