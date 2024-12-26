@@ -24,8 +24,6 @@
       width: 300px;
       margin: 20px;
       text-align: center;
-      background-color: #1a1a1a;
-      color: red;
     }
 
     /* Input and button styles */
@@ -37,8 +35,6 @@
       outline: none;
       width: 90%;
       margin-bottom: 10px;
-      background-color: black;
-      color: red;
       transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
     }
 
@@ -52,7 +48,6 @@
       font-size: 24px;
       font-weight: bold;
       text-align: center;
-      color: red;
     }
 
     /* Grid for aligning boxes in the center */
@@ -71,8 +66,7 @@
       align-items: center;
       height: 100vh;
       flex-direction: column;
-      background-color: #121212; /* Default background color */
-      color: red;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     header {
@@ -87,7 +81,6 @@
     }
 
     nav a {
-      color: red;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s ease-in-out;
@@ -97,10 +90,6 @@
       color: darkred;
     }
 
-    /* Ensure smooth transitions for all elements */
-    body, header, main, footer, .box-container, .styled-input, .styled-button, #logo-name, nav a {
-      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    }
   </style>
 </head>
 <body>
@@ -193,63 +182,63 @@
       });
     });
 
-    // Function to apply a theme
+    // Function to apply a theme to everything
     function applyTheme(theme) {
-      const elements = document.querySelectorAll('*'); // Select all elements globally
-      
+      const allElements = document.querySelectorAll('*'); // Select all elements
+
       switch (theme) {
         case 'dark':
           document.body.style.backgroundColor = '#121212';
           document.body.style.color = 'white';
-          elements.forEach(el => {
-            el.style.borderColor = 'gray';
+          allElements.forEach(el => {
             el.style.backgroundColor = '#1a1a1a';
             el.style.color = 'white';
+            el.style.borderColor = 'gray'; // For elements with borders
           });
           break;
         case 'light':
           document.body.style.backgroundColor = 'white';
           document.body.style.color = 'black';
-          elements.forEach(el => {
-            el.style.borderColor = 'black';
+          allElements.forEach(el => {
             el.style.backgroundColor = '#f0f0f0';
             el.style.color = 'black';
+            el.style.borderColor = 'black';
           });
           break;
         case 'blue':
           document.body.style.backgroundColor = '#1e3a5f';
           document.body.style.color = '#a9d6e5';
-          elements.forEach(el => {
-            el.style.borderColor = '#4682b4';
+          allElements.forEach(el => {
             el.style.backgroundColor = '#243447';
             el.style.color = '#a9d6e5';
+            el.style.borderColor = '#4682b4';
           });
           break;
         case 'forest':
           document.body.style.backgroundColor = '#2b4227';
           document.body.style.color = '#d0e6b5';
-          elements.forEach(el => {
-            el.style.borderColor = '#3c6e47';
+          allElements.forEach(el => {
             el.style.backgroundColor = '#334d34';
             el.style.color = '#d0e6b5';
+            el.style.borderColor = '#3c6e47';
           });
           break;
         case 'sunset':
           document.body.style.backgroundColor = '#ffad60';
           document.body.style.color = '#4a1a1a';
-          elements.forEach(el => {
-            el.style.borderColor = '#ff4500';
+          allElements.forEach(el => {
             el.style.backgroundColor = '#ff6347';
             el.style.color = '#4a1a1a';
+            el.style.borderColor = '#ff4500';
           });
           break;
         default:
           document.body.style.backgroundColor = '#121212';
           document.body.style.color = 'red';
-          elements.forEach(el => {
-            el.style.borderColor = 'red';
+          allElements.forEach(el => {
             el.style.backgroundColor = '#1a1a1a';
             el.style.color = 'red';
+            el.style.borderColor = 'red';
           });
       }
     }
