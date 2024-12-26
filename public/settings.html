@@ -114,106 +114,84 @@
     </div>
   </main>
 
-  <script>
-    // Load saved settings on page load
-    document.addEventListener('DOMContentLoaded', function () {
-      // Panic Key
-      const panicKeyInput = document.getElementById('panic-key-input');
-      const savedPanicKey = localStorage.getItem('panicKey');
-      if (savedPanicKey) {
-        panicKeyInput.value = savedPanicKey;
-      }
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Load and apply the saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    }
 
-      panicKeyInput.addEventListener('input', function () {
-        const panicKey = panicKeyInput.value.toUpperCase();
-        localStorage.setItem('panicKey', panicKey);
-      });
-
-      // Panic Key Functionality
-      document.addEventListener('keydown', function (e) {
-        const panicKey = localStorage.getItem('panicKey');
-        if (panicKey && e.key.toUpperCase() === panicKey) {
-          window.location.href = 'https://classroom.google.com';
-        }
-      });
-
-      // Themes
-      const themeSelector = document.getElementById('theme-selector');
-      const savedTheme = localStorage.getItem('theme');
+    // Initialize the theme selector if it exists
+    const themeSelector = document.getElementById('theme-selector');
+    if (themeSelector) {
       if (savedTheme) {
         themeSelector.value = savedTheme;
-        applyTheme(savedTheme);
       }
 
+      // Save and apply theme when the dropdown changes
       themeSelector.addEventListener('change', function () {
         const selectedTheme = themeSelector.value;
         localStorage.setItem('theme', selectedTheme);
         applyTheme(selectedTheme);
       });
-    });
-
-    // Function to apply a theme
-    function applyTheme(theme) {
-      const elements = document.querySelectorAll(
-        'body, header, nav, .box-container, .styled-input, .styled-button, #logo-name, footer, a, .setting-title, #panic-key-title, #themes-title, #panic-key-explanation, #theme-explanation'
-      );
-
-      switch (theme) {
-        case 'dark':
-          document.body.style.backgroundColor = '#121212';
-          document.body.style.color = 'white';
-          elements.forEach(el => {
-            el.style.borderColor = 'gray';
-            el.style.backgroundColor = '#1a1a1a';
-            el.style.color = 'white';
-          });
-          break;
-        case 'light':
-          document.body.style.backgroundColor = 'white';
-          document.body.style.color = 'black';
-          elements.forEach(el => {
-            el.style.borderColor = 'black';
-            el.style.backgroundColor = '#f0f0f0';
-            el.style.color = 'black';
-          });
-          break;
-        case 'blue':
-          document.body.style.backgroundColor = '#1e3a5f';
-          document.body.style.color = '#a9d6e5';
-          elements.forEach(el => {
-            el.style.borderColor = '#4682b4';
-            el.style.backgroundColor = '#243447';
-            el.style.color = '#a9d6e5';
-          });
-          break;
-        case 'forest':
-          document.body.style.backgroundColor = '#2b4227';
-          document.body.style.color = '#d0e6b5';
-          elements.forEach(el => {
-            el.style.borderColor = '#3c6e47';
-            el.style.backgroundColor = '#334d34';
-            el.style.color = '#d0e6b5';
-          });
-          break;
-        case 'sunset':
-          document.body.style.backgroundColor = '#ffad60';
-          document.body.style.color = '#4a1a1a';
-          elements.forEach(el => {
-            el.style.borderColor = '#ff4500';
-            el.style.backgroundColor = '#ffad60';
-            el.style.color = '#4a1a1a';
-          });
-          break;
-        default:
-          document.body.style.backgroundColor = '#000000';
-          document.body.style.color = 'red';
-          elements.forEach(el => {
-            el.style.borderColor = 'red';
-            el.style.backgroundColor = '#000000';
-            el.style.color = 'red';
-          });
-      }
     }
-  </script>
+  });
+
+  // Function to apply a theme dynamically to all elements
+  function applyTheme(theme) {
+    const allElements = document.querySelectorAll("*"); // Select all elements in the document
+
+    switch (theme) {
+      case 'dark':
+        allElements.forEach(el => {
+          el.style.backgroundColor = '#121212';
+          el.style.color = 'white';
+          el.style.borderColor = 'gray';
+        });
+        break;
+
+      case 'light':
+        allElements.forEach(el => {
+          el.style.backgroundColor = 'white';
+          el.style.color = 'black';
+          el.style.borderColor = 'black';
+        });
+        break;
+
+      case 'blue':
+        allElements.forEach(el => {
+          el.style.backgroundColor = '#1e3a5f';
+          el.style.color = '#a9d6e5';
+          el.style.borderColor = '#4682b4';
+        });
+        break;
+
+      case 'forest':
+        allElements.forEach(el => {
+          el.style.backgroundColor = '#2b4227';
+          el.style.color = '#d0e6b5';
+          el.style.borderColor = '#3c6e47';
+        });
+        break;
+
+      case 'sunset':
+        allElements.forEach(el => {
+          el.style.backgroundColor = '#ffad60';
+          el.style.color = '#4a1a1a';
+          el.style.borderColor = '#ff4500';
+        });
+        break;
+
+      default: // Default theme (reset to original styles)
+        allElements.forEach(el => {
+          el.style.backgroundColor = ''; // Clear inline background color
+          el.style.color = '';           // Clear inline text color
+          el.style.borderColor = '';     // Clear inline border color
+        });
+    }
+  }
+</script>
+
 </body>
 </html>
