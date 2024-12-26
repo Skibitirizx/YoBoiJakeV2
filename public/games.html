@@ -96,69 +96,121 @@
 </script>
 <script type="text/javascript" src="//www.highperformanceformat.com/b7ce0045a6c724134a50361a5ae06e0a/invoke.js"></script>
 <script>
-  // Apply saved theme on page load
-  function loadTheme() {
+  document.addEventListener('DOMContentLoaded', function () {
+    // Load and apply the saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       applyTheme(savedTheme);
     }
-  }
+
+    // Initialize the theme selector if it exists
+    const themeSelector = document.getElementById('theme-selector');
+    if (themeSelector) {
+      if (savedTheme) {
+        themeSelector.value = savedTheme;
+      }
+
+      // Save and apply theme when the dropdown changes
+      themeSelector.addEventListener('change', function () {
+        const selectedTheme = themeSelector.value;
+        localStorage.setItem('theme', selectedTheme);
+        applyTheme(selectedTheme);
+      });
+    }
+  });
+
   // Function to apply a theme
   function applyTheme(theme) {
+    // Select all elements on the page
+    const allElements = document.querySelectorAll('*');
+
+    // Define theme styles
+    let themeStyles;
     switch (theme) {
       case 'dark':
-        document.body.style.backgroundColor = '#121212';
-        document.body.style.color = 'white';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = 'gray';
-          el.style.backgroundColor = '#1a1a1a';
-        });
+        themeStyles = {
+          backgroundColor: '#121212',
+          textColor: 'white',
+          borderColor: 'gray',
+          buttonHoverBackground: '#333333',
+          buttonHoverColor: 'white',
+        };
         break;
+
       case 'light':
-        document.body.style.backgroundColor = 'white';
-        document.body.style.color = 'black';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = 'black';
-          el.style.backgroundColor = '#f0f0f0';
-        });
+        themeStyles = {
+          backgroundColor: 'white',
+          textColor: 'black',
+          borderColor: 'black',
+          buttonHoverBackground: '#f0f0f0',
+          buttonHoverColor: 'black',
+        };
         break;
+
       case 'blue':
-        document.body.style.backgroundColor = '#1e3a5f';
-        document.body.style.color = '#a9d6e5';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = '#4682b4';
-          el.style.backgroundColor = '#243447';
-        });
+        themeStyles = {
+          backgroundColor: '#1e3a5f',
+          textColor: '#a9d6e5',
+          borderColor: '#4682b4',
+          buttonHoverBackground: '#285678',
+          buttonHoverColor: 'white',
+        };
         break;
+
       case 'forest':
-        document.body.style.backgroundColor = '#2b4227';
-        document.body.style.color = '#d0e6b5';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = '#3c6e47';
-          el.style.backgroundColor = '#334d34';
-        });
+        themeStyles = {
+          backgroundColor: '#2b4227',
+          textColor: '#d0e6b5',
+          borderColor: '#3c6e47',
+          buttonHoverBackground: '#385537',
+          buttonHoverColor: 'white',
+        };
         break;
+
       case 'sunset':
-        document.body.style.backgroundColor = '#ffad60';
-        document.body.style.color = '#4a1a1a';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = '#ff4500';
-          el.style.backgroundColor = '#ff6347';
-        });
+        themeStyles = {
+          backgroundColor: '#ffad60',
+          textColor: '#4a1a1a',
+          borderColor: '#ff4500',
+          buttonHoverBackground: '#ffa372',
+          buttonHoverColor: 'black',
+        };
         break;
-      default:
-        document.body.style.backgroundColor = '#121212';
-        document.body.style.color = 'white';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = 'red';
-          el.style.backgroundColor = '#1a1a1a';
-        });
+
+      default: // Default theme
+        themeStyles = {
+          backgroundColor: '#000000',
+          textColor: 'red',
+          borderColor: 'red',
+          buttonHoverBackground: '#333333',
+          buttonHoverColor: 'red',
+        };
     }
+
+    // Apply styles to all elements
+    allElements.forEach(el => {
+      el.style.backgroundColor = themeStyles.backgroundColor;
+      el.style.color = themeStyles.textColor;
+
+      // Apply borders if the element has a visible border
+      if (window.getComputedStyle(el).borderStyle !== 'none') {
+        el.style.borderColor = themeStyles.borderColor;
+      }
+    });
+
+    // Apply hover effects for specific elements (buttons, links, etc.)
+    const buttonsAndLinks = document.querySelectorAll('button, a, .game');
+    buttonsAndLinks.forEach(el => {
+      el.addEventListener('mouseover', () => {
+        el.style.backgroundColor = themeStyles.buttonHoverBackground;
+        el.style.color = themeStyles.buttonHoverColor;
+      });
+      el.addEventListener('mouseout', () => {
+        el.style.backgroundColor = themeStyles.backgroundColor;
+        el.style.color = themeStyles.textColor;
+      });
+    });
   }
-  // Initialize theme on page load
-  document.addEventListener('DOMContentLoaded', function () {
-    loadTheme();
-  });
 </script>
-	
+
 </html>
