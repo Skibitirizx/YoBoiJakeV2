@@ -47,10 +47,12 @@
       color: red;
     }
 
-    /* Flexbox for aligning boxes side by side */
+    /* Grid for aligning boxes in the center */
     .settings-container {
-      display: flex;
-      justify-content: space-around;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
+      grid-gap: 20px;
+      justify-items: center;
       margin-top: 40px;
     }
 
@@ -73,33 +75,42 @@
   </header>
 
   <main id="settings-content">
-    <div class="setting-title">Panic Key</div>
-    <div class="box-container">
-      <p class="panic-key-explanation">
-        The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
-      </p>
-      <input 
-        id="panic-key-input" 
-        class="styled-input" 
-        type="text" 
-        placeholder="Enter Panic Key" 
-        maxlength="1"
-      />
-    </div>
+    <!-- Create container for the two sections -->
+    <div class="settings-container">
+      <!-- Panic Key Section -->
+      <div>
+        <div class="setting-title">Panic Key</div>
+        <div class="box-container">
+          <p class="panic-key-explanation">
+            The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
+          </p>
+          <input 
+            id="panic-key-input" 
+            class="styled-input" 
+            type="text" 
+            placeholder="Enter Panic Key" 
+            maxlength="1"
+          />
+        </div>
+      </div>
 
-    <div class="setting-title">Themes</div>
-    <div class="box-container">
-      <p class="theme-explanation">
-        Choose a theme to customize the appearance of the website. Your selection will be saved.
-      </p>
-      <select id="theme-selector" class="styled-input">
-        <option value="default">Default</option>
-        <option value="dark">Dark</option>
-        <option value="light">Light</option>
-        <option value="blue">Blue</option>
-        <option value="forest">Forest</option>
-        <option value="sunset">Sunset</option>
-      </select>
+      <!-- Themes Section -->
+      <div>
+        <div class="setting-title">Themes</div>
+        <div class="box-container">
+          <p class="theme-explanation">
+            Choose a theme to customize the appearance of the website. Your selection will be saved.
+          </p>
+          <select id="theme-selector" class="styled-input">
+            <option value="default">Default</option>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+            <option value="blue">Blue</option>
+            <option value="forest">Forest</option>
+            <option value="sunset">Sunset</option>
+          </select>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -143,7 +154,9 @@
 
     // Function to apply a theme
     function applyTheme(theme) {
-      const elements = document.querySelectorAll('.box-container, .styled-input, .styled-button, #logo-name');
+      const elements = document.querySelectorAll(
+        'body, header, nav, .box-container, .styled-input, .styled-button, #logo-name, footer, a'
+      );
       
       switch (theme) {
         case 'dark':
