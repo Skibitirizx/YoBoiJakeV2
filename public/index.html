@@ -27,6 +27,12 @@
       background-color: red;
       color: black;
     }
+
+    /* Additional styles for body, header, etc. to ensure full theme coverage */
+    body, header, nav, footer, main, h1, p, a, div, button {
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
   </style>
 </head>
 <body>
@@ -71,7 +77,7 @@
       }
     }
 
-    // Array of verses
+       // Array of verses
     const verses = [
       "John 3:16 - For God so loved the world that He gave His one and only Son, that whoever believes in Him shall not perish but have eternal life.",
     "Psalm 23:1 - The Lord is my shepherd; I shall not want.",
@@ -148,6 +154,7 @@
 
     ];
 
+
     // Function to randomize verse every 24 hours
     function getDailyVerse() {
       const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
@@ -170,107 +177,109 @@
       dailyVerseElement.textContent = getDailyVerse();
     });
   </script>
-<script>
-  document.addEventListener('keydown', function (e) {
-    const panicKey = localStorage.getItem('panicKey');
-    if (panicKey && e.key.toUpperCase() === panicKey) {
-      window.location.href = 'https://classroom.google.com';
-    }
-  });
-</script>
+
+  <script>
+    document.addEventListener('keydown', function (e) {
+      const panicKey = localStorage.getItem('panicKey');
+      if (panicKey && e.key.toUpperCase() === panicKey) {
+        window.location.href = 'https://classroom.google.com';
+      }
+    });
+  </script>
 
   <script type="text/javascript">
-	atOptions = {
-		'key' : 'b7ce0045a6c724134a50361a5ae06e0a',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/b7ce0045a6c724134a50361a5ae06e0a/invoke.js"></script>
-<script>
-  // Apply the saved theme across all elements on page load
-  document.addEventListener('DOMContentLoaded', function () {
-    // Load and apply the saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      applyTheme(savedTheme);
-    }
+    atOptions = {
+      'key' : 'b7ce0045a6c724134a50361a5ae06e0a',
+      'format' : 'iframe',
+      'height' : 90,
+      'width' : 728,
+      'params' : {}
+    };
+  </script>
+  <script type="text/javascript" src="//www.highperformanceformat.com/b7ce0045a6c724134a50361a5ae06e0a/invoke.js"></script>
 
-    // Initialize the theme selector if it exists
-    const themeSelector = document.getElementById('theme-selector');
-    if (themeSelector) {
+  <script>
+    // Apply the saved theme across all elements on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      // Load and apply the saved theme
+      const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
-        themeSelector.value = savedTheme;
+        applyTheme(savedTheme);
       }
 
-      // Save and apply theme when the dropdown changes
-      themeSelector.addEventListener('change', function () {
-        const selectedTheme = themeSelector.value;
-        localStorage.setItem('theme', selectedTheme);
-        applyTheme(selectedTheme);
-      });
+      // Initialize the theme selector if it exists
+      const themeSelector = document.getElementById('theme-selector');
+      if (themeSelector) {
+        if (savedTheme) {
+          themeSelector.value = savedTheme;
+        }
+
+        // Save and apply theme when the dropdown changes
+        themeSelector.addEventListener('change', function () {
+          const selectedTheme = themeSelector.value;
+          localStorage.setItem('theme', selectedTheme);
+          applyTheme(selectedTheme);
+        });
+      }
+    });
+
+    // Function to apply a theme
+    function applyTheme(theme) {
+      const root = document.documentElement;
+      const elements = document.querySelectorAll(
+        'body, header, nav, footer, main, h1, p, a, div, button, img, span, #about-tab'
+      );
+
+      switch (theme) {
+        case 'dark':
+          elements.forEach(el => {
+            el.style.backgroundColor = '#121212';
+            el.style.color = 'white';
+            el.style.borderColor = 'gray';
+          });
+          break;
+
+        case 'light':
+          elements.forEach(el => {
+            el.style.backgroundColor = 'white';
+            el.style.color = 'black';
+            el.style.borderColor = 'black';
+          });
+          break;
+
+        case 'blue':
+          elements.forEach(el => {
+            el.style.backgroundColor = '#1e3a5f';
+            el.style.color = '#a9d6e5';
+            el.style.borderColor = '#4682b4';
+          });
+          break;
+
+        case 'forest':
+          elements.forEach(el => {
+            el.style.backgroundColor = '#2b4227';
+            el.style.color = '#d0e6b5';
+            el.style.borderColor = '#3c6e47';
+          });
+          break;
+
+        case 'sunset':
+          elements.forEach(el => {
+            el.style.backgroundColor = '#ffad60';
+            el.style.color = '#4a1a1a';
+            el.style.borderColor = '#ff4500';
+          });
+          break;
+
+        default: // Default theme
+          elements.forEach(el => {
+            el.style.backgroundColor = '#1a1a1a';
+            el.style.color = 'red';
+            el.style.borderColor = 'red';
+          });
+      }
     }
-  });
-
-  // Function to apply a theme
-  function applyTheme(theme) {
-    const root = document.documentElement;
-    const elements = document.querySelectorAll(
-      'body, .box-container, .styled-input, .styled-button, header, nav a, footer'
-    );
-
-    switch (theme) {
-      case 'dark':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#121212';
-          el.style.color = 'white';
-          el.style.borderColor = 'gray';
-        });
-        break;
-
-      case 'light':
-        elements.forEach(el => {
-          el.style.backgroundColor = 'white';
-          el.style.color = 'black';
-          el.style.borderColor = 'black';
-        });
-        break;
-
-      case 'blue':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#1e3a5f';
-          el.style.color = '#a9d6e5';
-          el.style.borderColor = '#4682b4';
-        });
-        break;
-
-      case 'forest':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#2b4227';
-          el.style.color = '#d0e6b5';
-          el.style.borderColor = '#3c6e47';
-        });
-        break;
-
-      case 'sunset':
-        elements.forEach(el => {
-          el.style.backgroundColor = '#ffad60';
-          el.style.color = '#4a1a1a';
-          el.style.borderColor = '#ff4500';
-        });
-        break;
-
-      default: // Default theme
-        elements.forEach(el => {
-          el.style.backgroundColor = '#1a1a1a';
-          el.style.color = 'red';
-          el.style.borderColor = 'red';
-        });
-    }
-  }
-</script>
+  </script>
 
 </body>
 </html>
