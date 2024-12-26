@@ -96,71 +96,87 @@
 </script>
 <script type="text/javascript" src="//www.highperformanceformat.com/b7ce0045a6c724134a50361a5ae06e0a/invoke.js"></script>
 <script>
-  // Apply saved theme on page load
-  function loadTheme() {
+  // Apply the saved theme across all elements on page load
+  document.addEventListener('DOMContentLoaded', function () {
+    // Load and apply the saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       applyTheme(savedTheme);
     }
-  }
+
+    // Initialize the theme selector if it exists
+    const themeSelector = document.getElementById('theme-selector');
+    if (themeSelector) {
+      if (savedTheme) {
+        themeSelector.value = savedTheme;
+      }
+
+      // Save and apply theme when the dropdown changes
+      themeSelector.addEventListener('change', function () {
+        const selectedTheme = themeSelector.value;
+        localStorage.setItem('theme', selectedTheme);
+        applyTheme(selectedTheme);
+      });
+    }
+  });
 
   // Function to apply a theme
   function applyTheme(theme) {
+    const root = document.documentElement;
+    const elements = document.querySelectorAll(
+      'body, .box-container, .styled-input, .styled-button, header, nav a, footer'
+    );
+
     switch (theme) {
       case 'dark':
-        document.body.style.backgroundColor = '#121212';
-        document.body.style.color = 'white';
-        document.querySelectorAll('.box-container').forEach(el => {
+        elements.forEach(el => {
+          el.style.backgroundColor = '#121212';
+          el.style.color = 'white';
           el.style.borderColor = 'gray';
-          el.style.backgroundColor = '#1a1a1a';
         });
         break;
+
       case 'light':
-        document.body.style.backgroundColor = 'white';
-        document.body.style.color = 'black';
-        document.querySelectorAll('.box-container').forEach(el => {
+        elements.forEach(el => {
+          el.style.backgroundColor = 'white';
+          el.style.color = 'black';
           el.style.borderColor = 'black';
-          el.style.backgroundColor = '#f0f0f0';
         });
         break;
+
       case 'blue':
-        document.body.style.backgroundColor = '#1e3a5f';
-        document.body.style.color = '#a9d6e5';
-        document.querySelectorAll('.box-container').forEach(el => {
+        elements.forEach(el => {
+          el.style.backgroundColor = '#1e3a5f';
+          el.style.color = '#a9d6e5';
           el.style.borderColor = '#4682b4';
-          el.style.backgroundColor = '#243447';
         });
         break;
+
       case 'forest':
-        document.body.style.backgroundColor = '#2b4227';
-        document.body.style.color = '#d0e6b5';
-        document.querySelectorAll('.box-container').forEach(el => {
+        elements.forEach(el => {
+          el.style.backgroundColor = '#2b4227';
+          el.style.color = '#d0e6b5';
           el.style.borderColor = '#3c6e47';
-          el.style.backgroundColor = '#334d34';
         });
         break;
+
       case 'sunset':
-        document.body.style.backgroundColor = '#ffad60';
-        document.body.style.color = '#4a1a1a';
-        document.querySelectorAll('.box-container').forEach(el => {
+        elements.forEach(el => {
+          el.style.backgroundColor = '#ffad60';
+          el.style.color = '#4a1a1a';
           el.style.borderColor = '#ff4500';
-          el.style.backgroundColor = '#ff6347';
         });
         break;
-      default:
-        document.body.style.backgroundColor = '#121212';
-        document.body.style.color = 'white';
-        document.querySelectorAll('.box-container').forEach(el => {
-          el.style.borderColor = 'red';
+
+      default: // Default theme
+        elements.forEach(el => {
           el.style.backgroundColor = '#1a1a1a';
+          el.style.color = 'red';
+          el.style.borderColor = 'red';
         });
     }
   }
-
-  // Initialize theme on page load
-  document.addEventListener('DOMContentLoaded', function () {
-    loadTheme();
-  });
 </script>
+
 	
 </html>
