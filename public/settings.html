@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/css/styles.css">
   <style>
     /* Larger Panic Key Title */
-    .panic-key-title {
+    .panic-key-title, .theme-title {
       font-size: 32px;
       font-weight: bold;
       color: red;
@@ -17,41 +17,42 @@
       margin-bottom: 20px;
     }
 
-    /* Explanation text styling */
-    .panic-key-explanation {
-      font-size: 16px;
-      color: red;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
     /* Container box with rounded corners */
-    .panic-key-container {
+    .box-container {
       border: 2px solid red;
       border-radius: 12px;
       padding: 20px;
       width: 300px;
-      margin: 0 auto;
+      margin: 20px auto;
       text-align: center;
       background-color: #1a1a1a; /* Dark background for the box */
     }
 
-    /* Input field with black background, red text, and red border */
-    .panic-key-input {
+    /* Dropdown styling */
+    .theme-select {
       padding: 10px;
       font-size: 16px;
       border: 2px solid red;
       border-radius: 8px;
       outline: none;
-      width: 250px;
       background-color: black;
       color: red;
       transition: border-color 0.3s ease-in-out;
-      margin-bottom: 10px;
+      width: 100%;
     }
 
-    .panic-key-input:focus {
+    .theme-select:focus {
       border-color: darkred;
+    }
+
+    /* Default theme styles */
+    body {
+      background-color: #121212;
+      color: white;
+    }
+
+    header {
+      color: white;
     }
   </style>
 </head>
@@ -69,8 +70,8 @@
 
   <main id="settings-content">
     <p class="panic-key-title">Panic Key</p>
-    <div class="panic-key-container">
-      <p class="panic-key-explanation">
+    <div class="box-container">
+      <p>
         The panic key allows you to quickly navigate to Google Classroom. Once set, press the key anywhere on the site to activate it.
       </p>
       <input 
@@ -81,56 +82,159 @@
         maxlength="1"
       />
     </div>
+
+    <p class="theme-title">Themes</p>
+    <div class="box-container">
+      <p>Choose a theme to customize the appearance:</p>
+      <select id="theme-select" class="theme-select">
+        <option value="default">Default</option>
+        <option value="dark">Dark Mode</option>
+        <option value="light">Light Mode</option>
+        <option value="blue">Blue Ocean</option>
+        <option value="forest">Forest Green</option>
+        <option value="sunset">Sunset Glow</option>
+      </select>
+    </div>
   </main>
 
   <script>
-    // Auto-save panic key on typing
-    const panicKeyInput = document.getElementById('panic-key-input');
-
-    // Load saved panic key on page load
+    // Load saved theme on page load
     window.onload = function () {
-      const savedPanicKey = localStorage.getItem('panicKey');
-      if (savedPanicKey) {
-        panicKeyInput.value = savedPanicKey;
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.getElementById('theme-select').value = savedTheme;
+        applyTheme(savedTheme);
       }
     };
 
-    // Save panic key to localStorage on input
-    panicKeyInput.addEventListener('input', function () {
-      const panicKey = panicKeyInput.value.toUpperCase();
-      localStorage.setItem('panicKey', panicKey);
-    });
-
-    // Panic key functionality (works across all pages)
-    document.addEventListener('keydown', function (e) {
-      const panicKey = localStorage.getItem('panicKey');
-      if (panicKey && e.key.toUpperCase() === panicKey) {
-        window.location.href = 'https://classroom.google.com';
+    // Function to apply a theme
+    function applyTheme(theme) {
+      const root = document.documentElement;
+      switch (theme) {
+        case 'dark':
+          document.body.style.backgroundColor = '#121212';
+          document.body.style.color = 'white';
+          document.querySelectorAll('.box-container').forEach(el => {
+            el.style.borderColor = 'gray';
+            el.style.backgroundColor = '#1a1a1a';
+          });
+          break;
+        case 'light':
+          document.body.style.backgroundColor = 'white';
+          document.body.style.color = 'black';
+          document.querySelectorAll('.box-container').forEach(el => {
+            el.style.borderColor = 'black';
+            el.style.backgroundColor = '#f0f0f0';
+          });
+          break;
+        case 'blue':
+          document.body.style.backgroundColor = '#1e3a5f';
+          document.body.style.color = '#a9d6e5';
+          document.querySelectorAll('.box-container').forEach(el => {
+            el.style.borderColor = '#4682b4';
+            el.style.backgroundColor = '#243447';
+          });
+          break;
+        case 'forest':
+          document.body.style.backgroundColor = '#2b4227';
+          document.body.style.color = '#d0e6b5';
+          document.querySelectorAll('.box-container').forEach(el => {
+            el.style.borderColor = '#3c6e47';
+            el.style.backgroundColor = '#334d34';
+          });
+          break;
+        case 'sunset':
+          document.body.style.backgroundColor = '#ffad60';
+          document.body.style.color = '#4a1a1a';
+          document.querySelectorAll('.box-container').forEach(el => {
+            el.style.borderColor = '#ff4500';
+            el.style.backgroundColor = '#ff6347';
+          });
+          break;
+        default:
+          document.body.style.backgroundColor = '#121212';
+          document.body.style.color = 'white';
+          document.querySelectorAll('.box-container').forEach(el => {
+            el.style.borderColor = 'red';
+            el.style.backgroundColor = '#1a1a1a';
+          });
       }
+    }
+
+    // Theme change event listener
+    document.getElementById('theme-select').addEventListener('change', function () {
+      const selectedTheme = this.value;
+      localStorage.setItem('theme', selectedTheme);
+      applyTheme(selectedTheme);
     });
   </script>
-  <script>
-  document.addEventListener('keydown', function (e) {
-    const panicKey = localStorage.getItem('panicKey');
-    if (panicKey && e.key.toUpperCase() === panicKey) {
-      window.location.href = 'https://classroom.google.com';
+<script>
+  // Apply saved theme on page load
+  function loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
     }
+  }
+
+  // Function to apply a theme
+  function applyTheme(theme) {
+    switch (theme) {
+      case 'dark':
+        document.body.style.backgroundColor = '#121212';
+        document.body.style.color = 'white';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = 'gray';
+          el.style.backgroundColor = '#1a1a1a';
+        });
+        break;
+      case 'light':
+        document.body.style.backgroundColor = 'white';
+        document.body.style.color = 'black';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = 'black';
+          el.style.backgroundColor = '#f0f0f0';
+        });
+        break;
+      case 'blue':
+        document.body.style.backgroundColor = '#1e3a5f';
+        document.body.style.color = '#a9d6e5';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = '#4682b4';
+          el.style.backgroundColor = '#243447';
+        });
+        break;
+      case 'forest':
+        document.body.style.backgroundColor = '#2b4227';
+        document.body.style.color = '#d0e6b5';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = '#3c6e47';
+          el.style.backgroundColor = '#334d34';
+        });
+        break;
+      case 'sunset':
+        document.body.style.backgroundColor = '#ffad60';
+        document.body.style.color = '#4a1a1a';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = '#ff4500';
+          el.style.backgroundColor = '#ff6347';
+        });
+        break;
+      default:
+        document.body.style.backgroundColor = '#121212';
+        document.body.style.color = 'white';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = 'red';
+          el.style.backgroundColor = '#1a1a1a';
+        });
+    }
+  }
+
+  // Initialize theme on page load
+  document.addEventListener('DOMContentLoaded', function () {
+    loadTheme();
   });
 </script>
-<script type="text/javascript">
-	atOptions = {
-		'key' : 'b7ce0045a6c724134a50361a5ae06e0a',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/b7ce0045a6c724134a50361a5ae06e0a/invoke.js"></script>  
+	
 </body>
 </html>
-0 commit comments
-Comments
-0
- (0)
-Comment
