@@ -189,3 +189,71 @@ nav a:hover {
   background-color: red;
   color: black;
 }
+<script>
+  // Apply saved theme on page load
+  function loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    }
+  }
+
+  // Function to apply a theme
+  function applyTheme(theme) {
+    switch (theme) {
+      case 'dark':
+        document.body.style.backgroundColor = '#121212';
+        document.body.style.color = 'white';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = 'gray';
+          el.style.backgroundColor = '#1a1a1a';
+        });
+        break;
+      case 'light':
+        document.body.style.backgroundColor = 'white';
+        document.body.style.color = 'black';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = 'black';
+          el.style.backgroundColor = '#f0f0f0';
+        });
+        break;
+      case 'blue':
+        document.body.style.backgroundColor = '#1e3a5f';
+        document.body.style.color = '#a9d6e5';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = '#4682b4';
+          el.style.backgroundColor = '#243447';
+        });
+        break;
+      case 'forest':
+        document.body.style.backgroundColor = '#2b4227';
+        document.body.style.color = '#d0e6b5';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = '#3c6e47';
+          el.style.backgroundColor = '#334d34';
+        });
+        break;
+      case 'sunset':
+        document.body.style.backgroundColor = '#ffad60';
+        document.body.style.color = '#4a1a1a';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = '#ff4500';
+          el.style.backgroundColor = '#ff6347';
+        });
+        break;
+      default:
+        document.body.style.backgroundColor = '#121212';
+        document.body.style.color = 'white';
+        document.querySelectorAll('.box-container').forEach(el => {
+          el.style.borderColor = 'red';
+          el.style.backgroundColor = '#1a1a1a';
+        });
+    }
+  }
+
+  // Initialize theme on page load
+  document.addEventListener('DOMContentLoaded', function () {
+    loadTheme();
+  });
+</script>
+
