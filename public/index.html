@@ -198,7 +198,7 @@
   </script>
   <script type="text/javascript" src="//www.highperformanceformat.com/b7ce0045a6c724134a50361a5ae06e0a/invoke.js"></script>
 
-  <script>
+ <script>
     // Apply the saved theme across all elements on page load
     document.addEventListener('DOMContentLoaded', function () {
       // Load and apply the saved theme
@@ -225,9 +225,8 @@
 
     // Function to apply a theme
     function applyTheme(theme) {
-      const root = document.documentElement;
       const elements = document.querySelectorAll(
-        'body, header, nav, footer, main, h1, p, a, div, button, img, span, #about-tab'
+        'body, header, nav, footer, main, .search-bar, h1, p, #logo-name, .desc, #uv-error'
       );
 
       switch (theme) {
@@ -238,7 +237,6 @@
             el.style.borderColor = 'gray';
           });
           break;
-
         case 'light':
           elements.forEach(el => {
             el.style.backgroundColor = 'white';
@@ -246,7 +244,6 @@
             el.style.borderColor = 'black';
           });
           break;
-
         case 'blue':
           elements.forEach(el => {
             el.style.backgroundColor = '#1e3a5f';
@@ -254,7 +251,6 @@
             el.style.borderColor = '#4682b4';
           });
           break;
-
         case 'forest':
           elements.forEach(el => {
             el.style.backgroundColor = '#2b4227';
@@ -262,7 +258,6 @@
             el.style.borderColor = '#3c6e47';
           });
           break;
-
         case 'sunset':
           elements.forEach(el => {
             el.style.backgroundColor = '#ffad60';
@@ -270,7 +265,6 @@
             el.style.borderColor = '#ff4500';
           });
           break;
-
         default: // Default theme
           elements.forEach(el => {
             el.style.backgroundColor = '#000000';
@@ -278,7 +272,6 @@
             el.style.borderColor = 'red';
           });
       }
-    }
   </script>
 
 </body>
