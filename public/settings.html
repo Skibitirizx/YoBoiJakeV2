@@ -366,11 +366,13 @@
       case 'desmos':
         title = 'Desmos Calculator';
         faviconUrl = 'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/92/e4/3c/92e43c1b-0ae3-1fcd-a0db-4eb75f07644a/AppIcon-Desmos-0-0-1x_U007emarketing-0-5-85-220.png/512x512bb.jpg';
-        break;
-      default:
-        title = 'YoBoiJake';
-        faviconUrl = '/assets/images/logo.png';
-    }
+         break;
+    default:
+      // Default case - reset title and favicon
+      title = 'YoBoiJake';
+      faviconUrl = '/assets/images/logo.png';
+  }
+
 
     document.title = title;
 
